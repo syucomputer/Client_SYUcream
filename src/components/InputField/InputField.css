@@ -1,0 +1,29 @@
+.buttonStyle {
+  width: "90px";
+  height: "30px";
+  background-color: "#4084ff";
+  color: "#ffffff";
+  position: absolute;
+  right: "0";
+}
+
+.codeButtonStyle {
+  width: "80px";
+  height: "30px";
+  margin-left: "10px";
+  background-color: "#d9d9d9";
+}
+
+.codeButtonStyleRight {
+  width: "80px";
+  height: "30px";
+  margin-left: "10px";
+  background-color: "#4084ff";
+}
+
+.checkBoxStyle {
+  width: "20px";
+  height: "20px";
+  position: "absolute";
+  right: "0";
+}
