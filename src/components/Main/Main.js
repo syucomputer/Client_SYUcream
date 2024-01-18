@@ -1,9 +1,9 @@
-import MenuButton from "./MenuButton";
+import MenuButton from "../Button/MenuButton";
 import {useState} from "react";
-import Home from "./Menu/Home";
-import LatestTrend from "./Menu/LatestTrend";
-import SubjectRecommendation from "./Menu/SubjectRecommendation";
-import RoadMap from "./Menu/RoadMap";
+import Home from "../Menu/Home";
+import LatestTrend from "../Menu/LatestTrend";
+import SubjectRecommendation from "../Menu/SubjectRecommendation";
+import RoadMap from "../Menu/RoadMap";
 
 const Main = () => {
     const [selectedMenu, setSelectedMenu] = useState('');
