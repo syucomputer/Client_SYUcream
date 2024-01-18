@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import InputField from "./InputField";
 import Button from "./Button";
 
-const Signup = () =>{
+const Signup = () => {
     // 회원가입 페이지에서 받아오는 데이터
     const [state, setState] = useState({
         name: '',
