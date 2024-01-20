@@ -36,7 +36,7 @@ const Login = () => {
         />
         <Button
           label="로그인"
-          style={{ width: "100%", height: "40px", marginTop: "20px" }}
+          className="LoginButton"
           onClick={handleLogin}
         />
         <div
@@ -49,13 +49,7 @@ const Login = () => {
       <div style={{ textAlign: "center" }}>
         <Button
           label="회원가입"
-          style={{
-            width: "510px",
-            height: "40px",
-            marginTop: "30px",
-            color: "black",
-            backgroundColor: "#ffffff",
-          }}
+          className="SignButton"
           onClick={handleSign}
         />
       </div>

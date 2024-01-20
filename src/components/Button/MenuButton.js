@@ -1,17 +1,11 @@
-const MenuButton = ({ label, title, onClick }) => {
-
-    const style = {
-        width: '100px',
-        height: '100px',
-        backgroundColor: '#6C63FF',
-        color: 'white'
-    }
-
+import "./MenuButton.css"
+const MenuButton = ({ label, title, className, onClick }) => {
+    const defaultStyle = "hello"
     const handleClick = () => {
         onClick(title);
     }
 
-    return <button title={title} style={style} onClick={handleClick}>
+    return <button title={title} className={`${defaultStyle} ${className}`} onClick={handleClick}>
         {label}
     </button>
 }

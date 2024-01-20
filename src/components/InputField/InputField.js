@@ -17,6 +17,7 @@ const InputField = ({ type, label, value, onChange }) => {
     setButtonLabel("재전송하기");
   };
 
+  // email 인증 코드 정규표현식
   const handleCodeChange = (e) => {
     const code = e.target.value;
     const filteredValue = code.replace(/[^A-Za-z0-9]/g, ""); // 정규 표현식(영문, 숫자)
@@ -26,6 +27,7 @@ const InputField = ({ type, label, value, onChange }) => {
     else setIsRight(false);
   };
 
+  // 이메일 인증 확인
   const rightEmailCode = () => {
     if (verificationCode === "hello1") {
       setIsEmail(false);
@@ -34,6 +36,7 @@ const InputField = ({ type, label, value, onChange }) => {
     } else {
       setIsFailCode(true);
       setVerificationCode("");
+      setIsRight(false);
     }
   };
 
@@ -63,7 +66,7 @@ const InputField = ({ type, label, value, onChange }) => {
             {!isSuccess && (
               <Button
                 label={buttonLabel}
-                className="buttonStyle"
+                className='buttonStyle'
                 onClick={postEmail}
               />
             )}

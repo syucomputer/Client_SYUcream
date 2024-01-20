@@ -1,15 +1,8 @@
-const Button = ({ label, onClick, style }) => {
-    const defaultStyle = {
-        backgroundColor: '#D9D9D9',
-        color: '#ffffff',
-        border: 'none',
-        borderRadius: '40px',
-        cursor: 'pointer',
-    }
-
-    const totalStyle = {...defaultStyle, ...style}
+import "./Button.css"
+const Button = ({ label, onClick, className }) => {
+    const defaultStyle = "defaultStyle"
     return (
-        <button onClick={onClick} style={totalStyle}>
+        <button onClick={onClick} className={`${defaultStyle} ${className}`}>
             {label}
         </button>
     );
