@@ -1,32 +1,17 @@
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import "./Nav.css"
 
 const Nav = () => {
   const navigate = useNavigate();
 
-  const loginButton = {
-    width: "80px",
-    height: "30px",
-    backgroundColor: "#ffffff",
-    color: "black",
-    border: "1px solid black",
-    borderRadius: "8px",
-    marginRight: "10px",
-  };
   const handlerLogin = () => {
     navigate("/login");
-  };
-
-  const signupButton = {
-    width: "80px",
-    height: "30px",
-    backgroundColor: "black",
-    color: "#ffffff",
-    borderRadius: "8px",
   };
   const handlerSignup = () => {
     navigate("/signup");
   };
+
   return (
     <nav
       style={{
@@ -34,6 +19,9 @@ const Nav = () => {
         height: "60px",
         backgroundColor: "#ffffff",
         position: "relative",
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
       }}
     >
       <div
@@ -44,8 +32,8 @@ const Nav = () => {
           alignItems: "center",
         }}
       >
-        <Button label="로그인" style={loginButton} onClick={handlerLogin} />
-        <Button label="회원가입" style={signupButton} onClick={handlerSignup} />
+        <Button label="로그인" className="loginButton" onClick={handlerLogin} />
+        <Button label="회원가입" className="signButton" onClick={handlerSignup} />
       </div>
     </nav>
   );

@@ -28,11 +28,12 @@ const Main = () => {
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <div style={{ flex: 4}}>
+        <div style={{ height: 'calc(100% - 60px)', display: 'flex', flexDirection: 'row', alignItems: "center" }}>
+            <div style={{ flex: 4 }}>
                 {renderSelectedMenu()}
             </div>
-            <div style={{ flex: 1}}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                <MenuButton label='홈' title='home' onClick={handleMenu} />
                 <MenuButton label='최신 동향' title='trend' onClick={handleMenu} />
                 <MenuButton label='과목 추천' title='subject' onClick={handleMenu} />
                 <MenuButton label='로드맵 추천' title='roadmap' onClick={handleMenu} />

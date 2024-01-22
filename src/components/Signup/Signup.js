@@ -15,11 +15,6 @@ const Signup = () => {
 
   const [next, setNext] = useState(false);
 
-  const buttonStyle = {
-    width: "100%",
-    height: "40px",
-  };
-
   // 화면에 글자 보이게 하는 로직
   const handleChangeState = (e) => {
     setState({
@@ -65,7 +60,7 @@ const Signup = () => {
         value={state.passwordR}
         onChange={handleChangeState}
       />
-      <Button label="다음으로" onClick={handleNext} style={buttonStyle} />
+      <Button label="다음으로" onClick={handleNext} className="nextButtonStyle" />
       <div style={{ fontSize: "12px", textAlign: "center", marginTop: "6px" }}>
         계정을 만들고 사용 약관 및 개인 정보 보호 정책에 동의합니다.
       </div>

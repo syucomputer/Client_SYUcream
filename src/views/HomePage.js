@@ -1,4 +1,5 @@
 import Nav from "../components/Nav/Nav";
+import Main from "../components/Main/Main";
 
 const HomePage = () => {
   return (
@@ -11,7 +12,8 @@ const HomePage = () => {
         backgroundColor: "#E7ECFF",
       }}
     >
-      <Nav />
+        <Nav />
+        <Main />
     </div>
   );
 };
