@@ -25,7 +25,7 @@ const Checkbox = styled.label`
 
 const TrendCheckbox = (trends) => {
   const [selectedOption, setSelectedOption] = useState("");
-  const [selectedMonth, setselectedMonth] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedStack, setSelectedStack] = useState("");
 
   const handleOptionChange = (event) => {
@@ -33,7 +33,7 @@ const TrendCheckbox = (trends) => {
   };
 
   const handleMonthChange = (event) => {
-    setselectedMonth(event.target.value);
+    setSelectedMonth(event.target.value);
   };
 
   const handleStackChange = (event) => {
