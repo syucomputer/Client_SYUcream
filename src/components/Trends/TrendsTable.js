@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import "./TrendsData";
+import data from './TrendsData.json';
 
 const Table = styled.table`
   border-collapse: collapse;
@@ -23,11 +23,10 @@ const TableContainer = styled.div`
 const TrendsTable = () => {
   const [trendsData, setTrendsData] = useState([]);
 
+  
   useEffect(() => {
-    fetch("./TrendsData.json")
-      .then((res) => res.json())
-      .then((data) => setTrendsData(data.result.trends));
-  }, []);
+    setTrendsData(data.result.trends);
+  }, []); // 의존성 배열 제거
 
   return (
     <TableContainer>
