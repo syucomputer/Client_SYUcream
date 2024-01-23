@@ -3,12 +3,16 @@ import Nav from "../Nav/Nav";
 import Labelbox from "./Labelbox";
 import TrendCheckbox from "./TrendCheckbox";
 import TrendsTable from "./TrendsTable";
+import TrendsStackTable from "./TrendsStackTable";
+
 import "./Trends.css";
 
 const Trends = () => {
+  const [selectedOption, setSelectedOption] = React.useState("직무");
+
   return (
     <div>
-      <Nav /> {/* 헤더자리 임시로 Nav넣어 놓음 */}
+      <Nav />
       <div
         style={{
           display: "flex",
@@ -17,9 +21,20 @@ const Trends = () => {
         }}
       >
         <Labelbox />
-        <TrendCheckbox />
+        <TrendCheckbox
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
       </div>
-      <TrendsTable />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {selectedOption === "직무" ? <TrendsTable /> : <TrendsStackTable />}
+      </div>
     </div>
   );
 };

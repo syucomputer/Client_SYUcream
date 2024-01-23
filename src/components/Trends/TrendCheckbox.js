@@ -11,7 +11,7 @@ const Checkbox = styled.label`
   color: ${(trends) => (trends.checked ? "#fff" : "black")};
   cursor: pointer;
   font-size: 16px;
-  // transition: all 0.3s ease-in-out;
+  //transition: all 0.3s ease-in-out;
 
   &:hover {
     background: #ddd;
@@ -23,10 +23,15 @@ const Checkbox = styled.label`
   }
 `;
 
-const TrendCheckbox = (trends) => {
-  const [selectedOption, setSelectedOption] = useState("");
+const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedStack, setSelectedStack] = useState("");
+
+  const [active, setActive] = useState(false);
+
+  const handleClick = () => {
+    setActive(!active);
+  };
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -105,6 +110,16 @@ const TrendCheckbox = (trends) => {
             />
             12개월
           </Checkbox>
+          {selectedOption === "직무" && (
+            <div style={{ marginTop: "50px" }}>
+              <button
+                className={`button ${active ? "active" : ""}`}
+                onClick={handleClick}
+              >
+                그래프 보기
+              </button>
+            </div>
+          )}
           {selectedOption === "기술스택" && (
             <div style={{ marginTop: "50px" }}>
               <label>분야를 선택하세요</label>
