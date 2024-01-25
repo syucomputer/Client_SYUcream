@@ -1,0 +1,10 @@
+.hello {
+    width: 100px;
+    height: 100px;
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    border-radius: 18px;
+    margin: 20px;
+    font-size: 16px;
+}
