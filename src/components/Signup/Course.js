@@ -1,45 +1,85 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Button from "../Button/Button";
 import "./Course.css"
+import data from "./testData.json"
 
-const Course = () => {
+const Course = ({ onStepChange }) => {
     const [loading, setLoading] = useState(false);
     const [complete, setComplete] = useState(false);
+    const [subjectData, setSubjectData] = useState([]);
 
     const handlerPull =  () => {
         setLoading(true);
 
-        // 3초 동안 로딩 시뮬레이션
-        setTimeout(() => {
-            setLoading(false);
-            setComplete(true);
-        }, 3000);
+        // 데이터를 불러오는 비동기 작업을 수행합니다.
+        const startTime = new Date().getTime();
+
+        fetchData()
+            .then((data) => {
+                const endTime = new Date().getTime();
+                const elapsedTime = endTime - startTime;
+
+                // 최소 3초간 로딩을 보여줍니다.
+                const remainingTime = Math.max(0, 3000 - elapsedTime);
+
+                setTimeout(() => {
+                    setSubjectData(data.results.subject);
+                    setComplete(true);
+                    setLoading(false);
+                }, remainingTime);
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                setLoading(false);
+            });
+    };
+
+    const fetchData = () => {
+        // 데이터를 불러오는 비동기 작업을 시뮬레이션합니다.
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(data);
+            }, 2000);
+        });
     };
 
     const handlerNext = () => {
-
+        onStepChange(3);
     }
 
     return (
         <div style={{ textAlign: 'center' }}>
             <h2>수강과목 확인</h2>
+            <div>
+                사이트 이용을 위한 수강과목을 불러와주세요! <br/>
+                해당 정보는 강좌추천, 로드맵 추천 등 사이트 이용에 이용됩니다.
+            </div>
             {loading ? (
                 <div>
-                    <div className="spinner"></div>
-                    <div>
-                        사이트 이용을 위한 수강과목을 불러오는 중입니다...
+                    <div className="box boxSpinner">
+                        <div className="spinner"></div>
+                        <div>
+                            사이트 이용을 위한 수강과목을 불러오는 중입니다...
+                        </div>
                     </div>
                 </div>
             ) : complete ? (
                 <div className="successMessage">
-                    데이터 불러오기가 완료되었습니다.
-                    <Button label="다음으로" className="" onClick={handlerNext} />
+                    <div className="box">
+                        <div>
+                            {subjectData.map((subject) => (
+                                <ul key={subject.subjectId}>
+                                    <li>{subject.completeYear}년 {subject.completeTerm}</li>
+                                </ul>
+                            ))}
+                        </div>
+                    </div>
+                    <Button label="서비스 시작하기" className="next" onClick={handlerNext} />
                 </div>
             ) : (
                     <div>
-                        사이트 이용을 위한 수강과목을 불러와주세요! <br/>
-                        해당 정보는 강좌추천, 로드맵 추천 등 사이트 이용에 이용됩니다.
-                        <Button label="불러오기" className="ButtonPull" onClick={handlerPull} />
+                        <div className="box"></div>
+                        <Button label="수강정보 불러오기" className="ButtonPull" onClick={handlerPull} />
                     </div>
                 )
             }
