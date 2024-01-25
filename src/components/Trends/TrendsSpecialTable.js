@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import data from "./TrendsData.json";
+import data from "./TrendsData3.json";
 import "./Trends.css";
 
-const TrendsTable = () => {
+const TrendsSpecialTable = ({ handleJobTitleClick }) => {
   const [trendsData, setTrendsData] = useState([]);
-  const [description, setDescription] = useState(
-    "직무명을 클릭하면 설명을 확인할 수 있어요."
-  );
 
   useEffect(() => {
     setTrendsData(data.result.trends);
+    const sortedData = data.result.trends.sort(
+      (a, b) => b.postCount - a.postCount
+    );
+    setTrendsData(sortedData);
   }, []);
-
-  const handleJobTitleClick = (description) => {
-    setDescription(description);
-  };
 
   return (
     <div className="table-container">
@@ -27,9 +24,9 @@ const TrendsTable = () => {
           </tr>
         </thead>
         <tbody>
-          {trendsData.map((trend) => (
-            <tr key={trend.rank}>
-              <td>{trend.rank}</td>
+          {trendsData.map((trend, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
               <td onClick={() => handleJobTitleClick(trend.description)}>
                 {trend.jobTitle}
               </td>{" "}
@@ -38,9 +35,8 @@ const TrendsTable = () => {
           ))}
         </tbody>
       </table>
-      <textarea className="textbox" readOnly value={description}></textarea>
     </div>
   );
 };
 
-export default TrendsTable;
+export default TrendsSpecialTable;
