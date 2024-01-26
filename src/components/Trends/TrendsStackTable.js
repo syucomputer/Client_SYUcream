@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import data from "./TrendsData.json";
+import data from "./TrendsData2.json";
 import "./Trends.css";
 
 const TrendsTable = () => {

@@ -1,0 +1,20 @@
+{
+  "httpStatus": 200,
+  "message": "기술스택별 순위 조회 성공",
+  "result": {
+    "trends": [
+      {
+        "rank": 1,
+        "jobTitle": "Java",
+        "postCount": "2813",
+        "description": "javajavajvajvajavjavajavjvajvajvajvajvajv"
+      },
+      {
+        "rank": 2,
+        "jobTitle": "C++",
+        "postCount": "2678",
+        "description": "C+++++++++++++++++++++++++++++++++"
+      }
+    ]
+  }
+}
