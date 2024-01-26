@@ -44,12 +44,12 @@ const Course = ({ onStepChange }) => {
     };
 
     const handlerNext = () => {
-        onStepChange(3);
+        onStepChange(4);
     }
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <h2>수강과목 확인</h2>
+            <h2>수강 과목 불러오기</h2>
             <div>
                 사이트 이용을 위한 수강과목을 불러와주세요! <br/>
                 해당 정보는 강좌추천, 로드맵 추천 등 사이트 이용에 이용됩니다.
