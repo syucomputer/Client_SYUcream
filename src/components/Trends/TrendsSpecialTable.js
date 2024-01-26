@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import data from "./TrendsData2.json";
+import data from "./TrendsData3.json";
 import "./Trends.css";
 
-const TrendsStackTable = ({ handleJobTitleClick }) => {
+const TrendsSpecialTable = ({ handleJobTitleClick }) => {
   const [trendsData, setTrendsData] = useState([]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const TrendsStackTable = ({ handleJobTitleClick }) => {
         <thead>
           <tr>
             <th>순위</th>
-            <th>기술스택</th>
+            <th>직무명</th>
             <th>공고수</th>
           </tr>
         </thead>
@@ -39,4 +39,4 @@ const TrendsStackTable = ({ handleJobTitleClick }) => {
   );
 };
 
-export default TrendsStackTable;
+export default TrendsSpecialTable;

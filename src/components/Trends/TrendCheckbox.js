@@ -25,7 +25,6 @@ const Checkbox = styled.label`
 
 const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
   const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedStack, setSelectedStack] = useState("");
 
   const [active, setActive] = useState(false);
 
@@ -41,37 +40,58 @@ const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
     setSelectedMonth(event.target.value);
   };
 
-  const handleStackChange = (event) => {
-    setSelectedStack(event.target.value);
-  };
-
   return (
     <div style={{ marginTop: "50px" }}>
-      <label>
-        옵션을 선택하세요
-        <br />
-      </label>
-      <div style={{ marginBottom: "30px" }}>
-        <Checkbox checked={selectedOption === "직무"}>
-          <input
-            type="checkbox"
-            value="직무"
-            checked={selectedOption === "직무"}
-            onChange={handleOptionChange}
-          />
-          직무
-        </Checkbox>
-        <Checkbox checked={selectedOption === "기술스택"}>
-          <input
-            type="checkbox"
-            value="기술스택"
-            checked={selectedOption === "기술스택"}
-            onChange={handleOptionChange}
-          />
-          기술스택
-        </Checkbox>
+      <div
+        style={{
+          backgroundColor: "#f0f0f0",
+          borderRadius: "20px",
+          padding: "20px",
+          marginBottom: "30px",
+        }}
+      >
+        <label>
+          옵션을 선택하세요
+          <br />
+        </label>
+        <div>
+          <Checkbox checked={selectedOption === "직무"}>
+            <input
+              type="checkbox"
+              value="직무"
+              checked={selectedOption === "직무"}
+              onChange={handleOptionChange}
+            />
+            직무
+          </Checkbox>
+          <Checkbox checked={selectedOption === "기술스택"}>
+            <input
+              type="checkbox"
+              value="기술스택"
+              checked={selectedOption === "기술스택"}
+              onChange={handleOptionChange}
+            />
+            기술스택
+          </Checkbox>
+          <Checkbox checked={selectedOption === "전문분야"}>
+            <input
+              type="checkbox"
+              value="전문분야"
+              checked={selectedOption === "전문분야"}
+              onChange={handleOptionChange}
+            />
+            전문분야
+          </Checkbox>
+        </div>
       </div>
-      <div>
+      <div
+        style={{
+          backgroundColor: "#f0f0f0",
+          borderRadius: "20px",
+          padding: "20px",
+          marginBottom: "30px",
+        }}
+      >
         <label>기간을 선택하세요</label>
         <div>
           <Checkbox checked={selectedMonth === "1개월"}>
@@ -110,117 +130,29 @@ const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
             />
             12개월
           </Checkbox>
-          {selectedOption === "직무" && (
-            <div style={{ marginTop: "50px" }}>
-              <button
-                className={`button ${active ? "active" : ""}`}
-                onClick={handleClick}
-              >
-                그래프 보기
-              </button>
-            </div>
-          )}
-          {selectedOption === "기술스택" && (
-            <div style={{ marginTop: "50px" }}>
-              <label>분야를 선택하세요</label>
-              <div>
-                <Checkbox checked={selectedStack === "솔루션"}>
-                  <input
-                    type="checkbox"
-                    value="솔루션"
-                    checked={selectedStack === "솔루션"}
-                    onChange={handleStackChange}
-                  />
-                  솔루션
-                </Checkbox>
-                <Checkbox checked={selectedStack === "네트워크"}>
-                  <input
-                    type="checkbox"
-                    value="네트워크"
-                    checked={selectedStack === "네트워크"}
-                    onChange={handleStackChange}
-                  />
-                  네트워크
-                </Checkbox>
-                <Checkbox checked={selectedStack === "S/W"}>
-                  <input
-                    type="checkbox"
-                    value="S/W"
-                    checked={selectedStack === "S/W"}
-                    onChange={handleStackChange}
-                  />
-                  S/W
-                </Checkbox>
-                <Checkbox checked={selectedStack === "클라우드"}>
-                  <input
-                    type="checkbox"
-                    value="클라우드"
-                    checked={selectedStack === "클라우드"}
-                    onChange={handleStackChange}
-                  />
-                  클라우드
-                </Checkbox>
-                <Checkbox checked={selectedStack === "인프라"}>
-                  <input
-                    type="checkbox"
-                    value="인프라"
-                    checked={selectedStack === "인프라"}
-                    onChange={handleStackChange}
-                  />
-                  인프라
-                </Checkbox>
-              </div>
-              <div>
-                <Checkbox checked={selectedStack === "API"}>
-                  <input
-                    type="checkbox"
-                    value="API"
-                    checked={selectedStack === "API"}
-                    onChange={handleStackChange}
-                  />
-                  API
-                </Checkbox>
-                <Checkbox checked={selectedStack === "H/W"}>
-                  <input
-                    type="checkbox"
-                    value="H/W"
-                    checked={selectedStack === "H/W"}
-                    onChange={handleStackChange}
-                  />
-                  H/W
-                </Checkbox>
-                <Checkbox checked={selectedStack === "빅데이터"}>
-                  <input
-                    type="checkbox"
-                    value="빅데이터"
-                    checked={selectedStack === "빅데이터"}
-                    onChange={handleStackChange}
-                  />
-                  빅데이터
-                </Checkbox>
-                <Checkbox checked={selectedStack === "임베디드"}>
-                  <input
-                    type="checkbox"
-                    value="임베디드"
-                    checked={selectedStack === "임베디드"}
-                    onChange={handleStackChange}
-                  />
-                  임베디드
-                </Checkbox>
-                <Checkbox checked={selectedStack === "정보통신"}>
-                  <input
-                    type="checkbox"
-                    value="정보통신"
-                    checked={selectedStack === "정보통신"}
-                    onChange={handleStackChange}
-                  />
-                  정보통신
-                </Checkbox>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+      {selectedOption === "직무" && (
+        <div style={{ marginTop: "30px" }}>
+          <button
+            className={`button ${active ? "active" : ""}`}
+            onClick={handleClick}
+          >
+            그래프 보기
+          </button>
+        </div>
+      )}
+
+      {selectedOption === "전문분야" && (
+        <div style={{ marginTop: "30px" }}>
+          <button
+            className={`button ${active ? "active" : ""}`}
+            onClick={handleClick}
+          >
+            그래프 보기
+          </button>
+        </div>
+      )}
     </div>
   );
 };
