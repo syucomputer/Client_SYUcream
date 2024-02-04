@@ -1,3 +1,10 @@
+.NavLink {
+    font-size: 14px;
+    margin-left: 40px;
+    text-decoration: none;
+    color: #666666;
+}
+
 .loginButton {
     width: 80px;
     height: 30px;
