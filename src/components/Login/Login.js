@@ -3,15 +3,19 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import "./Login.css";
+import { useAuth } from "./AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
+
 
   const handleLogin = () => {
     // 여기다가 로그인 로직 정의
-    alert("로그인합니다");
+    login();
+    navigate('/')
   };
 
   const handleSign = () => {
