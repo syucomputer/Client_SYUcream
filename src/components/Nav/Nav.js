@@ -5,7 +5,7 @@ import {useAuth} from "../Login/AuthContext";
 
 const Nav = ({ isLoggedIn }) => {
   const navigate = useNavigate();
-  const { logout } = useAuth();  // useAuth 훅을 통해 logout 함수를 가져옴
+  const { user, logout } = useAuth();  // useAuth 훅을 통해 logout 함수를 가져옴
 
   const handlerLogin = () => {
     navigate("/login");
@@ -55,12 +55,12 @@ const Nav = ({ isLoggedIn }) => {
           alignItems: "center",
         }}
       >
-          {isLoggedIn ? (
+          {user ? (
               // 로그인 상태일 때 표시할 내비게이션
               <>
                   {/* 추가적인 로그인 후 네비게이션 항목 */}
                   <Button label="로그아웃" className="loginButton" onClick={handlerLogout}/>
-                  <Button label="마이페이지" className="signButton" onClick={handlerMyPage}/>
+                  {/*<Button label="마이페이지" className="signButton" onClick={handlerMyPage}/>*/}
               </>
           ) : (
               // 로그인 상태가 아닐 때 표시할 내비게이션
