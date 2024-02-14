@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import "./Trends.css";
 const labelbox = () => {
   return (
-    <Box sx={{ textAlign: "center", marginRight: "200px" }}>
+    <Box sx={{ textAlign: "center", marginRight: "200px", width: "620px" }}>
       <label className="labeltitle">
         최신동향 <br />
       </label>

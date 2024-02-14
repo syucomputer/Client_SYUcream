@@ -1,10 +1,9 @@
-import Trends from "../components/Trends/Trends";
+import Subject from "../components/Subject/Subject";
 
-const SignupPage = () => {
+const SubjectPage = () => {
   return (
     <div
       style={{
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
         margin: 0,
@@ -12,9 +11,9 @@ const SignupPage = () => {
         position: "relative",
       }}
     >
-      <Trends />
+      <Subject />
     </div>
   );
 };
 
-export default SignupPage;
+export default SubjectPage;
