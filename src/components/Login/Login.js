@@ -3,15 +3,26 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import InputField from "../InputField/InputField";
 import "./Login.css";
+import { useAuth } from "./AuthContext";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = () => {
-    // 여기다가 로그인 로직 정의
-    alert("로그인합니다");
+
+  const handleLogin = async () => {
+    try {
+      // 사용자가 입력한 정보를 가지고 로그인을 시도합니다.
+      await login(id, password);
+
+      // 로그인 성공 시 원하는 동작 수행 (예: 페이지 이동)
+      navigate('/mypage');
+    } catch (error) {
+      console.error('로그인 실패 또는 오류', error);
+      // 로그인 실패 시 사용자에게 알림 또는 다른 처리를 수행할 수 있습니다.
+    }
   };
 
   const handleSign = () => {
@@ -25,8 +36,8 @@ const Login = () => {
         <InputField
           type="text"
           label="학번"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={id}
+          onChange={(e) => setId(e.target.value)}
         />
         <InputField
           type="password"

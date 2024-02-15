@@ -4,11 +4,9 @@ const SignupPage = () => {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
         margin: 0,
         padding: 0,
+        height: "100vh",
         position: "relative",
       }}
     >

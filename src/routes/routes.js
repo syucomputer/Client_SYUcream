@@ -2,7 +2,7 @@ import SignupPage from "../views/SignupPage";
 import LoginPage from "../views/LoginPage";
 import HomePage from "../views/HomePage";
 import TrendsPage from "../views/TrendsPage";
-import SubjectPage from "../views/SubjectPage";
+import MyPage from "../views/MyPage";
 
 const routes = [
   {
@@ -19,12 +19,12 @@ const routes = [
     element: <SignupPage />,
   },
   {
-    path: "/trends",
-    element: <TrendsPage />,
+    path: "/mypage",
+    element: <MyPage />,
   },
   {
-    path: "/subjectRecommend",
-    element: <SubjectPage />,
+    path: "/trends",
+    element: <TrendsPage />,
   },
 ];
 

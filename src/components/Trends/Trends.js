@@ -39,6 +39,7 @@ const Trends = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          width: "95%",
         }}
       >
         <Labelbox />
@@ -52,6 +53,7 @@ const Trends = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          width: "95%",
         }}
       >
         {selectedOption === "직무" ? (

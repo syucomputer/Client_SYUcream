@@ -41,7 +41,7 @@ const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
   };
 
   return (
-    <div style={{ marginTop: "50px", width: "480px" }}>
+    <div style={{ marginTop: "50px" }}>
       <div
         style={{
           backgroundColor: "#f0f0f0",

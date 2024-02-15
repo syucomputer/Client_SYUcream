@@ -11,6 +11,7 @@ const Main = () => {
     const handleMenu = (title) => {
         setSelectedMenu(title);
     }
+
     const renderSelectedMenu = () => {
         switch (selectedMenu) {
             case 'home':

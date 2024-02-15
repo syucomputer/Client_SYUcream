@@ -1,7 +1,10 @@
 import Nav from "../components/Nav/Nav";
 import Main from "../components/Main/Main";
+import {useAuth} from "../components/Login/AuthContext";
 
 const HomePage = () => {
+    const { isLoggedIn } = useAuth()
+
   return (
     <div
       style={{
@@ -12,7 +15,7 @@ const HomePage = () => {
         backgroundColor: "#E7ECFF",
       }}
     >
-        <Nav />
+        <Nav isLoggedIn={isLoggedIn}/>
         <Main />
     </div>
   );
