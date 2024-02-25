@@ -15,7 +15,7 @@
         "recommendKeyword": ["정보보안", "네트워크", "데이터통신"]
       },
       {
-        "subjectId": 1234,
+        "subjectId": 1235,
         "subjectName": "데이터통신",
         "subjectProfessor": "조충희",
         "subjectClassification": "전공필수",
@@ -26,7 +26,7 @@
         "recommendKeyword": ["정보보안", "네트워크", "데이터통신"]
       },
       {
-        "subjectId": 1234,
+        "subjectId": 1236,
         "subjectName": "컴퓨터프로그래밍",
         "subjectProfessor": "김정숙",
         "subjectClassification": "전공선택",
@@ -37,7 +37,7 @@
         "recommendKeyword": ["정보보안", "네트워크", "데이터통신"]
       },
       {
-        "subjectId": 1234,
+        "subjectId": 1237,
         "subjectName": "컴퓨터프로그래밍",
         "subjectProfessor": "김정숙",
         "subjectClassification": "전공선택",

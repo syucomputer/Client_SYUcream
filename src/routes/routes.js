@@ -3,6 +3,7 @@ import LoginPage from "../views/LoginPage";
 import HomePage from "../views/HomePage";
 import TrendsPage from "../views/TrendsPage";
 import MyPage from "../views/MyPage";
+import SubjectPage from "../views/SubjectPage";
 
 const routes = [
   {
@@ -25,6 +26,10 @@ const routes = [
   {
     path: "/trends",
     element: <TrendsPage />,
+  },
+  {
+    path: "/subject",
+    element: <SubjectPage />,
   },
 ];
 

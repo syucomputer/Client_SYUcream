@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import data from "./SubjectData.json";
-
+import axios from "axios";
 import "./Subject.css";
 
 const SubjectTable = () => {
-  const [allSubjects] = useState(data.results.subjects);
-  const [subjects, setSubjects] = useState(allSubjects);
+  const [allSubjects, setAllSubjects] = useState([]);
+  const [subjects, setSubjects] = useState([]);
   const [search, setSearch] = useState("");
 
   const itemsPerPage = 8;
@@ -16,6 +15,24 @@ const SubjectTable = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = subjects.slice(indexOfFirstItem, indexOfLastItem);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalData] = useState(null);
+
+  const [subjectDetailData, setSubjectDetailData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/user/1`)
+      .then((response) => {
+        setSubjects(response.data.results.subject);
+        setAllSubjects(response.data.results.subject);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+        setSubjects([]);
+      });
+  }, []);
 
   const pageNumbers = [];
   for (
@@ -42,6 +59,21 @@ const SubjectTable = () => {
     }
     setSubjects(filteredSubjects);
   }, [semester, search, allSubjects]);
+
+  const setModalContent = (subjectId) => {
+    if (!subjectDetailData) {
+      setModalData("상세 정보를 불러오는 중입니다.");
+    } else {
+      const subjectDetail = subjectDetailData.find(
+        (subject) => subject.subjectId === subjectId
+      );
+      if (subjectDetail) {
+        setModalData(subjectDetail.subjectGoal);
+      } else {
+        setModalData("상세 정보를 불러오는 데 실패했습니다.");
+      }
+    }
+  };
 
   return (
     <div className="container-form">
@@ -79,9 +111,15 @@ const SubjectTable = () => {
             <tr key={index}>
               <td>{subject.subjectGrade}학년</td>
               <td>{subject.subjectClassification}</td>
-              <td>{subject.subjectName}</td>
+              <td
+                onClick={() => {
+                  setModalContent(subject.subjectId);
+                  setIsModalOpen(true);
+                }}
+              >
+                {subject.subjectName}
+              </td>
               <td>{subject.subjectopen}</td>
-              {/* API 수정 되면 수정해야됨 {subjectYear}-{subjectSemester}*/}
               <td>{subject.subjectProfessor}</td>
               <td>{subject.subjectStatus}</td>
             </tr>
@@ -112,6 +150,14 @@ const SubjectTable = () => {
           )}
         </div>
       </table>
+      {isModalOpen && (
+        <div className="modal" onClick={() => setIsModalOpen(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <span onClick={() => setIsModalOpen(false)}>Close</span>
+            <p>{modalContent}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
