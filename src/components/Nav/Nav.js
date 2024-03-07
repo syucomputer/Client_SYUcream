@@ -72,7 +72,11 @@ const Nav = ({ isLoggedIn }) => {
               className="loginButton"
               onClick={handlerLogout}
             />
-            {/*<Button label="마이페이지" className="signButton" onClick={handlerMyPage}/>*/}
+            <Button
+              label="마이페이지"
+              className="signButton"
+              onClick={handlerMyPage}
+            />
           </>
         ) : (
           // 로그인 상태가 아닐 때 표시할 내비게이션

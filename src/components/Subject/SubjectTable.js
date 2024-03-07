@@ -23,7 +23,7 @@ const SubjectTable = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/user/1`)
+      .get(`http://localhost:8080/subject`)
       .then((response) => {
         setSubjects(response.data.results.subject);
         setAllSubjects(response.data.results.subject);
@@ -42,12 +42,11 @@ const SubjectTable = () => {
   ) {
     pageNumbers.push(i);
   }
-
   useEffect(() => {
     let filteredSubjects = allSubjects;
-    if (semester !== "") {
+    if (semester !== "" && semester !== "--학기-- 선택") {
       filteredSubjects = filteredSubjects.filter(
-        (subject) => subject.subjectopen === semester
+        (subject) => subject.subjectOpen === semester
       );
     }
     if (search !== "") {
@@ -110,7 +109,7 @@ const SubjectTable = () => {
           {currentItems.map((subject, index) => (
             <tr key={index}>
               <td>{subject.subjectGrade}학년</td>
-              <td>{subject.subjectClassification}</td>
+              <td>{subject.subjectSort}</td>
               <td
                 onClick={() => {
                   setModalContent(subject.subjectId);
@@ -119,7 +118,7 @@ const SubjectTable = () => {
               >
                 {subject.subjectName}
               </td>
-              <td>{subject.subjectopen}</td>
+              <td>{subject.subjectOpen}</td>
               <td>{subject.subjectProfessor}</td>
               <td>{subject.subjectStatus}</td>
             </tr>
