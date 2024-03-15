@@ -2,11 +2,13 @@ import React, { useState} from "react";
 import Button from "../Button/Button";
 import "./Course.css"
 import data from "./testData.json"
+import {useNavigate} from "react-router-dom";
 
 const Course = ({ onStepChange }) => {
     const [loading, setLoading] = useState(false);
     const [complete, setComplete] = useState(false);
     const [subjectData, setSubjectData] = useState([]);
+    const navigate = useNavigate();
 
     const handlerPull =  () => {
         setLoading(true);
@@ -44,7 +46,7 @@ const Course = ({ onStepChange }) => {
     };
 
     const handlerNext = () => {
-        onStepChange(4);
+        navigate('/login');
     }
 
     return (
