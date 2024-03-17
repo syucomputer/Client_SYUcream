@@ -1,4 +1,4 @@
-import Login from "../components/Login/Login";
+import LoginForm from "../components/Login/LoginForm";
 import React from "react";
 
 const LoginPage = () => {
@@ -13,7 +13,7 @@ const LoginPage = () => {
         position: "relative",
       }}
     >
-      <Login />
+      <LoginForm />
     </div>
   );
 };
