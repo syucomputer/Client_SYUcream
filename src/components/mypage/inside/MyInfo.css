@@ -1,0 +1,48 @@
+.keywordContainer {
+    width: calc(100% - 30px);
+    height: 150px;
+    border-radius: 20px;
+    border: 2px solid #2670FF;
+    display: flex;
+}
+
+.keywordEdit {
+    width: 100px;
+    height: 20px;
+    background-color: #d9d9d9;
+    margin-top: 10px;
+    color: black;
+}
+
+.selectButton {
+    width: 140px;
+    height: 30px;
+    font-size: 14px;
+    color: black;
+    margin-top: 15px;
+}
+
+.keywordContainer > div {
+    display: flex;
+    height: calc(100% - 20px);
+    flex-direction: column;
+}
+
+.keyword {
+    flex: 1;
+    align-items: center; /* 추가 */
+    justify-content: center; /* 추가 */
+    background-color: #2670FF;
+    border-radius: 17px 0 0 17px;
+    padding: 10px;
+}
+
+.selectKeyword {
+    flex: 5;
+    padding: 10px;
+}
+
+.remove {
+    margin-left: 5px;
+    cursor: pointer;
+}
