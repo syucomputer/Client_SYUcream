@@ -66,7 +66,7 @@ const InputField = ({ type, label, value, onChange }) => {
             {!isSuccess && (
               <Button
                 label={buttonLabel}
-                className='buttonStyle'
+                className="buttonStyle"
                 onClick={postEmail}
               />
             )}

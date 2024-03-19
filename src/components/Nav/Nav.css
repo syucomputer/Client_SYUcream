@@ -1,25 +1,25 @@
 .NavLink {
-    font-size: 14px;
-    margin-left: 40px;
-    text-decoration: none;
-    color: #666666;
+  font-size: 14px;
+  margin-left: 40px;
+  text-decoration: none;
+  color: #666666;
 }
 
 .loginButton {
-    width: 80px;
-    height: 30px;
-    background-color: #ffffff;
-    color: black;
-    border: 1px solid black;
-    border-radius: 8px;
-    margin-right: 15px;
+  width: 80px;
+  height: 30px;
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-right: 15px;
 }
 
 .signButton {
-    width: 80px;
-    height: 30px;
-    background-color: black;
-    color: #ffffff;
-    border-radius: 8px;
-    margin-right: 25px;
+  width: 80px;
+  height: 30px;
+  background-color: black;
+  color: #ffffff;
+  border-radius: 8px;
+  margin-right: 25px;
 }
