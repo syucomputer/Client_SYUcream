@@ -4,7 +4,7 @@ import "./Course.css"
 import data from "./testData.json"
 import {useNavigate} from "react-router-dom";
 
-const Course = ({ onStepChange }) => {
+const Course = () => {
     const [loading, setLoading] = useState(false);
     const [complete, setComplete] = useState(false);
     const [subjectData, setSubjectData] = useState([]);

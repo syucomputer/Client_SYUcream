@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { useAuth } from "../Login/AuthContext";
 
-const Nav = ({ isLoggedIn }) => {
+const Nav = () => {
     const navigate = useNavigate();
     const { user, logout } = useAuth(); // useAuth 훅을 통해 logout 함수를 가져옴
 

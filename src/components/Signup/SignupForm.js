@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import InputField from "../InputField/InputField";
-import Button from "../Button/Button";
 import axios from "axios";
 
 const SignupForm = ({ onStepChange }) => {
