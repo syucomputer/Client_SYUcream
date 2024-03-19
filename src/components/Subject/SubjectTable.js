@@ -29,7 +29,7 @@ const SubjectTable = () => {
     axios
       .get("http://localhost:8080/subject/recommend")
       .then((response) => {
-        const subjectsData = response.data.result?.subjects;
+        const subjectsData = response.data.results?.subjects;
 
         setAllSubjects(subjectsData || []); // API 호출 결과를 allSubjects에 저장
         setSubjects(subjectsData || []); // 초기 subjects 상태도 업데이트
@@ -48,7 +48,7 @@ const SubjectTable = () => {
     axios
       .get("http://localhost:8080/subject/{subjectID}")
       .then((response) => {
-        const subjectsInfoData = response.data.result?.subject;
+        const subjectsInfoData = response.data.results?.subject;
         setSubjectsInfo(subjectsInfoData || []); //API호출 결과를 setSubjectsInfo에 저장
         console.log(response.result);
         console.log(response.data);
