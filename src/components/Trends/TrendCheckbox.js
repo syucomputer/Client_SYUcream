@@ -7,7 +7,7 @@ const Checkbox = styled.label`
   margin: 10px;
   border: 1px solid #ccc;
   border-radius: 30px;
-  background: ${(trends) => (trends.checked ? "#9370DB" : "#fff")};
+  background: ${(trends) => (trends.checked ? "#ADB6FF" : "#fff")};
   color: ${(trends) => (trends.checked ? "#fff" : "black")};
   cursor: pointer;
   font-size: 16px;
@@ -133,7 +133,13 @@ const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
         </div>
       </div>
       {selectedOption === "직무" && (
-        <div style={{ marginTop: "30px" }}>
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <button
             className={`button ${active ? "active" : ""}`}
             onClick={handleClick}
@@ -143,8 +149,30 @@ const TrendCheckbox = ({ selectedOption, setSelectedOption }) => {
         </div>
       )}
 
+      {selectedOption === "기술스택" && (
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <button
+            className={`button ${active ? "active" : ""}`}
+            onClick={handleClick}
+          >
+            그래프 보기
+          </button>
+        </div>
+      )}
       {selectedOption === "전문분야" && (
-        <div style={{ marginTop: "30px" }}>
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <button
             className={`button ${active ? "active" : ""}`}
             onClick={handleClick}

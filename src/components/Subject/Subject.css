@@ -89,3 +89,27 @@
   width: 80%;
   max-width: 500px;
 }
+
+.background-completed {
+  background-color: #eeeeee;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  color: #c4c4c4;
+  padding: 3px 10px;
+}
+
+.background-highly-recommended {
+  background-color: #ffc5c5;
+  border: 1px solid #df0404;
+  border-radius: 4px;
+  color: #df0404;
+  padding: 3px 10px;
+}
+
+.background-recommended {
+  background-color: #16c098;
+  border: 1px solid #00b087;
+  border-radius: 4px;
+  color: #00b087;
+  padding: 3px 10px;
+}
