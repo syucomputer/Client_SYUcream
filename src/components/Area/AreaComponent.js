@@ -3,7 +3,7 @@ import testListData from "./testListData.json";
 import Areas from "./Areas";
 import "./AreaComponent.css"
 
-const AreaComponent = () => {
+const AreaComponent = ({ onSelectedItemsChange }) => {
     const [dataJobs, setDataJobs] = useState([]);
     const [dataFields, setDataFields] = useState([]);
     const [dataSkills, setDataSkills] = useState([]);
@@ -24,10 +24,13 @@ const AreaComponent = () => {
         } else {
             setSelectedItems([...selectedItems, item]);
         }
+
+        onSelectedItemsChange(selectedItems); // 선택된 아이템들을 부모 컴포넌트로 전달
     };
 
     const handleRemoveItem = (item) => {
         setSelectedItems(selectedItems.filter((selectedItem) => selectedItem !== item));
+        onSelectedItemsChange(selectedItems); // 선택된 아이템들을 부모 컴포넌트로 전달
     };
 
     return (
@@ -38,8 +41,8 @@ const AreaComponent = () => {
                 <Areas label="기술스택" list={dataSkills} onItemClick={handleItemClick} />
             </div>
             <div className="AllItems">
-                {selectedItems.map((selectedItem) => (
-                    <div key={selectedItem.jobCode} className="SelectedItem">
+                {selectedItems.map((selectedItem, index) => (
+                    <div key={index} className="SelectedItem">
                         {selectedItem.jobTitle}
                         <button className="remove" onClick={() => handleRemoveItem(selectedItem)}>x</button>
                     </div>

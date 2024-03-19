@@ -1,0 +1,42 @@
+.profile-container {
+    width: calc(100% - 100px);
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 30px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.editButton {
+    width: 80px;
+    height: 30px;
+    background-color: #ADB6FF;
+    float: right;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    background-image: url('/public/profile/suya.png'); /* 이미지 경로 설정 */
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 섀도우 효과 */
+}
+
+.homeButton {
+    width: calc(100% - 60px);
+    height: 40px;
+    background-color: #9CB5DA;
+    margin: 10px 30px;
+}
+
+.roadmapButton {
+    width: calc(100% - 60px);
+    height: 40px;
+    background-color: #02225F;
+    margin: 10px 30px;
+}

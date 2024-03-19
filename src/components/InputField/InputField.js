@@ -4,12 +4,22 @@ import "./InputField.css";
 
 const InputField = ({ type, label, value, onChange }) => {
   const isEmailField = label === "이메일"; // 이메일 필드 여부를 판별
+
   const [isEmail, setIsEmail] = useState(false);
   const [isRight, setIsRight] = useState(false);
   const [isFailCode, setIsFailCode] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [buttonLabel, setButtonLabel] = useState("인증하기");
   const [verificationCode, setVerificationCode] = useState("");
+
+const [inputValue, setInputValue] = useState(value); // value prop을 로컬 상태로 관리
+
+// 입력 값이 변경될 때마다 상태를 업데이트하고, 부모 컴포넌트에서 전달된 onChange 핸들러 호출
+const handleChange = (e) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onChange(newValue);
+};
 
   // email 보내는 로직
   const postEmail = () => {
@@ -47,8 +57,8 @@ const InputField = ({ type, label, value, onChange }) => {
       <div style={{ marginTop: "5px" }}>
         <input
           type={type}
-          value={value}
-          onChange={onChange}
+          value={inputValue}
+          onChange={handleChange}
           style={{
             width: "100%",
             padding: "8px",

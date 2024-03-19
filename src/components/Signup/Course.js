@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
+<<<<<<< HEAD
 import "./Course.css";
 import data from "./testData.json";
 
@@ -7,6 +8,17 @@ const Course = ({ onStepChange }) => {
   const [loading, setLoading] = useState(false);
   const [complete, setComplete] = useState(false);
   const [subjectData, setSubjectData] = useState([]);
+=======
+import "./Course.css"
+import data from "./testData.json"
+import {useNavigate} from "react-router-dom";
+
+const Course = ({ onStepChange }) => {
+    const [loading, setLoading] = useState(false);
+    const [complete, setComplete] = useState(false);
+    const [subjectData, setSubjectData] = useState([]);
+    const navigate = useNavigate();
+>>>>>>> master
 
   const handlerPull = () => {
     setLoading(true);
@@ -43,9 +55,15 @@ const Course = ({ onStepChange }) => {
     });
   };
 
+<<<<<<< HEAD
   const handlerNext = () => {
     onStepChange(4);
   };
+=======
+    const handlerNext = () => {
+        navigate('/login');
+    }
+>>>>>>> master
 
   return (
     <div style={{ textAlign: "center" }}>
