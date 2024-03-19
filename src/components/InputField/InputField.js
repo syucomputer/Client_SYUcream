@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
 import "./InputField.css";
+import axios from "axios";
 
-const InputField = ({ type, label, value, onChange }) => {
+const InputField = ({ type, label, value, onChange, onVerificationSuccess }) => {
   const isEmailField = label === "이메일"; // 이메일 필드 여부를 판별
+
   const [isEmail, setIsEmail] = useState(false);
   const [isRight, setIsRight] = useState(false);
   const [isFailCode, setIsFailCode] = useState(false);
@@ -11,11 +13,31 @@ const InputField = ({ type, label, value, onChange }) => {
   const [buttonLabel, setButtonLabel] = useState("인증하기");
   const [verificationCode, setVerificationCode] = useState("");
 
-  // email 보내는 로직
-  const postEmail = () => {
-    setIsEmail(true);
-    setButtonLabel("재전송하기");
-  };
+    const [inputValue, setInputValue] = useState(value); // value prop을 로컬 상태로 관리
+
+    // 입력 값이 변경될 때마다 상태를 업데이트하고, 부모 컴포넌트에서 전달된 onChange 핸들러 호출
+    const handleChange = (e) => {
+        const newValue = e.target.value;
+        setInputValue(newValue);
+        onChange(newValue);
+    };
+
+    // email 보내는 로직
+    const postEmail = async () => {
+        setIsEmail(true);
+        setButtonLabel("재전송하기");
+
+        try {
+            const response = await axios.post(`http://localhost:8080/auth/${inputValue}`, {
+                userEmail: inputValue
+            });
+            console.log(response.data); // 응답 확인
+            // 응답에 따른 처리 (예: 성공 시 화면에 메시지 표시)
+        } catch (error) {
+            console.error("이메일 전송 실패:", error);
+            // 실패 시 처리 로직 추가
+        }
+    };
 
   // email 인증 코드 정규표현식
   const handleCodeChange = (e) => {
@@ -23,23 +45,32 @@ const InputField = ({ type, label, value, onChange }) => {
     const filteredValue = code.replace(/[^A-Za-z0-9]/g, ""); // 정규 표현식(영문, 숫자)
     setVerificationCode(filteredValue);
 
-    if (code.length === 6) setIsRight(true);
+    if (code.length === 8) setIsRight(true);
     else setIsRight(false);
   };
 
-  // 이메일 인증 확인
-  const rightEmailCode = () => {
-    if (verificationCode === "hello1") {
-      setIsEmail(false);
-      setIsFailCode(false);
-      setIsSuccess(true);
-    } else {
-      setIsFailCode(true);
-      setVerificationCode("");
-      setIsRight(false);
-    }
-  };
+    // 인증 코드 확인 함수
+    const checkVerificationCode = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/auth/${inputValue}/${verificationCode}`);
 
+            if (response.status === 200) {
+                setIsEmail(false);
+                setIsFailCode(false);
+                setIsSuccess(true);
+                if (onVerificationSuccess) {
+                    onVerificationSuccess(); // 인증 성공 시 콜백 함수 호출
+                }
+            } else {
+                setIsFailCode(true);
+                setVerificationCode("");
+                setIsRight(false);
+            }
+        } catch (error) {
+            console.error("인증 코드 확인 실패:", error);
+            // 실패 시 처리 로직 추가
+        }
+    };
   return (
     <div style={{ marginBottom: "20px", position: "relative" }}>
       <label style={{ color: "666666" }}>{label}</label>
@@ -47,8 +78,8 @@ const InputField = ({ type, label, value, onChange }) => {
       <div style={{ marginTop: "5px" }}>
         <input
           type={type}
-          value={value}
-          onChange={onChange}
+          value={inputValue}
+          onChange={handleChange}
           style={{
             width: "100%",
             padding: "8px",
@@ -95,7 +126,7 @@ const InputField = ({ type, label, value, onChange }) => {
               borderBottom: "1px solid black",
               textAlign: "center",
             }}
-            maxLength="6"
+            maxLength="8"
           />
           {isFailCode && (
             <label style={{ marginLeft: "8px", color: "red" }}>
@@ -105,7 +136,7 @@ const InputField = ({ type, label, value, onChange }) => {
           <Button
             label="인증하기"
             className={isRight ? "codeButtonStyleRight" : "codeButtonStyle"}
-            onClick={rightEmailCode}
+            onClick={checkVerificationCode}
           />
         </div>
       )}
