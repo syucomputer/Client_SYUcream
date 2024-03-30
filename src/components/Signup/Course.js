@@ -1,49 +1,79 @@
-import React, { useState} from "react";
+import React, {useEffect, useState} from "react";
 import Button from "../Button/Button";
 import "./Course.css"
-import data from "./testData.json"
+// import data from "./testData.json"
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
-const Course = () => {
+const Course = ({ studentId, onStepChange }) => {
     const [loading, setLoading] = useState(false);
     const [complete, setComplete] = useState(false);
     const [subjectData, setSubjectData] = useState([]);
     const navigate = useNavigate();
 
-    const handlerPull =  () => {
+    useEffect(() => {
+        if (studentId) {
+            fetchSubjects(studentId);
+        }
+    }, [studentId]);
+
+    const fetchSubjects = (studentId) => {
         setLoading(true);
+        // 수강 과목을 불러오는 요청을 보냅니다.
+        axios.get(`http://localhost:8080/user/${studentId}`)
+            .then((response) => {
+                const mySubjectData = response.data.results?.subjects;
 
-        // 데이터를 불러오는 비동기 작업을 수행합니다.
-        const startTime = new Date().getTime();
+                setSubjectData(mySubjectData);
+                console.log(mySubjectData);
 
-        fetchData()
-            .then((data) => {
-                const endTime = new Date().getTime();
-                const elapsedTime = endTime - startTime;
-
-                // 최소 3초간 로딩을 보여줍니다.
-                const remainingTime = Math.max(0, 3000 - elapsedTime);
-
-                setTimeout(() => {
-                    setSubjectData(data.results.subject);
-                    setComplete(true);
-                    setLoading(false);
-                }, remainingTime);
+                // console.log(response.result);
+                // console.log(response.data);
+                // console.log(subjectsData); // 로그로 데이터 확인
+                // console.log(response.result);
+                // console.log(response.data);
+                // console.log(subjectsData); // 로그로 데이터 확인
             })
             .catch((error) => {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching subjects:", error);
                 setLoading(false);
             });
     };
 
-    const fetchData = () => {
-        // 데이터를 불러오는 비동기 작업을 시뮬레이션합니다.
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(data);
-            }, 2000);
-        });
-    };
+    // const handlerPull =  () => {
+    //     setLoading(true);
+    //
+    //     // 데이터를 불러오는 비동기 작업을 수행합니다.
+    //     const startTime = new Date().getTime();
+    //
+    //     fetchData()
+    //         .then((data) => {
+    //             const endTime = new Date().getTime();
+    //             const elapsedTime = endTime - startTime;
+    //
+    //             // 최소 3초간 로딩을 보여줍니다.
+    //             const remainingTime = Math.max(0, 3000 - elapsedTime);
+    //
+    //             setTimeout(() => {
+    //                 setSubjectData(data.results.subject);
+    //                 setComplete(true);
+    //                 setLoading(false);
+    //             }, remainingTime);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching data:", error);
+    //             setLoading(false);
+    //         });
+    // };
+    //
+    // const fetchData = () => {
+    //     // 데이터를 불러오는 비동기 작업을 시뮬레이션합니다.
+    //     return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //             resolve(data);
+    //         }, 2000);
+    //     });
+    // };
 
     const handlerNext = () => {
         navigate('/login');
@@ -76,12 +106,12 @@ const Course = () => {
                             ))}
                         </div>
                     </div>
-                    <Button label="서비스 시작하기" className="next" onClick={handlerNext} />
+                    <button className="next" onClick={handlerNext}> 서비스 시작하기 </button>
                 </div>
             ) : (
                     <div>
                         <div className="box"></div>
-                        <Button label="수강정보 불러오기" className="ButtonPull" onClick={handlerPull} />
+                        <button className="ButtonPull" onClick={() => fetchSubjects(studentId)}> 수강정보 불러오기 </button>
                     </div>
                 )
             }

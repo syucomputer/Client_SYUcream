@@ -21,11 +21,9 @@ const LoginForm = () => {
         memId: id,
         password: password,
       });
-      console.log('전송하는 데이터:', { memId: id, password: password });
 
       // 백엔드에서 로그인 처리 후 클라이언트에서 응답 처리
       if (request.status === 200) {
-        console.log('로그인 성공:', request.data);
         // 로그인 성공 시 MyPage로 이동
         login();
         navigate('/mypage');
@@ -38,20 +36,6 @@ const LoginForm = () => {
       // 오류 발생 시 사용자에게 알림 또는 다른 처리 수행
     }
   };
-
-  // const handleLogin = async () => {
-  //   try {
-  //     // 사용자가 입력한 정보를 가지고 로그인을 시도합니다.
-  //     await login(id, password);
-  //     console.log('hello')
-  //
-  //     // 로그인 성공 시 원하는 동작 수행 (예: 페이지 이동)
-  //     navigate('/mypage');
-  //   } catch (error) {
-  //     console.error('로그인 실패 또는 오류', error);
-  //     // 로그인 실패 시 사용자에게 알림 또는 다른 처리를 수행할 수 있습니다.
-  //   }
-  // };
 
   const handleSign = () => {
     navigate("/signup");

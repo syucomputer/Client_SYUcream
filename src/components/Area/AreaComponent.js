@@ -1,36 +1,46 @@
 import {useEffect, useState} from "react";
-import testListData from "./testListData.json";
 import Areas from "./Areas";
 import "./AreaComponent.css"
+import axios from "axios";
 
-const AreaComponent = ({ onSelectedItemsChange }) => {
+const AreaComponent = ({ onSelectedItemsChange, studentId }) => {
     const [dataJobs, setDataJobs] = useState([]);
     const [dataFields, setDataFields] = useState([]);
     const [dataSkills, setDataSkills] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
 
     useEffect(() => {
-        // 비동기 작업을 수행한다고 가정
-        // 예를 들어, API 호출 등...
+        axios.get('http://localhost:8080/member/keyword/all',{
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                // 받아온 데이터를 각 항목별로 분류하여 상태에 저장합니다.
+                const jobs = response.data.filter(item => item.division === 'job');
+                const fields = response.data.filter(item => item.division === 'field');
+                const techstacks = response.data.filter(item => item.division === 'techstack');
 
-        setDataJobs(testListData.results.jobs);
-        setDataFields(testListData.results.fields);
-        setDataSkills(testListData.results.skills);
+                setDataJobs(jobs);
+                setDataFields(fields);
+                setDataSkills(techstacks);
+            })
+            .catch(error => {
+                console.error("API 호출 오류:", error);
+            })
     }, []);
 
     const handleItemClick = (item) => {
-        if (selectedItems.includes(item)) {
-            setSelectedItems(selectedItems.filter((selectedItem) => selectedItem !== item));
-        } else {
-            setSelectedItems([...selectedItems, item]);
-        }
-
-        onSelectedItemsChange(selectedItems); // 선택된 아이템들을 부모 컴포넌트로 전달
+        const updatedItems = selectedItems.includes(item)
+            ? selectedItems.filter(selectedItem => selectedItem !== item)
+            : [...selectedItems, item];
+        setSelectedItems(updatedItems);
+        onSelectedItemsChange(updatedItems);
     };
 
     const handleRemoveItem = (item) => {
-        setSelectedItems(selectedItems.filter((selectedItem) => selectedItem !== item));
-        onSelectedItemsChange(selectedItems); // 선택된 아이템들을 부모 컴포넌트로 전달
+        setSelectedItems(selectedItems.filter(selectedItem => selectedItem !== item));
+        onSelectedItemsChange(selectedItems);
     };
 
     return (
@@ -43,7 +53,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
             <div className="AllItems">
                 {selectedItems.map((selectedItem, index) => (
                     <div key={index} className="SelectedItem">
-                        {selectedItem.jobTitle}
+                        {selectedItem.name}
                         <button className="remove" onClick={() => handleRemoveItem(selectedItem)}>x</button>
                     </div>
                 ))}

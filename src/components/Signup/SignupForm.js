@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import InputField from "../InputField/InputField";
 import axios from "axios";
 
-const SignupForm = ({ onStepChange }) => {
+const SignupForm = ({ onStepChange, onStudentIdChange }) => {
     const [state, setState] = useState({
         name: "",
         id: "",
         email: "",
         password: "",
         passwordR: "",
+        studentId: "", // 학번 추가
     });
 
     const [isSuc, setIsSuc] = useState(false);
@@ -18,6 +19,9 @@ const SignupForm = ({ onStepChange }) => {
             ...state,
             [name]: value,
         });
+        if (name === "id") {
+            onStudentIdChange(value); // 학번 변경 시 부모 컴포넌트로 학번 전달
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -28,26 +32,32 @@ const SignupForm = ({ onStepChange }) => {
             return;
         }
 
-        try {
-            const request = await axios.post('http://localhost:8080/member/save', {
-                memId: state.id,
-                name: state.name,
-                email: state.email,
-                password: state.password,
-                passwordCheck: state.passwordR
-            });
+        if(state.password !== state.passwordR) {
+            alert('비밀번호를 다시 확인해주세요.')
+        } else {
+            try {
+                const request = await axios.post('http://localhost:8080/member/save', {
+                    memId: state.id,
+                    name: state.name,
+                    email: state.email,
+                    password: state.password,
+                    passwordCheck: state.passwordR
+                });
 
-            // 백엔드에서 로그인 처리 후 클라이언트에서 응답 처리
-            if (request.status === 200) {
-                console.log('회원가입 성공:', request.data);
-                onStepChange(2);
-            } else {
-                console.error('회원가입 실패:', request.data);
-                // 로그인 실패 시 사용자에게 알림 또는 다른 처리 수행
+                // 백엔드에서 로그인 처리 후 클라이언트에서 응답 처리
+                if (request.status === 200) {
+                    console.log('회원가입 성공:', request.data);
+                    onStepChange(2);
+                } else {
+                    console.error('회원가입 실패:', request.data);
+                    // 로그인 실패 시 사용자에게 알림 또는 다른 처리 수행
+
+                }
+            } catch (error) {
+                console.error('회원가입 오류:', error);
             }
-        } catch (error) {
-            console.error('회원가입 오류:', error);
         }
+
     }
 
     return (
