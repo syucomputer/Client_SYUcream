@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Button from "../Button/Button";
 import "./Course.css"
-// import data from "./testData.json"
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
-const Course = ({ studentId, onStepChange }) => {
+const Course = ({ studentId }) => {
     const [loading, setLoading] = useState(false);
     const [complete, setComplete] = useState(false);
     const [subjectData, setSubjectData] = useState([]);
@@ -13,19 +12,21 @@ const Course = ({ studentId, onStepChange }) => {
 
     useEffect(() => {
         if (studentId) {
-            fetchSubjects(studentId);
+            Subjects(studentId);
         }
     }, [studentId]);
 
-    const fetchSubjects = (studentId) => {
+    const Subjects = (studentId) => {
         setLoading(true);
         // 수강 과목을 불러오는 요청을 보냅니다.
-        axios.get(`http://localhost:8080/user/${studentId}`)
+        axios.get(`http://localhost:8080/subject/user/${studentId}`,{
+
+        })
             .then((response) => {
-                const mySubjectData = response.data.results?.subjects;
-
-                setSubjectData(mySubjectData);
-                console.log(mySubjectData);
+                // const mySubjectData = response.data.results.subjects;
+                // console.log(studentId)
+                // setSubjectData(mySubjectData);
+                // console.log(mySubjectData);
 
                 // console.log(response.result);
                 // console.log(response.data);
@@ -33,6 +34,17 @@ const Course = ({ studentId, onStepChange }) => {
                 // console.log(response.result);
                 // console.log(response.data);
                 // console.log(subjectsData); // 로그로 데이터 확인
+                // 응답 데이터의 구조를 확인하여 존재하는지 확인
+                if (response.data.results && response.data.results.subjects) {
+                    // 수강과목 데이터가 있는 경우
+                    const subjectData = response.data.results.subjects;
+                    // 상태 업데이트
+                    setSubjectData(subjectData);
+                    setComplete(true)
+                } else {
+                    // 수강과목 데이터가 없는 경우 또는 구조가 예상과 다른 경우
+                    console.error("수강과목 데이터가 없거나 잘못된 형식입니다.");
+                }
             })
             .catch((error) => {
                 console.error("Error fetching subjects:", error);
@@ -111,7 +123,7 @@ const Course = ({ studentId, onStepChange }) => {
             ) : (
                     <div>
                         <div className="box"></div>
-                        <button className="ButtonPull" onClick={() => fetchSubjects(studentId)}> 수강정보 불러오기 </button>
+                        <button className="ButtonPull" onClick={() => Subjects(studentId)}> 수강정보 불러오기 </button>
                     </div>
                 )
             }

@@ -20,7 +20,7 @@ const Signup = () => {
         <div className="Signup-container">
             {step === 1 && <SignupForm onStepChange={handleStepChange} onStudentIdChange={handleStudentIdChange} />}
             {step === 2 && <AreaOfInterest studentId={studentId} onStepChange={handleStepChange}/>}
-            {step === 3 && <Course studentId={studentId} onStepChange={handleStepChange} />}
+            {step === 3 && <Course studentId={studentId} />}
         </div>
     );
 };
