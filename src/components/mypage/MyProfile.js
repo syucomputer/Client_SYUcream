@@ -41,23 +41,23 @@ const MyProfile = ({ onChange }) => {
                 </div>
                 <table style={{ width: '100%', borderSpacing: '8px', marginTop: 'auto'}}>
                     <thead style={{ fontSize: '30px'}}>
-                        <tr>
-                            <th colSpan="2">{user.name}</th>
-                        </tr>
+                    <tr>
+                        <th colSpan="2">{user.name}</th>
+                    </tr>
                     </thead>
                     <tbody style={{ textAlign: 'left' }}>
-                        <tr>
-                            <td>이름</td>
-                            <td>{user.id}</td>
-                        </tr>
-                        <tr>
-                            <td>이메일</td>
-                            <td>{user.email}</td>
-                        </tr>
-                        <tr>
-                            <td>비밀번호</td>
-                            <td>{maskPassword(user.password)}</td>
-                        </tr>
+                    <tr>
+                        <td>이름</td>
+                        <td>{user.id}</td>
+                    </tr>
+                    <tr>
+                        <td>이메일</td>
+                        <td>{user.email}</td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호</td>
+                        <td>{user && maskPassword(user.password)}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

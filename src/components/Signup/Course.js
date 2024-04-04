@@ -23,17 +23,6 @@ const Course = ({ studentId }) => {
 
         })
             .then((response) => {
-                // const mySubjectData = response.data.results.subjects;
-                // console.log(studentId)
-                // setSubjectData(mySubjectData);
-                // console.log(mySubjectData);
-
-                // console.log(response.result);
-                // console.log(response.data);
-                // console.log(subjectsData); // 로그로 데이터 확인
-                // console.log(response.result);
-                // console.log(response.data);
-                // console.log(subjectsData); // 로그로 데이터 확인
                 // 응답 데이터의 구조를 확인하여 존재하는지 확인
                 if (response.data.results && response.data.results.subjects) {
                     // 수강과목 데이터가 있는 경우

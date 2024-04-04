@@ -4,17 +4,18 @@ import AreaComponent from "../Area/AreaComponent";
 import {useState} from "react";
 import axios from "axios";
 
-const AreaOfInterest = ({ onStepChange }) => {
+const AreaOfInterest = ({ studentId, onStepChange }) => {
     const [selectedItems, setSelectedItems] = useState([]);
 
     const handleComplete = () => {
         const postData = {
+            memberId: studentId,
             job: selectedItems.filter(item => item.division === 'job').map(item => item.name),
             field: selectedItems.filter(item => item.division === 'field').map(item => item.name),
             techStack: selectedItems.filter(item => item.division === 'techstack').map(item => item.name)
         };
 
-        axios.post('http://localhost:8080/member/keyword', postData)
+        axios.post(`http://localhost:8080/member/${studentId}/keyword`, postData)
             .then(response => {
                 console.log(selectedItems)
                 console.log('POST 요청 성공:', postData);
