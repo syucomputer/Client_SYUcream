@@ -1,6 +1,5 @@
-import Subject from "../components/Subject/Subject";
-
-const SubjectPage = () => {
+import Roadmap from "../components/Roadmap/RoadmapTable";
+const RoadmapPage = () => {
   return (
     <div
       style={{
@@ -11,9 +10,9 @@ const SubjectPage = () => {
         position: "absolute",
       }}
     >
-      <Subject />
+      <Roadmap />
     </div>
   );
 };
 
-export default SubjectPage;
+export default RoadmapPage;

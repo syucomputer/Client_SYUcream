@@ -42,6 +42,7 @@
   background-color: #f0f0f0;
   border: none;
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .pageNation-container button.active {
@@ -70,6 +71,16 @@
   outline: none;
 }
 
+.short-form {
+  margin-left: 10px;
+  align-items: center;
+  background-color: #f2f8ff;
+  border-radius: 5px;
+  margin-top: 15px;
+  height: 38px;
+  border: none;
+  outline: none;
+}
 .modal {
   position: fixed;
   top: 0;
@@ -88,6 +99,11 @@
   border-radius: 20px;
   width: 80%;
   max-width: 500px;
+  text-align: center;
+}
+
+.close {
+  margin-left: 450px;
 }
 
 .background-completed {
@@ -111,5 +127,12 @@
   border: 1px solid #00b087;
   border-radius: 4px;
   color: #00b087;
-  padding: 3px 10px;
+  padding: 3px 28px;
+}
+
+.pstyle {
+  font-size: 30px;
+  background: linear-gradient(to top, #ffec41 80%, transparent 100%);
+  width: 160px;
+  margin: auto;
 }

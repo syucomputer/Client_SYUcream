@@ -5,6 +5,7 @@ import TrendsPage from "../views/TrendsPage";
 import MyPage from "../views/MyPage";
 import SubjectPage from "../views/SubjectPage";
 import RoadmapPage from "../views/RoadmapPage";
+import Temp from "../views/Temp";
 
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
   {
     path: "/roadmap",
     element: <RoadmapPage />,
+  },
+  {
+    path: "/temp",
+    element: <Temp />,
   },
 ];
 

@@ -6,8 +6,10 @@ const SignupPage = () => {
       style={{
         margin: 0,
         padding: 0,
-        height: "100vh",
-        position: "relative",
+
+        position: "absolute",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Trends />
