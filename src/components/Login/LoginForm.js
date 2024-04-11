@@ -23,6 +23,7 @@ const LoginForm = () => {
 
       if (request.status === 200) {
         login(request.data);
+
         navigate('/mypage');
       } else {
         console.error('로그인 실패:', request);

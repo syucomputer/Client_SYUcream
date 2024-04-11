@@ -17,18 +17,17 @@ const Course = ({ studentId }) => {
     }, [studentId]);
 
     const Subjects = (studentId) => {
-        setLoading(true);
         // 수강 과목을 불러오는 요청을 보냅니다.
-        axios.get(`http://localhost:8080/subject/user/${studentId}`,{
-
-        })
+        axios.get(`http://localhost:8080/subject/user/${studentId}`)
             .then((response) => {
+                console.log(response.data);
                 // 응답 데이터의 구조를 확인하여 존재하는지 확인
-                if (response.data.results && response.data.results.subjects) {
+                if (response.status === 200) {
                     // 수강과목 데이터가 있는 경우
-                    const subjectData = response.data.results.subjects;
+                    const subjectData = response.data.results.subject;
                     // 상태 업데이트
                     setSubjectData(subjectData);
+                    setLoading(false)
                     setComplete(true)
                 } else {
                     // 수강과목 데이터가 없는 경우 또는 구조가 예상과 다른 경우
@@ -96,7 +95,7 @@ const Course = ({ studentId }) => {
                         </div>
                     </div>
                 </div>
-            ) : complete ? (
+            ) : (complete ? (
                 <div className="successMessage">
                     <div className="box">
                         <div>
@@ -115,7 +114,7 @@ const Course = ({ studentId }) => {
                         <button className="ButtonPull" onClick={() => Subjects(studentId)}> 수강정보 불러오기 </button>
                     </div>
                 )
-            }
+            )}
         </div>
     );
 };
