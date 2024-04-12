@@ -19,7 +19,7 @@ const MyPageComponent = () => {
             <div style={{flex: 1}}>
                 <MyProfile onChange={setContent} />
             </div>
-            <div style={{flex: 4}}>
+            <div style={{flex: 3}}>
                 {content ? <MyInfo /> : <MyRoadmap />}
             </div>
         </div>

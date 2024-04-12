@@ -63,7 +63,7 @@ const MyInfo = () => {
                     </div>
                     <div className="selectKeyword">
                         <div className="selectKeyword">
-                            {selectedKeywords && selectedKeywords.map((keyword, index) => (
+                            {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
                                 <div key={index} className="SelectedItem">
                                     {keyword.name}
                                 </div>
