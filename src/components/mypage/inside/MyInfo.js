@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import "./MyInfo.css"
 import {useAuth} from "../../Login/AuthContext";
 import axios from "axios";
+import MySubject from "./subject/MySubject";
 
 const MyInfo = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,20 +13,18 @@ const MyInfo = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        if(user) {
-            axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
-                .then(response => {
-                    // 받아온 데이터를 원하는 형식으로 가공합니다.
-                    const keywords = [];
-                    response.data.job.forEach(keyword => keywords.push({ division: 'job', name: keyword }));
-                    response.data.field.forEach(keyword => keywords.push({ division: 'field', name: keyword }));
-                    response.data.techStack.forEach(keyword => keywords.push({ division: 'techstack', name: keyword }));
-                    setSelectedKeywords(keywords);
-                })
-                .catch(error => {
-                    console.log('관심 키워드 에러 : ', error)
-                })
-        }
+        axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
+            .then(response => {
+                // 받아온 데이터를 원하는 형식으로 가공합니다.
+                const keywords = [];
+                response.data.job.forEach(keyword => keywords.push({ division: 'job', name: keyword }));
+                response.data.field.forEach(keyword => keywords.push({ division: 'field', name: keyword }));
+                response.data.techStack.forEach(keyword => keywords.push({ division: 'techstack', name: keyword }));
+                setSelectedKeywords(keywords);
+            })
+            .catch(error => {
+                console.log('관심 키워드 에러 : ', error)
+            })
     }, []);
 
     const handlerEdit = () => {
@@ -39,11 +38,9 @@ const MyInfo = () => {
             techStack: selectedKeywords.filter(item => item.division === 'techstack').map(item => item.name)
         };
 
-        axios.post(`http://localhost:8080/member/${user.memId}/keyword`, postData)
+        axios.put(`http://localhost:8080/member/${user.memId}/keyword`, postData)
             .then(response => {
-                console.log(response.data)
-                console.log(selectedKeywords)
-                console.log('POST 요청 성공:', postData);
+                console.log('POST 요청 성공:', postData, response.data);
                 setSelectedKeywords(selectedKeywords);
                 setIsModalOpen(false);
             })
@@ -69,10 +66,10 @@ const MyInfo = () => {
                                 </div>
                             ))}
                         </div>
-
                     </div>
                 </div>
             </div>
+            <MySubject />
             <ModalWindow
                 isOpen={isModalOpen}
                 onRequestClose={handleCloseModal}

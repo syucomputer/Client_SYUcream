@@ -30,7 +30,9 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
             .catch(error => {
                 console.error("API 호출 오류:", error);
             })
+    }, []);
 
+    useEffect(() => {
         if (user) {
             axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
                 .then(response => {
@@ -46,18 +48,20 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
                     console.error('키워드 불러오기 실패 : ', error);
                 });
         }
-    }, []);
+    }, [])
 
     const handleItemClick = (item) => {
+        const isItemAlreadySelected = selectedItems.some(selectedItem => selectedItem.name === item.name && selectedItem.division === item.division);
 
-        const updatedItems = selectedItems.includes(item)
-            ? selectedItems.filter(selectedItem => selectedItem !== item)
+        const updatedItems = isItemAlreadySelected
+            ? selectedItems.filter(selectedItem => !(selectedItem.name === item.name && selectedItem.division === item.division))
             : [...selectedItems, item];
         setSelectedItems(updatedItems);
         onSelectedItemsChange(updatedItems);
     };
+
     const handleRemoveItem = (item) => {
-        const updatedItems = selectedItems.filter(selectedItem => selectedItem.name !== item.name && selectedItem.division === item.division);
+        const updatedItems = selectedItems.filter(selectedItem => !(selectedItem.name === item.name && selectedItem.division === item.division));
         setSelectedItems(updatedItems);
         onSelectedItemsChange(updatedItems);
     };
