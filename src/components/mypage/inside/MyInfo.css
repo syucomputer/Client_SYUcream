@@ -42,6 +42,16 @@
     padding: 10px;
 }
 
+.SelectedItem {
+    display: inline-block;
+    width: 80px;
+    height: 25px;
+    font-size: 12px;
+    background-color: #CAD0FF;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: center;
+}
 .remove {
     margin-left: 5px;
     cursor: pointer;

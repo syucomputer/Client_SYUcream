@@ -48,7 +48,7 @@ const MyProfile = ({ onChange }) => {
                     <tbody style={{ textAlign: 'left' }}>
                     <tr>
                         <td>이름</td>
-                        <td>{user.id}</td>
+                        <td>{user.memId}</td>
                     </tr>
                     <tr>
                         <td>이메일</td>

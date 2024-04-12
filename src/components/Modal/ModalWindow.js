@@ -7,6 +7,7 @@ const ModalWindow = ({ isOpen, onRequestClose, children }) => {
         <Modal
             isOpen={isOpen}
             onRequestClose={onRequestClose}
+            shouldCloseOnOverlayClick={false}
             className="modal-container"
             overlayClassName="modal-background"
         >
