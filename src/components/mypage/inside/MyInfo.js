@@ -50,7 +50,7 @@ const MyInfo = () => {
     };
 
     return(
-        <div>
+        <div style={{margin: '50px'}}>
             <div>
                 <h1>나의 정보 관리</h1>
                 <div className="keywordContainer">

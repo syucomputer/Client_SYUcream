@@ -9,7 +9,7 @@ const MyPageComponent = () => {
     return(
         <div
             style={{
-                height: 'calc(100% - 120px)',
+                height: '100%',
                 margin: '30px',
                 borderRadius: '10px',
                 backgroundColor: 'white',

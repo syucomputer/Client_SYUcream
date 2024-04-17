@@ -1,12 +1,8 @@
-.container {
-    margin-top: 30px;
-}
-
 .container-form {
     margin-top: 5px;
     background-color: #ffffff;
-    width: calc(100% - 25px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    width: 1300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
 }
 
@@ -65,7 +61,7 @@
 }
 
 .search-form {
-    margin-left: 500px;
+    margin-left: 700px;
     align-items: center;
     background-color: #f2f8ff;
     border-radius: 5px;
@@ -85,7 +81,6 @@
     border: none;
     outline: none;
 }
-
 .modal {
     position: fixed;
     top: 0;
