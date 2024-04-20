@@ -32,7 +32,6 @@ const MyInfo = () => {
     };
 
     const handleCloseModal = () => {
-        console.log(selectedKeywords)
         const postData = {
             job: selectedKeywords.filter(item => item.division === 'job').map(item => item.name),
             field: selectedKeywords.filter(item => item.division === 'field').map(item => item.name),
