@@ -15,10 +15,10 @@ const Areas = ({ label, list, onItemClick }) => {
             {list.slice(0, showAllItems ? list.length : VisibleItemCount).map((item) => (
                 <button
                     className="clickButton"
-                    key={item.jobCode}
+                    key={item.id}
                     onClick={() => onItemClick(item)}
                 >
-                    {item.jobTitle}
+                    {item.name}
                 </button>
             ))}
             {(list.length > VisibleItemCount) && (
