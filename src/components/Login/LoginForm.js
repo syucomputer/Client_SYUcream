@@ -22,8 +22,11 @@ const LoginForm = () => {
       });
 
       if (request.status === 200) {
-        login(request.data);
-
+        const { accessToken, refreshToken, ...user } = request.data;
+        sessionStorage.setItem("accessToken", accessToken);
+        sessionStorage.setItem("refreshToken", refreshToken);
+        sessionStorage.setItem("user", JSON.stringify(user));
+        login(user);
         navigate('/mypage');
       } else {
         console.error('로그인 실패:', request);

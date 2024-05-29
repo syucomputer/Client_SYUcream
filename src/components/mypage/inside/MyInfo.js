@@ -12,6 +12,7 @@ const MyInfo = () => {
     const [selectedKeywords, setSelectedKeywords] = useState({});
     const { user } = useAuth();
 
+    // 사용자의 관심있는 키워드 불러오기
     useEffect(() => {
         axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
             .then(response => {
@@ -40,12 +41,12 @@ const MyInfo = () => {
 
         axios.put(`http://localhost:8080/member/${user.memId}/keyword`, postData)
             .then(response => {
-                console.log('POST 요청 성공:', postData, response.data);
+                console.log('PUT 요청 성공:', postData, response.data);
                 setSelectedKeywords(selectedKeywords);
                 setIsModalOpen(false);
             })
             .catch(error => {
-                console.error('POST 요청 실패:', error);
+                console.error('PUT 요청 실패:', error);
             });
     };
 
