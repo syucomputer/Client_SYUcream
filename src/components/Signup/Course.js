@@ -41,41 +41,6 @@ const Course = ({ studentId }) => {
             });
     };
 
-    // const handlerPull =  () => {
-    //     setLoading(true);
-    //
-    //     // 데이터를 불러오는 비동기 작업을 수행합니다.
-    //     const startTime = new Date().getTime();
-    //
-    //     fetchData()
-    //         .then((data) => {
-    //             const endTime = new Date().getTime();
-    //             const elapsedTime = endTime - startTime;
-    //
-    //             // 최소 3초간 로딩을 보여줍니다.
-    //             const remainingTime = Math.max(0, 3000 - elapsedTime);
-    //
-    //             setTimeout(() => {
-    //                 setSubjectData(data.results.subject);
-    //                 setComplete(true);
-    //                 setLoading(false);
-    //             }, remainingTime);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error fetching data:", error);
-    //             setLoading(false);
-    //         });
-    // };
-    //
-    // const fetchData = () => {
-    //     // 데이터를 불러오는 비동기 작업을 시뮬레이션합니다.
-    //     return new Promise((resolve) => {
-    //         setTimeout(() => {
-    //             resolve(data);
-    //         }, 2000);
-    //     });
-    // };
-
     const handlerNext = () => {
         navigate('/login');
     }
@@ -100,7 +65,8 @@ const Course = ({ studentId }) => {
                     <div className="successMessage">
                         <div className="box">
                             <div>
-                                {subjectData.map((subject) => (
+                                {console.log(subjectData)}
+                                {subjectData && subjectData.map((subject) => (
                                     <ul key={subject.subjectId}>
                                         <li>{subject.completeYear}년 {subject.completeTerm}</li>
                                     </ul>

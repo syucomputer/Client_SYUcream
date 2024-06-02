@@ -15,16 +15,18 @@ const MySubject = () => {
 
 
     useEffect(() => {
+        console.log(user.memId)
         axios
-            .get(`http://localhost:8080/subject/subject/course/${user.memId}`)
+            .get(`http://localhost:8080/subject/course/${user.memId}`)
             .then((response) => {
+                console.log("수강과목", response.data)
                 const subjectsData = response.data.results.subjects;
 
                 setAllSubjects(subjectsData || []); // API 호출 결과를 allSubjects에 저장
                 // setSubjects(subjectsData || []); // 초기 subjects 상태도 업데이트
 
                 // ..년도 ..학기 select문
-                const semesterList = response.data.results.subjects.map(semester => `${semester.completeYear}-${semester.completeTerm}`);
+                const semesterList = subjectsData.map(semester => `${semester.completeYear}-${semester.completeTerm}`);
                 setSemester(semesterList);
             })
             .catch((error) => {

@@ -14,6 +14,11 @@ const useToast = () => {
             pauseOnHover: false,
         };
 
+        const alarmConfig = {
+            ...config,
+            position: 'left'
+        }
+
         switch (type) {
             case 'success':
                 toast.success(message, config);
@@ -23,6 +28,9 @@ const useToast = () => {
                 break;
             case 'warning':
                 toast.warning(message, config);
+                break;
+            case 'alarmSuccess':
+                toast(message, alarmConfig);
                 break;
             default:
                 toast(message, config);
