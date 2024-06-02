@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import InputField from "../InputField/InputField";
 import axios from "axios";
+import useToast from "../Toast/useToast";
 
 const SignupForm = ({ onStepChange, onStudentIdChange }) => {
     const [state, setState] = useState({
@@ -14,6 +15,7 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
     });
 
     const [isSuc, setIsSuc] = useState(false);
+    const showToast = useToast();
 
     const handleChangeState = (name, value) => {
         setState({
@@ -30,11 +32,11 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
 
         if (!isSuc) {
             // 이메일 인증이 성공하지 않은 경우 회원가입을 진행하지 않음
-            return;
-        }
+            showToast('이메일이 인증되지 않았습니다.', 'error')
 
-        if(state.password !== state.passwordR) {
-            alert('비밀번호를 다시 확인해주세요.')
+        } else if(state.password !== state.passwordR) {
+            // 비밀번호가 일치하지 않을 때, 회원가입을 진행하지 않음
+            showToast('비밀번호가 서로 일치하지 않습니다.', 'error')
         } else {
             try {
                 const request = await axios.post('http://localhost:8080/member/save', {
@@ -48,17 +50,16 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
                 // 백엔드에서 로그인 처리 후 클라이언트에서 응답 처리
                 if (request.status === 200) {
                     console.log('회원가입 성공:', request.data);
+                    showToast('회원가입에 성공하셨습니다!!','success')
                     onStepChange(2);
                 } else {
                     console.error('회원가입 실패:', request.data);
                     // 로그인 실패 시 사용자에게 알림 또는 다른 처리 수행
-
                 }
             } catch (error) {
                 console.error('회원가입 오류:', error);
             }
         }
-
     }
 
     return (
