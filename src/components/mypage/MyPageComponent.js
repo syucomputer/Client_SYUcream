@@ -13,7 +13,8 @@ const MyPageComponent = () => {
                 margin: '30px',
                 borderRadius: '10px',
                 backgroundColor: 'white',
-                display: 'flex'
+                display: 'flex',
+                overflow: 'hidden'
             }}
         >
             <div style={{flex: 1}}>
