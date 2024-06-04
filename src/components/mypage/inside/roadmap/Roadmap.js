@@ -1,38 +1,78 @@
 import Button from "../../../Button/Button";
 import "./Roadmap.css"
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Roadmap = ({ setManage }) => {
+    const [allRoadmaps, setAllRoadmaps] = useState([]);
+    const [selectedRoadmapId, setSelectedRoadmapId] = useState("");
+    const [roadmapDetail, setRoadmapDetail] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/board/roadmaps`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                console.log(response.data)
+
+                setAllRoadmaps(response.data.result);
+            })
+            .catch(error => {
+                console.log('로드맵 리스트 조회 에러', error)
+            })
+    }, []);
+
+    useEffect(() => {
+        if (selectedRoadmapId) {
+            axios.get(`http://localhost:8080/board/roadmaps/${selectedRoadmapId}`)
+                .then(response => {
+
+                    setRoadmapDetail(response.data.result)
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log('로드맵 상세조회 에러',error)
+                })
+        }
+    }, [selectedRoadmapId]);
+
+    const handleSelectChange = (e) => {
+        setSelectedRoadmapId(e.target.value)
+    }
+
     return (
         <div>
             <div>
-                <select>
-                    <option value="1230">20201930_서버_개발자_1230</option>
-                    <option value="0103">2021101423_게임_클라이언트_개발자_0103</option>
-                    <option value="0214">202110423_네트워크_엔지니어_0214</option>
-                    <option value="0225">2021101423_클라우드_개발자_0225</option>
+                <select value={selectedRoadmapId} onChange={handleSelectChange}>
+                    <option value="">로드맵 선택</option>
+                    {allRoadmaps.map(roadmap => (
+                        <option key={roadmap.id} value={roadmap.id}>
+                            {roadmap.title}
+                        </option>
+                    ))}
                 </select>
                 <Button label="로드맵 관리" className="" onClick={setManage}/>
             </div>
             <div className="all-contatiner">
-                <div>
-                    <h1>네트워크 엔지니어</h1>
-                    <div>'네트워크 엔지니어'는 ~~~~~~~~~~~~~~</div>
-                </div>
+                {roadmapDetail && (
+                    <div>
+                        <h1>{roadmapDetail.name}</h1>
+                        <div>{roadmapDetail.job_description}</div>
+                    </div>
+                )}
                 <div className="roadmap-container">
                     <div className="Line">
                         <div className="add-container">
                             필요한 공부 및 기술
                         </div>
                     </div>
-                    <ol className="content-box">
-                        <li>기초 지식 : 과학 및 정보 기술의 기본적인 이해</li>
-                        <li>네트워킹 지식 :</li>
-                        <li>운영 체제 :</li>
-                        <li>하드웨어 지식 :</li>
-                        <li>보안 지식 :</li>
-                        <li>문제 해결 능력 :</li>
-                        <li>인증 :</li>
-                    </ol>
+                    <ul className="content-box">
+                        {/*{roadmapDetail && roadmapDetail.needed_skill.split('\n').map((skill, index) => (*/}
+                        {/*    <li key={index}>{skill}</li>*/}
+                        {/*))}*/}
+                    </ul>
                 </div>
                 <div className="roadmap-container">
                     <div className="Line">

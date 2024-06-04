@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Subject.css";
+import {useAuth} from "../Login/AuthContext";
 
 const SubjectTable = () => {
   const [allSubjects, setAllSubjects] = useState([]); // 모든 과목 데이터를 저장할 상태
@@ -21,6 +22,7 @@ const SubjectTable = () => {
   const currentItems = subjects.slice(indexOfFirstItem, indexOfLastItem);
 
   const [sortOption, setSortOption] = useState("추천순");
+  const { user } = useAuth();
 
   const getStatusClassName = (status) => {
     switch (status) {
@@ -39,6 +41,7 @@ const SubjectTable = () => {
     axios
       .get("http://localhost:8080/subject/recommend")
       .then((response) => {
+        console.log(response.data.results)
         const subjectsData = response.data.results?.subjects;
 
         setAllSubjects(subjectsData || []); // API 호출 결과를 allSubjects에 저장
@@ -56,19 +59,21 @@ const SubjectTable = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/subject/{subjectID}")
-      .then((response) => {
-        const subjectsInfoData = response.data.results?.subject;
-        setSubjectsInfo(subjectsInfoData || []); //API호출 결과를 setSubjectsInfo에 저장
-        // console.log(response.result);
-        // console.log(response.data);
-        // console.log(subjectsInfoData);
-      })
-      .catch((error) => {
-        console.error("subjectInfo 데이터를 불러오지 못 했습 니다.", error);
-        setSubjectsInfo([]); //에러 발생 시 SubjectsInfo를 빈 배열로 초기화
-      });
+    if(user) {
+      axios
+          .get(`http://localhost:8080/subject/${user.memId}`)
+          .then((response) => {
+            const subjectsInfoData = response.data.results?.subject;
+            setSubjectsInfo(subjectsInfoData || []); //API호출 결과를 setSubjectsInfo에 저장
+            // console.log(response.result);
+            // console.log(response.data);
+            // console.log(subjectsInfoData);
+          })
+          .catch((error) => {
+            console.error("subjectInfo 데이터를 불러오지 못 했습 니다.", error);
+            setSubjectsInfo([]); //에러 발생 시 SubjectsInfo를 빈 배열로 초기화
+          });
+    }
   }, []);
 
   useEffect(() => {

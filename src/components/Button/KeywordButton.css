@@ -1,0 +1,60 @@
+.round-button-wrapper {
+    width: 350px;
+    border-radius: 10px;
+    background-color: #adb6ff;
+    display: flex;
+    gap: 9px;
+    padding: 8px 0;
+    margin: 10px;
+}
+
+.round-button {
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0 5px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.inner-circle {
+    background-color: #969696;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+}
+
+.recommendation-text {
+    color: #292d32;
+    letter-spacing: -0.13px;
+    flex-grow: 1;
+    margin: auto 0;
+    font: 500 13px Poppins, sans-serif;
+}
+
+.selected {
+    background-color: #E1DEDE;
+}
+
+.keywordBox {
+    width: calc(100% - 30px);
+    height: 150px;
+    margin: 10px 0;
+    border-radius: 20px;
+    background-color: white;
+    overflow: auto;
+    display: flex;
+}
+
+.edit {
+    text-decoration: underline;
+    float: right;
+    margin-right: 10px;
+    color: #358fa3;
+}

@@ -1,7 +1,26 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useAuth} from "../../../Login/AuthContext";
 
 const ManageRoadmap = ({ setManage }) => {
     const [option, setOption] = useState('')
+    const [roadmaps, setRoadmaps] = useState([]);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8080/board/roadmaps/${user.memId}`)
+            .then(response => {
+                console.log(response.data)
+
+                setRoadmaps(response.data.result)
+            })
+            .catch(error => {
+                console.log('로드맵 불러오기 실패', error)
+            })
+
+    }, []);
+
     return (
         <div>
             <div>
@@ -21,6 +40,7 @@ const ManageRoadmap = ({ setManage }) => {
             <table className="SubjectTable">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>로드맵 명</th>
                     <th>태그 교수님</th>
                     <th>검토 상태</th>
@@ -29,7 +49,15 @@ const ManageRoadmap = ({ setManage }) => {
                 </tr>
                 </thead>
                 <tbody>
-
+                {roadmaps.map((roadmap, index) => (
+                    <tr key={index}>
+                        <td>{roadmap.title}</td>
+                        <td>{roadmap.professor} 교수님</td>
+                        <td>{roadmap.reviewStatus}</td>
+                        <td>{roadmap.createdAt}</td>
+                        <td>{roadmap.modifiedAt}</td>
+                    </tr>
+                ))}
                 </tbody>
             </table>
         </div>

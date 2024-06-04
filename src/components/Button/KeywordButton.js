@@ -1,20 +1,23 @@
-import Button from "../../Button/Button";
-import ModalWindow from "../../Modal/ModalWindow";
-import AreaComponent from "../../Area/AreaComponent";
-import {useEffect, useState} from "react";
-import "./MyInfo.css"
-import {useAuth} from "../../Login/AuthContext";
+import React, {useState} from "react";
+import "./KeywordButton.css";
+import "../mypage/inside/MyInfo.css"
 import axios from "axios";
-import MySubject from "./subject/MySubject";
+import {useAuth} from "../Login/AuthContext";
+import AreaComponent from "../Area/AreaComponent";
+import Button from "./Button";
+import ModalWindow from "../Modal/ModalWindow";
 
-const MyInfo = () => {
+const KeywordButton = ({ id, label, onSelect, selected }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedKeywords, setSelectedKeywords] = useState({});
     const { user } = useAuth();
+    const handleClick = () => {
+        if (!selected) {
+            onSelect(prev => !prev); // select 상태 토글
+        }
 
-    // 사용자의 관심있는 키워드 불러오기
-    useEffect(() => {
-        axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
+        axios
+            .get(`http://localhost:8080/member/${user.memId}/keyword`)
             .then(response => {
                 // 받아온 데이터를 원하는 형식으로 가공합니다.
                 const keywords = [];
@@ -26,7 +29,7 @@ const MyInfo = () => {
             .catch(error => {
                 console.log('관심 키워드 에러 : ', error)
             })
-    }, [user.memId]);
+    };
 
     const handlerEdit = () => {
         setIsModalOpen(true);
@@ -50,27 +53,40 @@ const MyInfo = () => {
             });
     };
 
-    return(
-        <div style={{margin: '50px'}}>
-            <div>
-                <h1>나의 정보 관리</h1>
-                <div className="keywordContainer">
-                    <div className="keyword">
-                        <label>나의 관심 키워드</label>
-                        <Button label="수정하기" className="keywordEdit" onClick={handlerEdit}/>
+    return (
+        <div>
+            <div className={`round-button-wrapper ${selected ? 'not-selected' : 'selected'}`} onClick={handleClick}>
+                <button
+                    className="round-button"
+                    onClick={(e) => {
+                        e.stopPropagation(); // 이벤트 버블링 막기
+                        handlerEdit(); // 수정하기 이벤트 핸들러 호출
+                    }}
+                >
+                    <div className="inner-circle"/>
+                </button>
+                <div>
+                    <div className="recommendation-text">{label}
+                        {selected && id === "새로운정보" && (
+                            <label className="edit" onClick={handlerEdit}>수정하기</label>
+                        )
+                    }
                     </div>
-                    <div className="selectKeyword">
-                        <div className="selectKeyword">
-                            {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
-                                <div key={index} className="SelectedItem">
-                                    {keyword.name}
+                    {selected && id === "새로운정보" && (
+                        <div className="keywordBox">
+                            <div className="selectKeyword">
+                                <div className="selectKeyword">
+                                    {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
+                                        <div key={index} className="SelectedItem">
+                                            {keyword.name}
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
-            <MySubject />
             <ModalWindow
                 isOpen={isModalOpen}
                 onRequestClose={handleCloseModal}
@@ -81,6 +97,7 @@ const MyInfo = () => {
                 <Button label="선택완료" className="selectButton" onClick={handleCloseModal}/>
             </ModalWindow>
         </div>
-    )
+    );
 }
-export default MyInfo;
+
+export default KeywordButton;

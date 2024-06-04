@@ -2,17 +2,23 @@ import Button from "../Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Nav.css";
 import { useAuth } from "../Login/AuthContext";
+import {useState} from "react";
 
 const Nav = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth(); // useAuth 훅을 통해 logout 함수를 가져옴
-
+  const [pageTest, setPageTest] = useState(true);
   const handlerLogin = () => {
     navigate("/login");
   };
 
   const handlerSignup = () => {
     navigate("/signup");
+  };
+
+  const handlerMypage = () => {
+    navigate("/mypage");
+    setPageTest(false);
   };
 
   const handlerLogout = () => {
@@ -26,6 +32,8 @@ const Nav = () => {
   const active = {
     color: "black",
   };
+
+  const imageUrl = "/profile/alarm.jpg"
 
   return (
     <nav
@@ -60,16 +68,29 @@ const Nav = () => {
         }}
       >
         {user ? (
-          // 로그인 상태일 때 표시할 내비게이션
-          <>
-            {/* 추가적인 로그인 후 네비게이션 항목 */}
-            <Button
-              label="로그아웃"
-              className="loginButton"
-              onClick={handlerLogout}
-            />
-            {/*<Button label="마이페이지" className="signButton" onClick={handlerMyPage}/>*/}
-          </>
+            // 로그인 상태일 때 표시할 내비게이션
+            pageTest ? (
+                // 마이페이지가 아닐 때
+                <>
+                    <img className="imageAlarm" src={imageUrl} alt="alarm"/>
+                    <Button
+                        label="로그아웃"
+                        className="loginButton"
+                        onClick={handlerLogout}
+                    />
+                    <Button label="마이페이지" className="signButton" onClick={handlerMypage}/>
+                </>
+            ) : (
+                // 마이페이지 일 때
+                <>
+                    <img className="imageAlarm" src={imageUrl} alt="alarm"/>
+                    <Button
+                        label="로그아웃"
+                        className="loginButton"
+                        onClick={handlerLogout}
+                    />
+                </>
+            )
         ) : (
           // 로그인 상태가 아닐 때 표시할 내비게이션
           <>
