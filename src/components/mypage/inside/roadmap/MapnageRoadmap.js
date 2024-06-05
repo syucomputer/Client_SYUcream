@@ -13,12 +13,11 @@ const ManageRoadmap = ({ setManage }) => {
             .then(response => {
                 console.log(response.data)
 
-                setRoadmaps(response.data.result)
+                setRoadmaps(response.data)
             })
             .catch(error => {
                 console.log('로드맵 불러오기 실패', error)
             })
-
     }, []);
 
     return (
@@ -52,10 +51,10 @@ const ManageRoadmap = ({ setManage }) => {
                 {roadmaps.map((roadmap, index) => (
                     <tr key={index}>
                         <td>{roadmap.title}</td>
-                        <td>{roadmap.professor} 교수님</td>
+                        <td>{roadmap.professorName} 교수님</td>
                         <td>{roadmap.reviewStatus}</td>
-                        <td>{roadmap.createdAt}</td>
-                        <td>{roadmap.modifiedAt}</td>
+                        <td>{roadmap.creationDate}</td>
+                        <td>{roadmap.lastUpdatedAt}</td>
                     </tr>
                 ))}
                 </tbody>

@@ -71,7 +71,7 @@ const SubjectTable = () => {
           })
           .catch((error) => {
             console.error("subjectInfo 데이터를 불러오지 못 했습 니다.", error);
-            setSubjectsInfo([]); //에러 발생 시 SubjectsInfo를 빈 배열로 초기화
+            setSubjectsInfo([]); // 에러 발생 시 SubjectsInfo를 빈 배열로 초기화
           });
     }
   }, []);
@@ -156,6 +156,11 @@ const SubjectTable = () => {
           <option value="2023-1">2023년 1학기</option>
           <option value="2023-2">2023년 2학기</option>
           <option value="2024-1">2024년 1학기</option>
+          {allSubjects.map(subject => (
+            <option key={subject.id} value={subject.id}>
+              {subject.completeYear + '년' +  subject.completeTerm}
+            </option>
+          ))}
         </select>
       </div>
 

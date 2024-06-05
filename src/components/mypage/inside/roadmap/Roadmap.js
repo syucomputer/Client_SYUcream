@@ -2,14 +2,16 @@ import Button from "../../../Button/Button";
 import "./Roadmap.css"
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useAuth} from "../../../Login/AuthContext";
 
 const Roadmap = ({ setManage }) => {
     const [allRoadmaps, setAllRoadmaps] = useState([]);
     const [selectedRoadmapId, setSelectedRoadmapId] = useState("");
     const [roadmapDetail, setRoadmapDetail] = useState([]);
+    const { user } = useAuth();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/board/roadmaps`, {
+        axios.get(`http://localhost:8080/board/roadmaps/${2020100033}`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -17,7 +19,7 @@ const Roadmap = ({ setManage }) => {
             .then(response => {
                 console.log(response.data)
 
-                setAllRoadmaps(response.data.result);
+                setAllRoadmaps(response.data);
             })
             .catch(error => {
                 console.log('로드맵 리스트 조회 에러', error)
@@ -25,17 +27,16 @@ const Roadmap = ({ setManage }) => {
     }, []);
 
     useEffect(() => {
-        if (selectedRoadmapId) {
-            axios.get(`http://localhost:8080/board/roadmaps/${selectedRoadmapId}`)
+            axios.get(`http://localhost:8080/board/roadmaps/detail/${1}`)
                 .then(response => {
 
-                    setRoadmapDetail(response.data.result)
+                    setRoadmapDetail(response.data)
                     console.log(response.data)
                 })
                 .catch(error => {
                     console.log('로드맵 상세조회 에러',error)
                 })
-        }
+
     }, [selectedRoadmapId]);
 
     const handleSelectChange = (e) => {
@@ -58,8 +59,8 @@ const Roadmap = ({ setManage }) => {
             <div className="all-contatiner">
                 {roadmapDetail && (
                     <div>
-                        <h1>{roadmapDetail.name}</h1>
-                        <div>{roadmapDetail.job_description}</div>
+                        <h1>{roadmapDetail.relatedJob}</h1>
+                        <div>{roadmapDetail.jobDescription}</div>
                     </div>
                 )}
                 <div className="roadmap-container">
@@ -69,7 +70,7 @@ const Roadmap = ({ setManage }) => {
                         </div>
                     </div>
                     <ul className="content-box">
-                        {/*{roadmapDetail && roadmapDetail.needed_skill.split('\n').map((skill, index) => (*/}
+                        {/*{roadmapDetail && roadmapDetail.neededSkill.split('\n').map((skill, index) => (*/}
                         {/*    <li key={index}>{skill}</li>*/}
                         {/*))}*/}
                     </ul>
