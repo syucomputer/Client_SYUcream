@@ -1,11 +1,15 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../../Login/AuthContext";
+import {useNavigate} from "react-router-dom";
+import nav from "../../../Nav/Nav";
 
-const ManageRoadmap = ({ setManage }) => {
+const ManageRoadmap = () => {
     const [option, setOption] = useState('')
     const [roadmaps, setRoadmaps] = useState([]);
+    const [review, setReview] = useState(true);
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -23,7 +27,7 @@ const ManageRoadmap = ({ setManage }) => {
     return (
         <div>
             <div>
-                <button onClick={setManage}>x</button>
+                <button onClick={() => navigate('/mypage/roadmap/1')}>x</button>
                 로드맵 관리
             </div>
             <div>
@@ -38,26 +42,26 @@ const ManageRoadmap = ({ setManage }) => {
             </div>
             <table className="SubjectTable">
                 <thead>
-                <tr>
-                    <th></th>
-                    <th>로드맵 명</th>
-                    <th>태그 교수님</th>
-                    <th>검토 상태</th>
-                    <th>생성 날짜</th>
-                    <th>업데이트 날짜</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th>로드맵 명</th>
+                        <th>태그 교수님</th>
+                        <th>검토 상태</th>
+                        <th>생성 날짜</th>
+                        <th>업데이트 날짜</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {roadmaps.map((roadmap, index) => (
-                    <tr key={index}>
-                        <td></td>
-                        <td>{roadmap.title}</td>
-                        <td>{roadmap.professorName} 교수님</td>
-                        <td>{roadmap.reviewStatus}</td>
-                        <td>{roadmap.creationDate}</td>
-                        <td>{roadmap.lastUpdatedAt}</td>
-                    </tr>
-                ))}
+                    {roadmaps.map((roadmap, index) => (
+                        <tr key={index} onClick={() => setReview(false)}>
+                            <td></td>
+                            <td>{roadmap.title}</td>
+                            <td>{roadmap.professorName} 교수님</td>
+                            <td>{roadmap.reviewStatus}</td>
+                            <td>{roadmap.creationDate}</td>
+                            <td>{roadmap.lastUpdatedAt}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

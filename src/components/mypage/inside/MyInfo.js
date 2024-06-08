@@ -76,7 +76,10 @@ const MyInfo = () => {
                 onRequestClose={handleCloseModal}
                 contentLabel="Modal"
             >
-                <h2>관심있는 키워드를 선택해주세요!</h2>
+                <div>
+                    <h2>관심있는 키워드를 선택해주세요!</h2>
+                    <button type="button" className="btn-close" aria-label="Close" onClick={() => setIsModalOpen(false)}></button>
+                </div>
                 <AreaComponent onSelectedItemsChange={setSelectedKeywords}/>
                 <Button label="선택완료" className="selectButton" onClick={handleCloseModal}/>
             </ModalWindow>

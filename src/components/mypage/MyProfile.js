@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 import useToast from "../Toast/useToast";
 import axios from "axios";
 
-const MyProfile = ({ onChange }) => {
+const MyProfile = () => {
     const { user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const showToast = useToast();
@@ -41,11 +41,9 @@ const MyProfile = ({ onChange }) => {
     // };
 
     const handlerHome = () => {
-        onChange(true);
         navigate("/mypage");
     }
     const handlerRoadmap = () => {
-        onChange(false);
         navigate("/mypage/roadmap")
     }
 

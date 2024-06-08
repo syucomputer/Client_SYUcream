@@ -1,18 +1,59 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Roadmap from "./roadmap/Roadmap";
-import ManageRoadmap from "./roadmap/MapnageRoadmap";
+import axios from "axios";
+import {useAuth} from "../../Login/AuthContext";
+import {useNavigate, useParams} from "react-router-dom";
+import Button from "../../Button/Button";
 
 const MyRoadmap = () => {
-    const [manage, setManage] = useState(false);
-    // const navigate = useNavigate();
+    const [roadmaps, setRoadmaps] = useState([]);
+    const [selectedRoadmapId, setSelectedRoadmapId] = useState("");
+    const { roadmapId } = useParams();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-    const handleManage = () => {
-        setManage(!manage);
-    }
+    useEffect(() => {
+        axios.get(`http://localhost:8080/board/roadmaps/${user.memId}`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                const roadmapData = response.data;
 
-    return(
-        <div className="">
-            {!manage ? <Roadmap setManage={handleManage}/> : <ManageRoadmap setManage={handleManage} />}
+                setRoadmaps(roadmapData || []);
+                if (roadmapData && roadmapData.length > 0) {
+                    const firstRoadmapId = roadmapId || roadmapData[0].id;
+                    setSelectedRoadmapId(firstRoadmapId);
+                }
+            })
+
+            .catch(error => {
+                console.log('로드맵 리스트 조회 에러', error)
+            })
+    }, []);
+
+    const handleRoadmapChange = (e) => {
+        const newRoadmapId = e.target.value;
+        navigate(`/mypage/roadmap/${newRoadmapId}`);
+        setSelectedRoadmapId(newRoadmapId); // 선택한 로드맵 ID 저장
+    };
+
+    return (
+        <div>
+            <div>
+                <div>
+                    <select value={selectedRoadmapId} onChange={handleRoadmapChange}>
+                        {roadmaps.map(roadmap => (
+                            <option key={roadmap.id} value={roadmap.id}>
+                                {roadmap.title}
+                            </option>
+                        ))}
+                    </select>
+                    <Button label="로드맵 관리" className="" onClick={() => navigate('/mypage/roadmap/manage')}/>
+                </div>
+                <Roadmap selectedRoadmapId={selectedRoadmapId} />
+            </div>
         </div>
     )
 }

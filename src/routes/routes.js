@@ -6,6 +6,9 @@ import MyPage from "../views/MyPage";
 import SubjectPage from "../views/SubjectPage";
 import RoadmapPage from "../views/RoadmapPage";
 import Temp from "../views/Temp";
+import MyInfo from "../components/mypage/inside/MyInfo";
+import MyRoadmap from "../components/mypage/inside/MyRoadmap";
+import ManageRoadmap from "../components/mypage/inside/roadmap/MapnageRoadmap";
 
 const routes = [
   {
@@ -22,8 +25,30 @@ const routes = [
     element: <SignupPage />,
   },
   {
-    path: "/mypage/*",
+    path: "/mypage",
     element: <MyPage />,
+    children: [
+      {
+        path: "",
+        element: <MyInfo />,
+      },
+      {
+        path: "roadmap",
+        element: <MyRoadmap />,
+      },
+      {
+        path: "roadmap/:roadmapId",
+        element: <MyRoadmap />,
+      },
+      {
+        path: "roadmap/manage",
+        element: <ManageRoadmap />,
+      },
+      // {
+      //   path: "roadmap",
+      //   element: <MyRoadmap />,
+      // },
+    ],
   },
   {
     path: "/trends",
