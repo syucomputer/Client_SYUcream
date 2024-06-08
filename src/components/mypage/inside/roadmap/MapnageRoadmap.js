@@ -50,6 +50,7 @@ const ManageRoadmap = ({ setManage }) => {
                 <tbody>
                 {roadmaps.map((roadmap, index) => (
                     <tr key={index}>
+                        <td></td>
                         <td>{roadmap.title}</td>
                         <td>{roadmap.professorName} 교수님</td>
                         <td>{roadmap.reviewStatus}</td>

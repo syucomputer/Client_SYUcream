@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useAuth } from "../Login/AuthContext";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./MyProfile.css";
 import Button from "../Button/Button";
 import useToast from "../Toast/useToast";
@@ -10,17 +10,18 @@ const MyProfile = ({ onChange }) => {
     const { user } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const showToast = useToast();
+    const navigate = useNavigate();
 
-    // 알람이 올때 api
-    useEffect(() => {
-        axios.get(``)
-            .then((response) => {
-                console.log('문제 없음', response.data)
-            })
-            .catch((error) => {
-                console.log('문제 발생', error)
-            })
-    }, []);
+    // // 알람이 올때 api
+    // useEffect(() => {
+    //     axios.get(``)
+    //         .then((response) => {
+    //             console.log('문제 없음', response.data)
+    //         })
+    //         .catch((error) => {
+    //             console.log('문제 발생', error)
+    //         })
+    // }, []);
 
     // 만약 로그인한 사용자의 정보가 없다면 로그인 페이지로 리다이렉트
     if (!user) {
@@ -41,9 +42,11 @@ const MyProfile = ({ onChange }) => {
 
     const handlerHome = () => {
         onChange(true);
+        navigate("/mypage");
     }
     const handlerRoadmap = () => {
         onChange(false);
+        navigate("/mypage/roadmap")
     }
 
     return (

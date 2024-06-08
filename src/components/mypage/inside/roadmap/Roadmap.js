@@ -1,53 +1,67 @@
 import Button from "../../../Button/Button";
 import "./Roadmap.css"
 import {useEffect, useState} from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {useAuth} from "../../../Login/AuthContext";
 
 const Roadmap = ({ setManage }) => {
     const [allRoadmaps, setAllRoadmaps] = useState([]);
     const [selectedRoadmapId, setSelectedRoadmapId] = useState("");
-    const [roadmapDetail, setRoadmapDetail] = useState([]);
+    const [roadmapDetail, setRoadmapDetail] = useState(null);
     const { user } = useAuth();
+    const { roadmapId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/board/roadmaps/${2020100033}`, {
+        axios.get(`http://localhost:8080/board/roadmaps/${user.memId}`, {
             headers: {
                 'Accept': 'application/json'
             }
         })
             .then(response => {
-                console.log(response.data)
+                const roadmapData = response.data;
 
-                setAllRoadmaps(response.data);
+                setAllRoadmaps(roadmapData || []);
+                if (roadmapData && roadmapData.length > 0) {
+                    const firstRoadmapId = roadmapId || roadmapData[0].id;
+                    setSelectedRoadmapId(firstRoadmapId);
+                    navigate(`/mypage/roadmap/${firstRoadmapId}`);
+                }
             })
+
             .catch(error => {
                 console.log('로드맵 리스트 조회 에러', error)
             })
     }, []);
 
     useEffect(() => {
-            axios.get(`http://localhost:8080/board/roadmaps/detail/${1}`)
-                .then(response => {
-
-                    setRoadmapDetail(response.data)
-                    console.log(response.data)
-                })
-                .catch(error => {
-                    console.log('로드맵 상세조회 에러',error)
-                })
-
+        if (selectedRoadmapId) {
+            fetchRoadmapDetail(selectedRoadmapId);
+        }
     }, [selectedRoadmapId]);
 
-    const handleSelectChange = (e) => {
-        setSelectedRoadmapId(e.target.value)
-    }
+    const fetchRoadmapDetail = (selectedRoadmapId) => {
+        axios.get(`http://localhost:8080/board/roadmaps/detail/${selectedRoadmapId}`)
+            .then(response => {
+                setRoadmapDetail(response.data);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log('로드맵 상세조회 에러', error);
+            });
+    };
+
+    const handleRoadmapChange = (e) => {
+        const newRoadmapId = e.target.value;
+        navigate(`/mypage/roadmap/${newRoadmapId}`);
+        setSelectedRoadmapId(newRoadmapId); // 선택한 로드맵 ID 저장
+    };
 
     return (
         <div>
             <div>
-                <select value={selectedRoadmapId} onChange={handleSelectChange}>
-                    <option value="">로드맵 선택</option>
+                <select value={selectedRoadmapId} onChange={handleRoadmapChange}>
                     {allRoadmaps.map(roadmap => (
                         <option key={roadmap.id} value={roadmap.id}>
                             {roadmap.title}
