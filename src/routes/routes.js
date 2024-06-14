@@ -9,6 +9,7 @@ import Temp from "../views/Temp";
 import MyInfo from "../components/mypage/inside/MyInfo";
 import MyRoadmap from "../components/mypage/inside/MyRoadmap";
 import ManageRoadmap from "../components/mypage/inside/roadmap/MapnageRoadmap";
+import ReviewRoadmap from "../components/mypage/inside/roadmap/ReviewRoadmap";
 
 const routes = [
   {
@@ -44,10 +45,10 @@ const routes = [
         path: "roadmap/manage",
         element: <ManageRoadmap />,
       },
-      // {
-      //   path: "roadmap",
-      //   element: <MyRoadmap />,
-      // },
+      {
+        path: "roadmap/manage/:roadmapId",
+        element: <ReviewRoadmap />,
+      },
     ],
   },
   {

@@ -6,8 +6,7 @@ import nav from "../../../Nav/Nav";
 
 const ManageRoadmap = () => {
     const [option, setOption] = useState('')
-    const [roadmaps, setRoadmaps] = useState([]);
-    const [review, setReview] = useState(true);
+    const [roadmaps, setRoadmaps] = useState([]);   // 저장된 전체 로드맵
     const { user } = useAuth();
     const navigate = useNavigate();
 
@@ -53,7 +52,7 @@ const ManageRoadmap = () => {
                 </thead>
                 <tbody>
                     {roadmaps.map((roadmap, index) => (
-                        <tr key={index} onClick={() => setReview(false)}>
+                        <tr key={roadmap.id} onClick={() => navigate(`/mypage/roadmap/manage/${index + 1}`)}>
                             <td></td>
                             <td>{roadmap.title}</td>
                             <td>{roadmap.professorName} 교수님</td>
