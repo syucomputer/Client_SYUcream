@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../../Login/AuthContext";
 import {useNavigate} from "react-router-dom";
-import nav from "../../../Nav/Nav";
 
 const ManageRoadmap = () => {
     const [option, setOption] = useState('')
@@ -12,10 +11,8 @@ const ManageRoadmap = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/board/roadmaps/${user.memId}`)
+            .get(`/board/roadmaps/${user.memId}`)
             .then(response => {
-                console.log(response.data)
-
                 setRoadmaps(response.data)
             })
             .catch(error => {
@@ -26,8 +23,8 @@ const ManageRoadmap = () => {
     return (
         <div>
             <div>
-                <button onClick={() => navigate('/mypage/roadmap/1')}>x</button>
-                로드맵 관리
+                <button onClick={() => navigate(-1)}>x</button>
+                <h1>로드맵 관리</h1>
             </div>
             <div>
                 <select
@@ -51,8 +48,16 @@ const ManageRoadmap = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {roadmaps.map((roadmap, index) => (
-                        <tr key={roadmap.id} onClick={() => navigate(`/mypage/roadmap/manage/${index + 1}`)}>
+                    {roadmaps.map((roadmap) => (
+                        <tr
+                            key={roadmap.id}
+                            onClick={() => navigate(
+                                // roadmap.professorName
+                                //     ? `/mypage/roadmap/chat/${roadmap.id}`
+                                //     : `/mypage/roadmap/manage/${roadmap.id}`
+                                `/mypage/roadmap/manage/${roadmap.id}`
+                            )}
+                        >
                             <td></td>
                             <td>{roadmap.title}</td>
                             <td>{roadmap.professorName} 교수님</td>

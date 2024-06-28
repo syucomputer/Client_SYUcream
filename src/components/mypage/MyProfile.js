@@ -41,7 +41,7 @@ const MyProfile = () => {
     // };
 
     const handlerHome = () => {
-        navigate("/mypage");
+        navigate("/mypage/info");
     }
     const handlerRoadmap = () => {
         navigate("/mypage/roadmap")
