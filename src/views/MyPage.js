@@ -1,5 +1,6 @@
 import Nav from "../components/Nav/Nav";
-import MyPageComponent from "../components/mypage/MyPageComponent";
+import MyProfile from "../components/mypage/MyProfile";
+import {Outlet} from "react-router-dom";
 
 const MyPage = () => {
     return(
@@ -7,14 +8,31 @@ const MyPage = () => {
             style={{
                 margin: 0,
                 padding: 0,
-                height: "100vh",
+                height: "100%",
                 position: "relative",
                 backgroundColor: "#DDDEEA",
             }}
         >
-            <Nav />
-            <MyPageComponent />
+            <Nav/>
+            <div
+                style={{
+                    height: 'calc(100% - 120px)',
+                    margin: '30px',
+                    borderRadius: '10px',
+                    backgroundColor: 'white',
+                    display: 'flex',
+                    // overflow: 'hidden'
+                }}
+            >
+                <div style={{flex: 1}}>
+                    <MyProfile/>
+                </div>
+                <div style={{flex: 3}}>
+                    <Outlet/>
+                </div>
+            </div>
         </div>
+
     )
 }
 

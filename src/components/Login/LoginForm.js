@@ -16,7 +16,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const request = await axios.post('http://localhost:8080/member/login', {
+      const request = await axios.post('/member/login', {
         memId: id,
         password: password,
       });
@@ -27,7 +27,7 @@ const LoginForm = () => {
         sessionStorage.setItem("refreshToken", refreshToken);
         sessionStorage.setItem("user", JSON.stringify(user));
         login(user);
-        navigate('/mypage');
+        navigate('/mypage/info');
       } else {
         console.error('로그인 실패:', request);
       }

@@ -39,7 +39,7 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
             showToast('비밀번호가 서로 일치하지 않습니다.', 'error')
         } else {
             try {
-                const request = await axios.post('http://localhost:8080/member/save', {
+                const request = await axios.post('/member/save', {
                     memId: state.id,
                     name: state.name,
                     email: state.email,

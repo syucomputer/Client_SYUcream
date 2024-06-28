@@ -1,29 +1,48 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import routes from "./routes/routes";
 import { AuthProvider } from "./components/Login/AuthContext";
 import Modal from "react-modal";
-import {ToastContainer} from "react-toastify"; // react-modal 라이브러리에서 Modal을 import
+import { ToastContainer } from "react-toastify";
+import routes from "./routes/routes";
 
-Modal.setAppElement("#root"); // App의 루트 엘리먼트를 지정
+Modal.setAppElement("#root");
+
 const App = () => {
-  return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              element={route.element}
-              exact={route.exact}
-            />
-          ))}
-        </Routes>
-          <ToastContainer />
-      </AuthProvider>
-    </Router>
-  );
+    const renderRoutes = (routes) => {
+        return routes.map((route, index) => {
+            if (route.children) {
+                return (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        element={route.element}
+                    >
+                        {renderRoutes(route.children)}
+                    </Route>
+                );
+            }
+
+            return (
+                <Route
+                    key={index}
+                    path={route.path}
+                    element={route.element}
+                    exact={route.exact}
+                />
+            );
+        });
+    };
+
+    return (
+        <Router>
+            <AuthProvider>
+                <Routes>
+                    {renderRoutes(routes)}
+                </Routes>
+                <ToastContainer />
+            </AuthProvider>
+        </Router>
+    );
 };
 
 export default App;
