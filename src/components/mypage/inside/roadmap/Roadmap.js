@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Roadmap = ({ selectedRoadmapId }) => {
-    const [roadmapDetail, setRoadmapDetail] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [formData, setFormData] = useState({
+    const [roadmapDetail, setRoadmapDetail] = useState(null);   // 현재 로드맵
+    const [formData, setFormData] = useState({             // 전체적인 로드맵
         relatedJob: "",
         jobDescription: "",
         neededSkill: "",
@@ -21,17 +21,20 @@ const Roadmap = ({ selectedRoadmapId }) => {
     }, [selectedRoadmapId]);
 
     const fetchRoadmapDetail = (selectedRoadmapId) => {
-        axios.get(`http://localhost:8080/board/roadmaps/detail/${selectedRoadmapId}`)
+        axios.get(`/board/roadmaps/detail/${selectedRoadmapId}`)
             .then(response => {
-                setRoadmapDetail(response.data);
+                const roadmap = response.data;
+
+                setRoadmapDetail(roadmap);
                 setFormData({
-                    relatedJob: response.data.relatedJob,
-                    jobDescription: response.data.jobDescription,
-                    neededSkill: response.data.neededSkill,
-                    plan: response.data.plan,
-                    project: response.data.project,
-                    closingMent: response.data.closingMent
+                    relatedJob: roadmap.relatedJob,
+                    jobDescription: roadmap.jobDescription,
+                    neededSkill: roadmap.neededSkill,
+                    plan: roadmap.plan,
+                    project: roadmap.project,
+                    closingMent: roadmap.closingMent
                 });
+                // setRoadmapData(roadmap)
             })
             .catch(error => {
                 console.log('로드맵 상세조회 에러', error);
@@ -53,10 +56,10 @@ const Roadmap = ({ selectedRoadmapId }) => {
     const handleSave = () => {
         const updatedRoadmap = {
             ...roadmapDetail,
-            ...formData
+            ...formData,
         };
 
-        axios.put(`http://localhost:8080/board/roadmaps/${selectedRoadmapId}`, updatedRoadmap)
+        axios.put(`/board/roadmaps/${selectedRoadmapId}`, updatedRoadmap)
             .then(response => {
                 setRoadmapDetail(response.data);
                 setIsEditing(false);
@@ -83,25 +86,28 @@ const Roadmap = ({ selectedRoadmapId }) => {
             <div className="all-container">
                 {roadmapDetail && (
                     <div>
-                        <h1 style={{ textAlign: 'center' }}>{isEditing ? (
-                            <input
-                                type="text"
-                                name="relatedJob"
-                                value={formData.relatedJob}
-                                onChange={handleInputChange}
-                            />
-                        ) : (
-                            roadmapDetail.relatedJob
-                        )}</h1>
-                        <div style={{ padding: '0 40px' }}>{isEditing ? (
-                            <textarea
-                                name="jobDescription"
-                                value={formData.jobDescription}
-                                onChange={handleInputChange}
-                            />
-                        ) : (
-                            roadmapDetail.jobDescription
-                        )}</div>
+                        <h1 style={{ textAlign: 'center' }}>
+                            {isEditing ? (
+                                <textarea
+                                    name="relatedJob"
+                                    value={formData.relatedJob}
+                                    onChange={handleInputChange}
+                                />
+                            ) : (
+                                roadmapDetail.relatedJob
+                            )}
+                        </h1>
+                        <div style={{ padding: '0 40px' }}>
+                            {isEditing ? (
+                                <textarea
+                                    name="jobDescription"
+                                    value={formData.jobDescription}
+                                    onChange={handleInputChange}
+                                />
+                            ) : (
+                                roadmapDetail.jobDescription
+                            )}
+                        </div>
                     </div>
                 )}
                 <div className="section">
@@ -126,7 +132,7 @@ const Roadmap = ({ selectedRoadmapId }) => {
                     <div className="add-container">
                         3개월 학습계획
                     </div>
-                    <ol className="content-box">
+                    <div className="content-box">
                         {isEditing ? (
                             <textarea
                                 name="plan"
@@ -134,17 +140,19 @@ const Roadmap = ({ selectedRoadmapId }) => {
                                 onChange={handleInputChange}
                             />
                         ) : (
-                            roadmapDetail?.plan.split('\n').map((plan, index) => (
-                                <li key={index}>{plan}</li>
-                            ))
+                            <ol>
+                                {roadmapDetail?.plan.split('\n').map((skill, index) => (
+                                    <li key={index}>{skill}</li>
+                                ))}
+                            </ol>
                         )}
-                    </ol>
+                    </div>
                 </div>
                 <div className="section">
                     <div className="add-container">
                         추가적으로 도움이 되는 프로젝트
                     </div>
-                    <ul className="content-box">
+                    <div className="content-box">
                         {isEditing ? (
                             <textarea
                                 name="project"
@@ -152,29 +160,35 @@ const Roadmap = ({ selectedRoadmapId }) => {
                                 onChange={handleInputChange}
                             />
                         ) : (
-                            roadmapDetail?.project.split('\n').map((project, index) => (
-                                <li key={index}>{project}</li>
-                            ))
+                            <ol>
+                                {roadmapDetail?.project.split('\n').map((skill, index) => (
+                                    <li key={index}>{skill}</li>
+                                ))}
+                            </ol>
                         )}
-                    </ul>
+                    </div>
                 </div>
-                {/*{isEditing ? (*/}
-                {/*    <textarea*/}
-                {/*        name="closingMent"*/}
-                {/*        value={formData.closingMent}*/}
-                {/*        onChange={handleInputChange}*/}
-                {/*    />*/}
-                {/*) : (*/}
-                {/*    <div style={{ padding: '0 40px', marginBottom: '20px' }}>{isEditing ? (*/}
-                {/*        <textarea*/}
-                {/*            name="closingMent"*/}
-                {/*            value={formData.closingMent}*/}
-                {/*            onChange={handleInputChange}*/}
-                {/*        />*/}
-                {/*    ) : (*/}
-                {/*        roadmapDetail.closingMent*/}
-                {/*    )}</div>*/}
-                {/*)}*/}
+                {roadmapDetail && (
+                    <div style={{ padding: '0 40px' }}>
+                        {isEditing ? (
+                            <textarea
+                                name="closingMent"
+                                value={formData.closingMent}
+                                onChange={handleInputChange}
+                            />
+                        ) : (
+                            <div style={{ marginBottom: '20px' }}>{isEditing ? (
+                                <textarea
+                                    name="closingMent"
+                                    value={formData.closingMent}
+                                    onChange={handleInputChange}
+                                />
+                            ) : (
+                                roadmapDetail.closingMent
+                            )}</div>
+                        )}
+                    </div>
+                )}
             </div>
             {isEditing ? (
                 <div>

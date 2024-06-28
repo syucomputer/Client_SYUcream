@@ -31,3 +31,24 @@
 .content-box li, .content-box ol {
     margin-bottom: 5px;
 }
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical; /* 사용자가 세로로 크기를 조절할 수 있도록 */
+}
+
+.textarea-large {
+    height: 150px; /* 큰 텍스트 영역 */
+}
+
+.textarea-medium {
+    height: 100px; /* 중간 텍스트 영역 */
+}
+
+.textarea-small {
+    height: 50px; /* 작은 텍스트 영역 */
+}
+

@@ -118,6 +118,10 @@ const SubjectTable = () => {
     setSubjects(sortedSubjects); // 정렬된 데이터로 상태 업데이트
   }, [sortOption, allSubjects]); // sortOption과 allSubjects가 바뀔 때마다 실행
 
+  const uniqueSemesters = Array.from(
+      new Set(allSubjects.map((subject) => `${subject.completeYear}년 ${subject.completeTerm}`))
+  );
+
   const pageNumbers = [];
 
   for (
@@ -139,7 +143,6 @@ const SubjectTable = () => {
             onChange={(e) => setSearch(e.target.value)}
             placeholder="강좌명 또는 교수명 검색"
           />
-
           <select
             className="short-form"
             value={sortOption}
@@ -153,14 +156,16 @@ const SubjectTable = () => {
       <div className="semester-form">
         <select value={semester} onChange={(e) => setSemester(e.target.value)}>
           <option value="">--학기-- 선택</option>
-          <option value="2023-1">2023년 1학기</option>
-          <option value="2023-2">2023년 2학기</option>
-          <option value="2024-1">2024년 1학기</option>
           {allSubjects.map(subject => (
-            <option key={subject.id} value={subject.id}>
-              {subject.completeYear + '년' +  subject.completeTerm}
+            <option key={subject.id} value={subject.subjectOpen}>
+              {`${subject.completeYear}년 ${subject.completeTerm}`}
             </option>
           ))}
+          {/*{uniqueSemesters.map((term, index) => (*/}
+          {/*    <option key={index} value={term}>*/}
+          {/*      {term}*/}
+          {/*    </option>*/}
+          {/*))}*/}
         </select>
       </div>
 

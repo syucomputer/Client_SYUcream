@@ -8,7 +8,7 @@ const MyPage = () => {
             style={{
                 margin: 0,
                 padding: 0,
-                height: "100vh",
+                height: "100%",
                 position: "relative",
                 backgroundColor: "#DDDEEA",
             }}
@@ -21,7 +21,7 @@ const MyPage = () => {
                     borderRadius: '10px',
                     backgroundColor: 'white',
                     display: 'flex',
-                    overflow: 'hidden'
+                    // overflow: 'hidden'
                 }}
             >
                 <div style={{flex: 1}}>
