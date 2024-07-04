@@ -1,8 +1,8 @@
 import Button from "../Button/Button";
-import "./AreaOfInterest.css"
 import AreaComponent from "../Area/AreaComponent";
 import {useState} from "react";
 import axios from "axios";
+import "./Signup.css"
 
 const AreaOfInterest = ({ studentId, onStepChange }) => {
     const [selectedItems, setSelectedItems] = useState({});
@@ -16,7 +16,7 @@ const AreaOfInterest = ({ studentId, onStepChange }) => {
 
         axios.post(`http://localhost:8080/member/${studentId}/keyword`, postData)
             .then(response => {
-                console.log('POST 요청 성공:', postData);
+                console.log('POST 요청 성공:', postData, response.data);
                 // 여기서 필요한 처리를 수행합니다. 예를 들어, 페이지 이동 등.
                 onStepChange(3);
             })

@@ -1,8 +1,8 @@
-
 import React, { useState } from "react";
 import InputField from "../InputField/InputField";
 import axios from "axios";
 import useToast from "../Toast/useToast";
+import "./Signup.css"
 
 const SignupForm = ({ onStepChange, onStudentIdChange }) => {
     const [state, setState] = useState({
@@ -64,7 +64,7 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <div>
                 <h2 style={{ textAlign: "center" }}>계정 만들기</h2>
                 <InputField
                     type="text"
@@ -97,11 +97,11 @@ const SignupForm = ({ onStepChange, onStudentIdChange }) => {
                     value={state.passwordR}
                     onChange={(value) => handleChangeState('passwordR', value)}
                 />
-                <button type="submit"> 다음으로 </button>
-                <div style={{ fontSize: "12px", textAlign: "center", marginTop: "6px" }}>
+                <button className="next-btn" onClick={handleSubmit}> 다음으로 </button>
+                <div className="label">
                     계정을 만들고 사용 약관 및 개인 정보 보호 정책에 동의합니다.
                 </div>
-            </form>
+            </div>
         </div>
     );
 };

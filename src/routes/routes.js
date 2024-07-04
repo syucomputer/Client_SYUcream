@@ -10,6 +10,7 @@ import MyInfo from "../components/mypage/inside/MyInfo";
 import MyRoadmap from "../components/mypage/inside/MyRoadmap";
 import ManageRoadmap from "../components/mypage/inside/roadmap/ManageRoadmap";
 import ReviewRoadmap from "../components/mypage/inside/roadmap/ReviewRoadmap";
+import Roadmap from "../components/Roadmap/CreateRoadmap";
 
 const routes = [
   {
@@ -62,6 +63,12 @@ const routes = [
   {
     path: "/roadmap",
     element: <RoadmapPage />,
+    children: [
+      {
+        path: "",
+        element: <Roadmap />,
+      },
+    ]
   },
   {
     path: "/temp",

@@ -21,13 +21,21 @@ const MyPage = () => {
                     borderRadius: '10px',
                     backgroundColor: 'white',
                     display: 'flex',
-                    // overflow: 'hidden'
+                    flexGrow: 1
                 }}
             >
-                <div style={{flex: 1}}>
+                <div style={{
+                    flex: 1,
+                    overflow: "auto",
+                }}>
                     <MyProfile/>
                 </div>
-                <div style={{flex: 3}}>
+                <div style={{
+                    flex: 2.5,
+                    overflow: 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                }}>
                     <Outlet/>
                 </div>
             </div>

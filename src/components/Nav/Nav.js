@@ -17,7 +17,7 @@ const Nav = () => {
   };
 
   const handlerMypage = () => {
-    navigate("/mypage");
+    navigate("/mypage/info");
     setPageTest(false);
   };
 

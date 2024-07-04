@@ -1,9 +1,7 @@
-
 import React, {useEffect, useState} from "react";
-import Button from "../Button/Button";
-import "./Course.css"
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import "./Signup.css"
 
 const Course = ({ studentId }) => {
     const [loading, setLoading] = useState(false);
@@ -65,7 +63,6 @@ const Course = ({ studentId }) => {
                     <div className="successMessage">
                         <div className="box">
                             <div>
-                                {console.log(subjectData)}
                                 {subjectData && subjectData.map((subject) => (
                                     <ul key={subject.subjectId}>
                                         <li>{subject.completeYear}년 {subject.completeTerm}</li>

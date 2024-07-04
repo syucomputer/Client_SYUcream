@@ -2,10 +2,10 @@ import Button from "../../Button/Button";
 import ModalWindow from "../../Modal/ModalWindow";
 import AreaComponent from "../../Area/AreaComponent";
 import {useEffect, useState} from "react";
-import "./MyInfo.css"
 import {useAuth} from "../../Login/AuthContext";
 import axios from "axios";
 import MySubject from "./subject/MySubject";
+import "./MyInside.css"
 
 const MyInfo = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,6 +41,7 @@ const MyInfo = () => {
 
         axios.put(`/member/${user.memId}/keyword`, postData)
             .then(response => {
+                console.log(response.data)
                 setSelectedKeywords(selectedKeywords);
                 setIsModalOpen(false);
             })
@@ -49,8 +50,8 @@ const MyInfo = () => {
             });
     };
 
-    return(
-        <div style={{ margin: '50px' }}>
+    return (
+        <div className="my-info-container">
             <div>
                 <h1>나의 정보 관리</h1>
                 <div className="keywordContainer">
@@ -69,7 +70,7 @@ const MyInfo = () => {
                     </div>
                 </div>
             </div>
-            <MySubject />
+            <MySubject/>
             <ModalWindow
                 isOpen={isModalOpen}
                 onRequestClose={handleCloseModal}
@@ -77,7 +78,8 @@ const MyInfo = () => {
             >
                 <div>
                     <h2>관심있는 키워드를 선택해주세요!</h2>
-                    <button type="button" className="btn-close" aria-label="Close" onClick={() => setIsModalOpen(false)}></button>
+                    <button type="button" className="btn-close" aria-label="Close"
+                            onClick={() => setIsModalOpen(false)}></button>
                 </div>
                 <AreaComponent onSelectedItemsChange={setSelectedKeywords}/>
                 <Button label="선택완료" className="selectButton" onClick={handleCloseModal}/>

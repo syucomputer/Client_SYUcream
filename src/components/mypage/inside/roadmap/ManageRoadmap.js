@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../../Login/AuthContext";
 import {useNavigate} from "react-router-dom";
+import BackButton from "../../../Button/BackButton";
+import "./Roadmap.css"
 
 const ManageRoadmap = () => {
     const [option, setOption] = useState('')
@@ -21,10 +23,10 @@ const ManageRoadmap = () => {
     }, []);
 
     return (
-        <div>
-            <div>
-                <button onClick={() => navigate(-1)}>x</button>
-                <h1>로드맵 관리</h1>
+        <div className="manage-container">
+            <div className="title-container">
+                <BackButton onClick={() => navigate(-1)} classname="" />
+                <label>전체 로드맵</label>
             </div>
             <div>
                 <select
@@ -36,10 +38,10 @@ const ManageRoadmap = () => {
                     <option value="학년순">학년순</option>
                 </select>
             </div>
-            <table className="SubjectTable">
+            <table className="roadmap-table">
                 <thead>
                     <tr>
-                        <th></th>
+                        <th style={{ width: '30px' }}></th>
                         <th>로드맵 명</th>
                         <th>태그 교수님</th>
                         <th>검토 상태</th>
@@ -52,9 +54,6 @@ const ManageRoadmap = () => {
                         <tr
                             key={roadmap.id}
                             onClick={() => navigate(
-                                // roadmap.professorName
-                                //     ? `/mypage/roadmap/chat/${roadmap.id}`
-                                //     : `/mypage/roadmap/manage/${roadmap.id}`
                                 `/mypage/roadmap/manage/${roadmap.id}`
                             )}
                         >

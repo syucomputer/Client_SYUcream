@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SignupForm from "./SignupForm";
 import Course from "./Course";
-import "./Signup.css";
 import AreaOfInterest from "./AreaOfInterest";
+import "./Signup.css";
 
 const Signup = () => {
   const [step, setStep] = useState(1);

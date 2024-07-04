@@ -1,9 +1,72 @@
+/* ManageRoadmap.js */
+.manage-container {
+    margin: 50px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.title-container label {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.short-form {
+    margin-left: 10px;
+    align-items: center;
+    background-color: #f2f8ff;
+    border-radius: 5px;
+    margin-top: 15px;
+    height: 38px;
+    border: none;
+    outline: none;
+}
+
+.roadmap-table {
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    table-layout: fixed;
+}
+
+.roadmap-table th {
+    color: gray;
+    font-weight: normal;
+    padding: 10px 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.roadmap-table td {
+    padding: 20px 0;
+    border-bottom: 1px solid lightgray;
+}
+
+/* ReviewRoadmap.js */
+.review-container {
+    height: calc(100% - 120px);
+    margin: 30px;
+    background-color: white;
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+/* CreateRoadmap.js */
 .all-container {
     width: calc(100% - 40px);
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    margin: 30px 0;
+    margin: 20px auto;
 }
 
 .section {
@@ -37,18 +100,17 @@ textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    resize: vertical; /* 사용자가 세로로 크기를 조절할 수 있도록 */
+    resize: vertical;
 }
 
 .textarea-large {
-    height: 150px; /* 큰 텍스트 영역 */
+    height: 150px;
 }
 
 .textarea-medium {
-    height: 100px; /* 중간 텍스트 영역 */
+    height: 100px;
 }
 
 .textarea-small {
-    height: 50px; /* 작은 텍스트 영역 */
+    height: 50px;
 }
-

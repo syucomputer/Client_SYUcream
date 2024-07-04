@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import "./KeywordButton.css";
-import "../mypage/inside/MyInfo.css"
 import axios from "axios";
 import {useAuth} from "../Login/AuthContext";
 import AreaComponent from "../Area/AreaComponent";

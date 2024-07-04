@@ -1,13 +1,22 @@
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 .profile-container {
-    width: 300px;
-    height: 400px;
+    width: 100%;
+    max-width: 300px;
     background-color: #fff;
     border-radius: 10px;
-    margin: 80px 80px 0 80px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
+    margin: 40px 40px 20px 40px;
 }
 
 .alarm {
@@ -36,16 +45,20 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 섀도우 효과 */
 }
 
-.homeButton {
-    width: calc(100% - 160px);
+.homeButton,
+.roadmapButton {
+    width: calc(100% - 30px);
+    max-width: 340px;
     height: 40px;
+    margin: 15px;
+    border-radius: 15px;
+}
+
+.homeButton {
     background-color: #9CB5DA;
-    margin: 20px 80px;
 }
 
 .roadmapButton {
-    width: calc(100% - 160px);
-    height: 40px;
     background-color: #02225F;
-    margin: 10px 80px;
+    color: white;
 }
