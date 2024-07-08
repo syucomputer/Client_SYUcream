@@ -1,4 +1,6 @@
-import Roadmap from "../components/Roadmap/Roadmap";
+// import Roadmap from "../components/Roadmap/Roadmap";
+import { Outlet } from "react-router-dom";
+import Nav from "../components/Nav/Nav";
 
 const RoadmapPage = () => {
   return (
@@ -11,7 +13,9 @@ const RoadmapPage = () => {
         position: "relative",
       }}
     >
-      <Roadmap />
+      <Nav />
+      <Outlet />
+      {/*<Roadmap />*/}
     </div>
   );
 };

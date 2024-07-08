@@ -12,7 +12,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
     const { user } = useAuth();
 
     useEffect(() => {
-        axios.get('http://localhost:8080/member/keyword/all',{
+        axios.get('/member/keyword/all',{
             headers: {
                 'Accept': 'application/json'
             }
@@ -34,7 +34,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
 
     useEffect(() => {
         if (user) {
-            axios.get(`http://localhost:8080/member/${user.memId}/keyword`, {
+            axios.get(`/member/${user.memId}/keyword`, {
                 headers: {
                     'Accept': 'application/json'
                 }
@@ -82,6 +82,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
                     <div key={index} className="SelectedItem">
                         {selectedItem.name}
                         <button className="remove" onClick={() => handleRemoveItem(selectedItem)}>x</button>
+                        {/*<Button className="remove" onClick={() => handleRemoveItem(selectedItem)} label="x" />*/}
                     </div>
                 ))}
             </div>

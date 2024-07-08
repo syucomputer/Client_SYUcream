@@ -4,6 +4,7 @@ import { AuthProvider } from "./components/Login/AuthContext";
 import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 import routes from "./routes/routes";
+import "./App.css"
 
 Modal.setAppElement("#root");
 

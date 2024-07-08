@@ -17,7 +17,7 @@ const MySubject = () => {
     useEffect(() => {
         console.log(user.memId)
         axios
-            .get(`http://localhost:8080/subject/course/${user.memId}`)
+            .get(`/subject/course/${user.memId}`)
             .then((response) => {
                 console.log("수강과목", response.data)
                 const subjectsData = response.data.results.subjects;
@@ -55,26 +55,24 @@ const MySubject = () => {
     };
 
     return (
-        <div className="container-form">
+        <div className="my-subject-container">
             <div>
-                <div>
-                    <label className="label-title">컴퓨터공학과</label>
-                    <input
-                        className="search-form"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        placeholder="search"
-                    />
+                <label className="label-title">컴퓨터공학과</label>
+                <input
+                    className="search-form"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="search"
+                />
 
-                    <select
-                        className="short-form"
-                        value={sortOption}
-                        onChange={(e) => setSortOption(e.target.value)}
-                    >
-                        <option value="추천순">추천순</option>
-                        <option value="학년순">학년순</option>
-                    </select>
-                </div>
+                <select
+                    className="short-form"
+                    value={sortOption}
+                    onChange={(e) => setSortOption(e.target.value)}
+                >
+                    <option value="추천순">추천순</option>
+                    <option value="학년순">학년순</option>
+                </select>
             </div>
             <div className="semester-form">
                 <select value={selectedSemester} onChange={handleChangeSemester}>

@@ -93,7 +93,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
         <div>
             {roadmapData && (
                 roadmapData.professorName ? (
-                    <>
+                    <div>
                         <div className="chatContainer">
                             <div className="chatBox">
                                 {chatData && chatData.map((chat, index) => (
@@ -114,7 +114,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
                                 <button onClick={handleAddChat} className="chatButton">전송</button>
                             </div>
                         </div>
-                    </>
+                    </div>
                 ) : (
                     <div>
                         <div>교수님 선택</div>

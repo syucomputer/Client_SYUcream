@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { useAuth } from "../Login/AuthContext";
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.css";
 import Button from "../Button/Button";
 import useToast from "../Toast/useToast";
-import axios from "axios";
 
 const MyProfile = () => {
     const { user } = useAuth();
@@ -48,18 +47,18 @@ const MyProfile = () => {
     }
 
     return (
-        <div>
+        <div className="profile-wrapper">
             <div className="profile-container">
                 <img className="alarm" src={"/profile/alarm.jpg"} alt="alarm"/>
                 <div className="profile-img"></div>
                 <Button label="정보 수정" className="editButton" onClick={handlerEdit}/>
                 <table style={{width: '100%', borderSpacing: '8px', marginTop: 'auto'}}>
-                    <thead style={{ fontSize: '30px'}}>
+                    <thead style={{fontSize: '30px'}}>
                     <tr>
                         <th colSpan="2">{user?.name || ''}</th>
                     </tr>
                     </thead>
-                    <tbody style={{ textAlign: 'left' }}>
+                    <tbody style={{textAlign: 'left'}}>
                     <tr>
                         <td>이름</td>
                         <td>{user?.memId || ''}</td>
