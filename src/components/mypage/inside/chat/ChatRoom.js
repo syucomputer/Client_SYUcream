@@ -31,6 +31,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
         if(roadmapData && roadmapData.professorName){
             axios.get(`/board/comment/roadmap/${selectedRoadmapId}`)
                 .then(response => {
+                    console.log(response.data)
                     setChatData(response.data);
                 })
                 .catch(error => {
@@ -83,9 +84,9 @@ const ChatRoom = ({ selectedRoadmapId }) => {
     };
 
     const professors = [
-        { id: 1, name: "김현규", image: "/profile/professorA.jpg" },
-        { id: 2, name: "조충희", image: "/profile/professorB.jpg" },
-        { id: 3, name: "김성완", image: "/profile/professorC.jpg" },
+        { id: 1, name: "김현규", image: "/profile/Professor1.jpg" },
+        { id: 2, name: "조충희", image: "/profile/Professor2.jpg" },
+        { id: 3, name: "김성완", image: "/profile/Professor3.jpg" },
         // 필요한 만큼 추가
     ];
 
@@ -125,7 +126,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
                                     className={`professor-item ${selectedProfessor.id === professor.id ? 'selected' : ''}`}
                                     onClick={() => handleSelect(professor)}
                                 >
-                                    <img src={professor.image} alt={professor.name} className="professor-image"/>
+                                    <img src={professor.image} alt={professor.name} className="professor-image" />
                                     <div>{professor.name}</div>
                                 </div>
                             ))}

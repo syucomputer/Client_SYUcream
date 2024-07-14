@@ -70,7 +70,7 @@
 }
 
 /* MyRoadmap.js */
-.myRoadmap-container {
+.MyRoadmapContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +83,7 @@
     margin: 60px auto;
 }
 
-.selectBox {
+.SelectBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +93,7 @@
     max-width: 700px;
 }
 
-.select {
+.Select {
     width: 70%;
     height: 40px;
     border-radius: 10px;
@@ -106,17 +106,26 @@
     box-sizing: border-box;
 }
 
-.selectBtn {
+.SelectButton {
+    display: flex;
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
     height: 40px;
     background-color: #02225F;
     color: white;
     border: none;
     border-radius: 10px;
-    padding: 0 20px;
+    padding: 0 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.selectBtn:hover {
+.SelectButton:hover {
     background-color: #434190;
+}
+
+.ContentImg {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
 }

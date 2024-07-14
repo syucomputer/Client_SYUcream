@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import Button from "../Button/Button";
 import "./InputField.css";
 import axios from "axios";
+import useToast from "../Toast/useToast";
 
-const InputField = ({ type, label, value, onChange, onVerificationSuccess }) => {
+const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuccess, showHideOption = true}, ref ) => {
     const isEmailField = label === "이메일"; // 이메일 필드 여부를 판별
 
+    const [inputType, setInputType] = useState(type);
     const [isEmail, setIsEmail] = useState(false);
     const [isRight, setIsRight] = useState(false);
-    const [isFailCode, setIsFailCode] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [buttonLabel, setButtonLabel] = useState("인증하기");
     const [verificationCode, setVerificationCode] = useState("");
 
     const [inputValue, setInputValue] = useState(value); // value prop을 로컬 상태로 관리
+    const showToast = useToast();
 
     // 입력 값이 변경될 때마다 상태를 업데이트하고, 부모 컴포넌트에서 전달된 onChange 핸들러 호출
     const handleChange = (e) => {
@@ -28,7 +30,7 @@ const InputField = ({ type, label, value, onChange, onVerificationSuccess }) => 
         setButtonLabel("재전송하기");
 
         try {
-            const response = await axios.post(`http://localhost:8080/auth/${inputValue}`, {
+            const response = await axios.post(`/auth/${inputValue}`, {
                 userEmail: inputValue
             });
             console.log(response.data); // 응답 확인
@@ -52,61 +54,68 @@ const InputField = ({ type, label, value, onChange, onVerificationSuccess }) => 
     // 인증 코드 확인 함수
     const checkVerificationCode = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/auth/${inputValue}/${verificationCode}`);
+            const response = await axios.get(`/auth/${inputValue}/${verificationCode}`);
 
             if (response.status === 200) {
                 setIsEmail(false);
-                setIsFailCode(false);
                 setIsSuccess(true);
                 if (onVerificationSuccess) {
                     onVerificationSuccess(); // 인증 성공 시 콜백 함수 호출
                 }
             } else {
-                setIsFailCode(true);
                 setVerificationCode("");
                 setIsRight(false);
             }
         } catch (error) {
             console.error("인증 코드 확인 실패:", error);
-            // 실패 시 처리 로직 추가
+            showToast('인증 코드가 올바르지 않습니다.', 'error');
         }
     };
+
+    // 패스워드 보이게 하는 함수
+    const handlePasswordHide = () => {
+        setInputType(prevType => (prevType === "password" ? "text" : "password"));
+    };
+
     return (
-        <div style={{ marginBottom: "20px", position: "relative" }}>
-            <label style={{ color: "666666" }}>{label}</label>
-            <br />
-            <div style={{ marginTop: "5px" }}>
+        <div className="InputField">
+            <div>
+                <div className="InputContainer">
+                    <label className="InputFieldLabel">{label}</label>
+                    {type === "password" && showHideOption &&
+                        <label onClick={handlePasswordHide} className="PasswordHide">
+                            <img
+                                className="IconHide"
+                                src={inputType === 'text'
+                                    ? "profile/icon/Hide_On.jpg"
+                                    : "profile/icon/Hide_Off.jpg"}
+                            />
+                            Hide
+                        </label>
+                    }
+                </div>
                 <input
-                    type={type}
+                    type={inputType}
                     value={inputValue}
                     onChange={handleChange}
-                    style={{
-                        width: "100%",
-                        padding: "8px",
-                        borderRadius: "8px",
-                        border: "1px solid #ccc",
-                        boxSizing: "border-box",
-                        ...(isEmailField && {
-                            width: "35%",
-                        }),
-                    }}
+                    className={isEmailField ? "Input EmailField" : "Input"}
+                    ref={ref}
                 />
                 {isEmailField && (
                     <>
                         <label>@syuin.ac.kr</label>
-                        {!isSuccess && (
-                            <Button
-                                label={buttonLabel}
-                                className='buttonStyle'
-                                onClick={postEmail}
-                            />
-                        )}
-                        {isSuccess && (
+                        {isSuccess ? (
                             <input
                                 type="checkbox"
                                 checked
                                 readOnly
-                                className="checkBoxStyle"
+                                className="CheckBoxStyle"
+                            />
+                        ) : (
+                            <Button
+                                label={buttonLabel}
+                                className='ButtonStyle'
+                                onClick={postEmail}
                             />
                         )}
                     </>
@@ -119,29 +128,18 @@ const InputField = ({ type, label, value, onChange, onVerificationSuccess }) => 
                         type="text"
                         value={verificationCode}
                         onChange={handleCodeChange}
-                        style={{
-                            width: "80px",
-                            borderRadius: "0",
-                            border: "none",
-                            borderBottom: "1px solid black",
-                            textAlign: "center",
-                        }}
+                        className="EmailCode"
                         maxLength="8"
                     />
-                    {isFailCode && (
-                        <label style={{ marginLeft: "8px", color: "red" }}>
-                            인증 실패!
-                        </label>
-                    )}
                     <Button
                         label="인증하기"
-                        className={isRight ? "codeButtonStyleRight" : "codeButtonStyle"}
+                        className={isRight ? "CodeButtonStyleRight" : "CodeButtonStyle"}
                         onClick={checkVerificationCode}
                     />
                 </div>
             )}
         </div>
     );
-};
+});
 
 export default InputField;

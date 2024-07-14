@@ -3,7 +3,6 @@ import Roadmap from "./roadmap/Roadmap";
 import axios from "axios";
 import {useAuth} from "../../Login/AuthContext";
 import {useNavigate, useParams} from "react-router-dom";
-import Button from "../../Button/Button";
 import "./MyInside.css"
 
 const MyRoadmap = () => {
@@ -41,18 +40,21 @@ const MyRoadmap = () => {
     };
 
     return (
-        <div className="myRoadmap-container">
-            <div className="selectBox">
-                <select className="select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
+        <div className="MyRoadmapContainer">
+            <div className="SelectBox">
+                <select className="Select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
                     {roadmaps.map(roadmap => (
                         <option key={roadmap.id} value={roadmap.id}>
                             {`${roadmap.title} - ${roadmap.reviewStatus} - ${roadmap.professorName}`}
                         </option>
                     ))}
                 </select>
-                <Button label="전체 로드맵" className="selectBtn" onClick={() => navigate('/mypage/roadmap/manage')}/>
+                <button className="SelectButton" onClick={() => navigate('/mypage/roadmap/manage')}>
+                    <img src="/profile/icon/Content.jpg" className="ContentImg"/>
+                    전체 로드맵
+                </button>
             </div>
-            <Roadmap selectedRoadmapId={selectedRoadmapId} />
+            <Roadmap selectedRoadmapId={selectedRoadmapId}/>
         </div>
     )
 }

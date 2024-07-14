@@ -1,4 +1,44 @@
-.buttonStyle {
+.InputField {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.InputContainer {
+  color: #666666;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.InputFieldLabel {
+  margin-bottom: 7px;
+}
+
+.PasswordHide {
+  position: absolute;
+  right: 10px;
+}
+
+.IconHide {
+  width: 12px;
+  height: 12px;
+  margin-right: 3px;
+}
+
+.Input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.EmailField {
+  width: 35%;
+  margin-right: 10px;
+}
+
+.ButtonStyle {
   width: 90px;
   height: 30px;
   background-color: #4084ff;
@@ -7,23 +47,31 @@
   right: 0;
 }
 
-.codeButtonStyle {
+.CheckBoxStyle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+}
+
+.EmailCode {
+  width: 80px;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+.CodeButtonStyle {
   width: 80px;
   height: 30px;
   margin-left: 10px;
   background-color: #d9d9d9;
 }
 
-.codeButtonStyleRight {
+.CodeButtonStyleRight {
   width: 80px;
   height: 30px;
   margin-left: 10px;
   background-color: #4084ff;
 }
 
-.checkBoxStyle {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 0;
-}
