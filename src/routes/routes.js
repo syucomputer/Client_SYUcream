@@ -11,6 +11,7 @@ import MyRoadmap from "../components/mypage/inside/MyRoadmap";
 import ManageRoadmap from "../components/mypage/inside/roadmap/ManageRoadmap";
 import ReviewRoadmap from "../components/mypage/inside/roadmap/ReviewRoadmap";
 import Roadmap from "../components/Roadmap/CreateRoadmap";
+import SelectJob from "../components/Roadmap/SelectJob";
 
 const routes = [
   {
@@ -68,6 +69,11 @@ const routes = [
         path: "",
         element: <Roadmap />,
       },
+      {
+        path: "jobs",
+        element: <SelectJob />,
+      },
+
     ]
   },
   {
