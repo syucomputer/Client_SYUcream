@@ -1,10 +1,14 @@
 import Button from "../Button/Button";
 import AreaComponent from "../Area/AreaComponent";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import axios from "axios";
 import "./Signup.css"
+import {StudentIdContext} from "./StudentIdContext";
+import {useNavigate} from "react-router-dom";
 
-const AreaOfInterest = ({ studentId, onStepChange }) => {
+const AreaOfInterest = () => {
+  const { studentId } = useContext(StudentIdContext);
+  const navigate = useNavigate();
   const [selectedItems, setSelectedItems] = useState({});
 
   const handleComplete = () => {
@@ -14,11 +18,10 @@ const AreaOfInterest = ({ studentId, onStepChange }) => {
       techStack: selectedItems.filter(item => item.division === 'techstack').map(item => item.name)
     };
 
-    axios.post(`http://localhost:8080/member/${studentId}/keyword`, postData)
+    axios.post(`/member/${studentId}/keyword`, postData)
       .then(response => {
         console.log('POST 요청 성공:', postData, response.data);
-        // 여기서 필요한 처리를 수행합니다. 예를 들어, 페이지 이동 등.
-        onStepChange(3);
+        navigate('/signup/course');
       })
       .catch(error => {
         console.error('POST 요청 실패:', error);

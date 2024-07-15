@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 import routes from "./routes/routes";
 import "./App.css"
+import {StudentIdProvider} from "./components/Signup/StudentIdContext";
 
 Modal.setAppElement("#root");
 
@@ -37,10 +38,12 @@ const App = () => {
   return (
     <Router>
       <AuthProvider>
-        <Routes>
-          {renderRoutes(routes)}
-        </Routes>
-        <ToastContainer />
+        <StudentIdProvider>
+          <Routes>
+            {renderRoutes(routes)}
+          </Routes>
+          <ToastContainer />
+        </StudentIdProvider>
       </AuthProvider>
     </Router>
   );

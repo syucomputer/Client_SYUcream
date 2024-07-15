@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./Signup.css"
+import {StudentIdContext} from "./StudentIdContext";
 
-const Course = ({ studentId }) => {
+const Course = () => {
+  const { studentId } = useContext(StudentIdContext);
+
   const [loading, setLoading] = useState(false);
   const [complete, setComplete] = useState(false);
   const [subjectData, setSubjectData] = useState([]);
@@ -75,7 +78,9 @@ const Course = ({ studentId }) => {
         ) : (
           <div>
             <div className="box"></div>
-            <button className="ButtonPull" onClick={() => upLoadSubjects(studentId)}> 수강정보 불러오기 </button>
+            <button className="ButtonPull" onClick={() => upLoadSubjects(studentId)}>
+              초기 설정 완료하고 서비스 시작하기
+            </button>
           </div>
         )
       )}

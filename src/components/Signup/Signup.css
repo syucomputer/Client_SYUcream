@@ -2,7 +2,7 @@
 .AreaButton {
   width: 100%;
   height: 40px;
-  background-color: #4084ff;
+  background-color: #4084ffcc;
   margin-top: 30px;
 }
 
@@ -10,7 +10,9 @@
 .ButtonPull {
   width: 100%;
   height: 40px;
-  background-color: #4084ff;
+  background-color: #4084ffcc;
+    border: none;
+    border-radius: 20px;
   margin-top: 50px;
   font-size: 14px;
 }
@@ -45,11 +47,11 @@
   width: 100%;
   height: 40px;
   margin-top: 50px;
-  background-color: #4084ff;
+  background-color: #4084ffcc;
   font-size: 14px;
 }
 
-/* Signup.js */
+/* SignupForm.js */
 .Signup-container {
   width: 500px;
   height: 600px;
@@ -59,7 +61,7 @@
   position: absolute;
 }
 
-/* SignupForm.js */
+/* Signup.js */
 .NextButton {
   width: 100%;
   height: 35px;
@@ -71,7 +73,7 @@
 }
 
 .ButtonFill {
-  background-color: #4084FF;
+  background-color: #4084FFcc;
 }
 
 .Label {

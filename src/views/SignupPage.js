@@ -1,4 +1,4 @@
-import Signup from "../components/Signup/Signup";
+import SignupForm from "../components/Signup/SignupForm";
 
 const SignupPage = () => {
   return (
@@ -12,7 +12,7 @@ const SignupPage = () => {
         position: "relative",
       }}
     >
-      <Signup />
+      <SignupForm />
     </div>
   );
 };
