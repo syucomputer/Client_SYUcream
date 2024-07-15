@@ -9,41 +9,41 @@ import "./App.css"
 Modal.setAppElement("#root");
 
 const App = () => {
-    const renderRoutes = (routes) => {
-        return routes.map((route, index) => {
-            if (route.children) {
-                return (
-                    <Route
-                        key={index}
-                        path={route.path}
-                        element={route.element}
-                    >
-                        {renderRoutes(route.children)}
-                    </Route>
-                );
-            }
+  const renderRoutes = (routes) => {
+    return routes.map((route, index) => {
+      if (route.children) {
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            element={route.element}
+          >
+            {renderRoutes(route.children)}
+          </Route>
+        );
+      }
 
-            return (
-                <Route
-                    key={index}
-                    path={route.path}
-                    element={route.element}
-                    exact={route.exact}
-                />
-            );
-        });
-    };
+      return (
+        <Route
+          key={index}
+          path={route.path}
+          element={route.element}
+          exact={route.exact}
+        />
+      );
+    });
+  };
 
-    return (
-        <Router>
-            <AuthProvider>
-                <Routes>
-                    {renderRoutes(routes)}
-                </Routes>
-                <ToastContainer />
-            </AuthProvider>
-        </Router>
-    );
+  return (
+    <Router>
+      <AuthProvider>
+        <Routes>
+          {renderRoutes(routes)}
+        </Routes>
+        <ToastContainer />
+      </AuthProvider>
+    </Router>
+  );
 };
 
 export default App;

@@ -61,7 +61,7 @@
 }
 
 /* CreateRoadmap.js */
-.all-container {
+.AllContainer {
     width: calc(100% - 40px);
     border: 1px solid black;
     display: flex;
@@ -69,14 +69,14 @@
     margin: 20px auto;
 }
 
-.section {
+.Section {
     border: 1px solid black;
     margin: 40px;
     padding: 10px 20px 20px;
     position: relative;
 }
 
-.add-container {
+.AddContainer {
     position: absolute;
     top: -20px;
     left: 20px;
@@ -85,13 +85,13 @@
     font-weight: bold;
 }
 
-.content-box {
+.ContentBox {
     list-style-type: none;
     padding-left: 0;
     margin-top: 40px;
 }
 
-.content-box li, .content-box ol {
+.ContentBox li, .ContentBox ol {
     margin-bottom: 5px;
 }
 

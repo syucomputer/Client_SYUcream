@@ -45,40 +45,40 @@ const LoginForm = () => {
   };
 
   return (
-      <div>
-        <div className="LoginForm">
-          <h2 style={{ textAlign: "center" }}>로그인</h2>
-          <InputField
-              type="text"
-              label="학번"
-              value={id}
-              onChange={(value) => setId(value)}
-          />
-          <InputField
-              type="password"
-              label="비밀번호"
-              value={password}
-              onChange={(value) => setPassword(value)}
-              showHideOption={false}
-          />
-          <Button
-            label="로그인"
-            className={id && password ? "LoginButton ButtonFill" : "LoginButton"}
-            onClick={handleLogin}
-          />
-          <div className="Center Label">
-            계속하려면 사용 및 개인정보 보호 정책에 동의합니다.
-          </div>
-          <div className="ForgotPassword">비밀번호를 잊으셨나요?</div>
+    <div>
+      <div className="LoginForm">
+        <h2 style={{ textAlign: "center" }}>로그인</h2>
+        <InputField
+            type="text"
+            label="학번"
+            value={id}
+            onChange={(value) => setId(value)}
+        />
+        <InputField
+            type="password"
+            label="비밀번호"
+            value={password}
+            onChange={(value) => setPassword(value)}
+            showHideOption={false}
+        />
+        <Button
+          label="로그인"
+          className={id && password ? "LoginButton ButtonFill" : "LoginButton"}
+          onClick={handleLogin}
+        />
+        <div className="Center Label">
+          계속하려면 사용 및 개인정보 보호 정책에 동의합니다.
         </div>
-        <div className="Center">
-          <Button
-            label="회원가입"
-            className="SignButton"
-            onClick={handleSign}
-          />
-        </div>
+        <div className="ForgotPassword">비밀번호를 잊으셨나요?</div>
       </div>
+      <div className="Center">
+        <Button
+          label="회원가입"
+          className="SignButton"
+          onClick={handleSign}
+        />
+      </div>
+    </div>
   );
 };
 

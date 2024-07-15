@@ -33,7 +33,6 @@ const Trends = () => {
 
   return (
     <div>
-      <Nav />
       <div
         style={{
           display: "flex",
