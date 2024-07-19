@@ -1,4 +1,4 @@
-import Roadmap from "../components/Roadmap/RoadmapTable";
+import Roadmap from "../components/roadmap/RoadmapTable";
 const RoadmapPage = () => {
   return (
     <div

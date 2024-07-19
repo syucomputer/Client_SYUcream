@@ -1,4 +1,4 @@
-import Subject from "../components/Subject/Subject";
+import Subject from "../components/subject/Subject";
 
 const SubjectPage = () => {
   return (

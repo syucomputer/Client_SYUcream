@@ -10,8 +10,11 @@ import MyInfo from "../components/mypage/inside/MyInfo";
 import MyRoadmap from "../components/mypage/inside/MyRoadmap";
 import ManageRoadmap from "../components/mypage/inside/roadmap/ManageRoadmap";
 import ReviewRoadmap from "../components/mypage/inside/roadmap/ReviewRoadmap";
-import Roadmap from "../components/Roadmap/CreateRoadmap";
-import SelectJob from "../components/Roadmap/SelectJob";
+import Roadmap from "../components/roadmap/CreateRoadmap";
+import SelectJob from "../components/roadmap/SelectJob";
+import Signup from "../components/signup/Signup";
+import AreaOfInterest from "../components/signup/AreaOfInterest";
+import Course from "../components/signup/Course";
 
 const routes = [
   {
@@ -26,6 +29,20 @@ const routes = [
   {
     path: "/signup",
     element: <SignupPage />,
+    children: [
+      {
+        path: "",
+        element: <Signup />,
+      },
+      {
+        path: "area-of-interest",
+        element: <AreaOfInterest />,
+      },
+      {
+        path: "course",
+        element: <Course />,
+      },
+    ]
   },
   {
     path: "/mypage",
@@ -54,7 +71,7 @@ const routes = [
     ],
   },
   {
-    path: "/trends",
+    path: "/trend",
     element: <TrendsPage />,
   },
   {
@@ -73,7 +90,6 @@ const routes = [
         path: "jobs",
         element: <SelectJob />,
       },
-
     ]
   },
   {

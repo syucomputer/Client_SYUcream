@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MySubject.css";
-import {useAuth} from "../../../Login/AuthContext";
+import {useAuth} from "../../../login/AuthContext";
 
 const MySubject = () => {
     const [allSubjects, setAllSubjects] = useState([]); // 모든 과목 데이터를 저장할 상태

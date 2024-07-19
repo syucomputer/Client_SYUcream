@@ -1,7 +1,7 @@
 import "./MyRoadmap.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Button from "../../../Button/Button";
+import Button from "../../../button/Button";
 
 const Roadmap = ({ selectedRoadmapId }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -111,6 +111,7 @@ const Roadmap = ({ selectedRoadmapId }) => {
             </div>
           )}
             <div className="Section">
+              {console.log(roadmapDetail?.neededSkill)}
               <div className="AddContainer">
                 필요한 공부 및 기술
               </div>

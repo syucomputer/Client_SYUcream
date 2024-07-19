@@ -1,8 +1,8 @@
-import Button from "../../Button/Button";
-import ModalWindow from "../../Modal/ModalWindow";
-import AreaComponent from "../../Area/AreaComponent";
+import Button from "../../button/Button";
+import ModalWindow from "../../modal/ModalWindow";
+import AreaComponent from "../../area/AreaComponent";
 import {useEffect, useState} from "react";
-import {useAuth} from "../../Login/AuthContext";
+import {useAuth} from "../../login/AuthContext";
 import axios from "axios";
 import MySubject from "./subject/MySubject";
 import "./MyInside.css"
@@ -62,7 +62,7 @@ const MyInfo = () => {
           <div className="selectKeyword">
             <div className="selectKeyword">
               {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
-                <div key={index} className="SelectedItem">
+                <div key={index} className="MySelectedItem">
                   {keyword.name}
                 </div>
               ))}

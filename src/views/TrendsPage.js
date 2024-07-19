@@ -1,5 +1,5 @@
-import Trends from "../components/Trends/Trends";
-import Nav from "../components/Nav/Nav";
+import Trends from "../components/trend/Trends";
+import Nav from "../components/nav/Nav";
 
 const SignupPage = () => {
   return (

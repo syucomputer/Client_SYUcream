@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useAuth } from "../Login/AuthContext";
+import { useAuth } from "../login/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyProfile.css";
-import Button from "../Button/Button";
-import useToast from "../Toast/useToast";
+import Button from "../button/Button";
+import useToast from "../toast/useToast";
 
 const MyProfile = () => {
     const { user } = useAuth();

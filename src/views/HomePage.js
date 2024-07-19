@@ -1,9 +1,13 @@
-import Nav from "../components/Nav/Nav";
-import Main from "../components/Main/Main";
-import {useAuth} from "../components/Login/AuthContext";
+import Nav from "../components/nav/Nav";
+import Main from "../components/main/Main";
+import {useAuth} from "../components/login/AuthContext";
+import {useContext} from "react";
+import {StudentIdContext} from "../components/signup/StudentIdContext";
 
 const HomePage = () => {
   const { isLoggedIn } = useAuth()
+  const { studentId } = useContext(StudentIdContext);
+
 
   return (
     <div
