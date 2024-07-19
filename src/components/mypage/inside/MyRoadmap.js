@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Roadmap from "./roadmap/Roadmap";
 import axios from "axios";
-import {useAuth} from "../../Login/AuthContext";
+import {useAuth} from "../../login/AuthContext";
 import {useNavigate, useParams} from "react-router-dom";
 import "./MyInside.css"
 
@@ -50,7 +50,7 @@ const MyRoadmap = () => {
           ))}
         </select>
         <button className="SelectButton" onClick={() => navigate('/mypage/roadmap/manage')}>
-          <img src="/profile/icon/Content.jpg" className="ContentImg"/>
+          <img src="/profile/icon/Content.jpg" className="ContentImg" alt="목차" />
           전체 로드맵
         </button>
       </div>

@@ -1,4 +1,4 @@
-import Nav from "../components/Nav/Nav";
+import Nav from "../components/nav/Nav";
 import MyProfile from "../components/mypage/MyProfile";
 import {Outlet} from "react-router-dom";
 

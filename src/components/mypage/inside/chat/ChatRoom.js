@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {useAuth} from "../../../Login/AuthContext";
+import {useAuth} from "../../../login/AuthContext";
 import "./ChatRoom.css"
 
 const ChatRoom = ({ selectedRoadmapId }) => {

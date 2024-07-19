@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./components/Login/AuthContext";
+import { AuthProvider } from "./components/login/AuthContext";
 import Modal from "react-modal";
 import { ToastContainer } from "react-toastify";
 import routes from "./routes/routes";
 import "./App.css"
-import {StudentIdProvider} from "./components/Signup/StudentIdContext";
+import {StudentIdProvider} from "./components/signup/StudentIdContext";
 
 Modal.setAppElement("#root");
 

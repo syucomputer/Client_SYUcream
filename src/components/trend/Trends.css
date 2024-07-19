@@ -1,0 +1,109 @@
+/* trend.js */
+.TrendsContainer {
+    display: flex;
+}
+
+.TrendsBox {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin: 80px;
+}
+
+.TrendTitle {
+    text-align: center;
+    font-size: 19px;
+}
+
+.TrendsBody {
+    margin-top: 120px;
+}
+
+.Date {
+    margin: 30px;
+    font-size: 25px;
+}
+
+/* TrendsTable.js */
+.TrendsTableContainer {
+    width: 100%;
+    margin-bottom: 50px;
+    height: 301px;
+    overflow: auto;
+    text-align: center;
+}
+
+.TrendsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.TrendsTable thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+}
+
+.TrendsTable th, .TrendsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.TrendsTable tr {
+    height: 50px;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+.TrendsTable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.TrendsTable thead tr {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.textbox {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  width: 100%;
+  height: 300px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  border: none;
+  resize: none;
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 50px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  background: #adb6ff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background: #ddd;
+}
+
+.button.active {
+  background: #adb6ff;
+  color: #fff;
+}
+
+/* TrendCheckBox.js */
+.TrendsCheckBox {
+    width: 450px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+}

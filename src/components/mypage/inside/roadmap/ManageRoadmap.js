@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useAuth} from "../../../Login/AuthContext";
+import {useAuth} from "../../../login/AuthContext";
 import {useNavigate} from "react-router-dom";
-import BackButton from "../../../Button/BackButton";
+import BackButton from "../../../button/BackButton";
 import "./MyRoadmap.css"
 
 const ManageRoadmap = () => {
