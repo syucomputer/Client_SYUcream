@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Trends.css";
 
 const TrendsTable = ({ selectedDivision, trendsData }) => {
@@ -31,8 +31,8 @@ const TrendsTable = ({ selectedDivision, trendsData }) => {
             클릭했을 때 오른쪽에 직무, 기술스택, 전문분야에 대한 내용
             <tr onClick={() => handleJobTitleClick(trend.description)}>
           */
-            <tr key={index}>
-              <td>{index + 1}</td>
+            <tr key={trend.rank}>
+              <td>{trend.rank}</td>
               <td>{trend.name}</td>
               <td>{trend.frequency}</td>
             </tr>
