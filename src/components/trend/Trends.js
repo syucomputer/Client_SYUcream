@@ -2,21 +2,20 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TrendsTable from "./TrendsTable";
 import TrendCheckbox from "./TrendCheckbox";
-import DescriptionBox from "./Descriptionbox";
+import DescriptionBox from "./DescriptionBox";
 import "./Trends.css";
 
 const Trends = () => {
   const [selectedDivision, setSelectedDivision] = useState("job");
   const [selectedPeriod, setSelectedPeriod] = useState("1month")
-  const [trendsData, setTrendsData] = useState({});
+  const [trendsData, setTrendsData] = useState([]);
   const date = new Date();
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/keywords/${selectedDivision}/${selectedPeriod}`)
+    axios.get(`/keywords/${selectedDivision}/${selectedPeriod}`)
       .then(response => {
         const rankingArray = Object.values(response.data?.ranking);
 
-        console.log(rankingArray)
         setTrendsData(rankingArray)
       })
       .catch(error => {
