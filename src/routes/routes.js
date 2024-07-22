@@ -15,6 +15,7 @@ import SelectJob from "../components/roadmap/SelectJob";
 import Signup from "../components/signup/Signup";
 import AreaOfInterest from "../components/signup/AreaOfInterest";
 import Course from "../components/signup/Course";
+import ProManageRoadmap from "../components/roadmap/ProManageRoadmap";
 
 const routes = [
   {
@@ -90,6 +91,10 @@ const routes = [
         path: "jobs",
         element: <SelectJob />,
       },
+      {
+        path: "pro-manage",
+        element: <ProManageRoadmap />,
+      }
     ]
   },
   {

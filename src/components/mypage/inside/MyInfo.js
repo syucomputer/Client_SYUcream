@@ -70,7 +70,7 @@ const MyInfo = () => {
           </div>
         </div>
       </div>
-      <MySubject/>
+      {user.division === '학생' && <MySubject/>}
       <ModalWindow
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}

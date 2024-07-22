@@ -12,7 +12,9 @@ const ManageRoadmap = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/board/roadmaps/${user.memId}`)
+    const backPoint = user.division === '학생' ? `${user.memId}` : 'professor';
+
+    axios.get(`http://localhost:8080/board/roadmaps/${backPoint}`)
       .then(response => {
         setRoadmaps(response.data)
       })
@@ -24,14 +26,16 @@ const ManageRoadmap = () => {
   return (
     <div className="manage-container">
       <div className="title-container">
-        <BackButton onClick={() => navigate(-1)} classname="" />
+        {user.division === '학생' &&
+          <BackButton onClick={() => navigate(-1)} classname="" />
+        }
         <label>전체 로드맵</label>
       </div>
       <div>
         <select
-            className="short-form"
-            value={option}
-            onChange={(e) => setOption(e.target.value)}
+          className="short-form"
+          value={option}
+          onChange={(e) => setOption(e.target.value)}
         >
           <option value="날짜순">날짜순</option>
           <option value="학년순">학년순</option>
@@ -42,28 +46,38 @@ const ManageRoadmap = () => {
           <tr>
             <th style={{ width: '30px' }}></th>
             <th>로드맵 명</th>
-            <th>태그 교수님</th>
+            {user.division === '학생' ? (
+              <th>태그 교수님</th>
+            ) : (
+              <th>학생</th>
+            )}
             <th>검토 상태</th>
             <th>생성 날짜</th>
             <th>업데이트 날짜</th>
           </tr>
         </thead>
         <tbody>
-          {roadmaps.map((roadmap) => (
-            <tr
-              key={roadmap.id}
-              onClick={() => navigate(
-                  `/mypage/roadmap/manage/${roadmap.id}`
-              )}
-            >
-              <td></td>
-              <td>{roadmap.title}</td>
-              <td>{roadmap.professorName} 교수님</td>
-              <td>{roadmap.reviewStatus}</td>
-              <td>{roadmap.creationDate}</td>
-              <td>{roadmap.lastUpdatedAt}</td>
-            </tr>
-          ))}
+          {!roadmaps ?(
+            <div>
+              로드맵이 없습니다.
+            </div>
+          ) : (
+            <>
+              {roadmaps.map((roadmap) => (
+                <tr
+                  key={roadmap.id}
+                  onClick={() => navigate(`/mypage/roadmap/manage/${roadmap.id}`)}
+                >
+                  <td></td>
+                  <td>{roadmap.title}</td>
+                  <td>{roadmap.professorName} 교수님</td>
+                  <td>{roadmap.reviewStatus}</td>
+                  <td>{roadmap.creationDate}</td>
+                  <td>{roadmap.lastUpdatedAt}</td>
+                </tr>
+              ))}
+            </>
+          )}
         </tbody>
       </table>
     </div>
