@@ -77,11 +77,11 @@
 }
 
 /* CreateRoadmap.js */
-.RoadmapBox {
+.roadmap-box {
     margin: 40px 70px
 }
 
-.Screen {
+.screen {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -92,19 +92,25 @@
     height: 600px;
 }
 
-.KeywordList {
+.keyword-list {
     width: 100%;
     border-right: 1px solid black;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    padding: 30px;
     flex: 3;
 }
 
-.KeywordContainerBox {
+.font-30 {
+    font-size: 26px;
+    margin: 10px;
+}
+
+.keyword-container-box {
     flex: 1;
 }
 
-.CompleteButton {
+.complete-button {
     width: 140px;
     height: 40px;
     font-size: 17px;
@@ -112,4 +118,9 @@
     margin: 15px auto;
     background-color: #CAD0FF;
     border-radius: 10px;
+}
+
+/* ProManageRoadmap.js */
+.pro-container {
+    height: 100%;
 }
