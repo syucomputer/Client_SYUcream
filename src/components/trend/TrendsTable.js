@@ -26,13 +26,13 @@ const TrendsTable = ({ selectedDivision, trendsData }) => {
           </tr>
         </thead>
         <tbody>
-          {trendsData.map((trend) => (
+          {trendsData && trendsData.map((trend, index) => (
           /*
             클릭했을 때 오른쪽에 직무, 기술스택, 전문분야에 대한 내용
             <tr onClick={() => handleJobTitleClick(trend.description)}>
           */
-            <tr key={trend.rank}>
-              <td>{trend.rank}</td>
+            <tr key={index}>
+              <td>{index + 1}</td>
               <td>{trend.name}</td>
               <td>{trend.frequency}</td>
             </tr>

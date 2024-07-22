@@ -4,9 +4,10 @@ import axios from "axios";
 import {useAuth} from "../../login/AuthContext";
 import {useNavigate, useParams} from "react-router-dom";
 import "./MyInside.css"
+import roadmap from "./roadmap/Roadmap";
 
 const MyRoadmap = () => {
-  const [roadmaps, setRoadmaps] = useState([]);
+  const [roadmaps, setRoadmaps] = useState(null);
   const [selectedRoadmapId, setSelectedRoadmapId] = useState("");
   const { roadmapId } = useParams();
   const { user } = useAuth();
@@ -41,20 +42,31 @@ const MyRoadmap = () => {
 
   return (
     <div className="MyRoadmapContainer">
-      <div className="SelectBox">
-        <select className="Select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
-          {roadmaps.map(roadmap => (
-            <option key={roadmap.id} value={roadmap.id}>
-              {`${roadmap.title} - ${roadmap.reviewStatus} - ${roadmap.professorName}`}
-            </option>
-          ))}
-        </select>
-        <button className="SelectButton" onClick={() => navigate('/mypage/roadmap/manage')}>
-          <img src="/profile/icon/Content.jpg" className="ContentImg" alt="목차" />
-          전체 로드맵
-        </button>
-      </div>
-      <Roadmap selectedRoadmapId={selectedRoadmapId}/>
+      {!roadmaps ? (
+        <div className="no-roadmap">
+          <p>등록된 로드맵이 없습니다.</p>
+          <button className="move-roadmap" onClick={() => navigate('/roadmap')}>
+            로드맵 생성하기
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="SelectBox">
+            <select className="Select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
+              {roadmaps.map(roadmap => (
+                <option key={roadmap.id} value={roadmap.id}>
+                  {`${roadmap.title} - ${roadmap.reviewStatus} - ${roadmap.professorName}`}
+                </option>
+              ))}
+            </select>
+            <button className="SelectButton" onClick={() => navigate('/mypage/roadmap/manage')}>
+              <img src="/profile/icon/Content.jpg" className="ContentImg" alt="목차" />
+              전체 로드맵
+            </button>
+          </div>
+          <Roadmap selectedRoadmapId={selectedRoadmapId}/>
+        </>
+      )}
     </div>
   )
 }

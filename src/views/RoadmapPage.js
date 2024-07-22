@@ -10,6 +10,8 @@ const RoadmapPage = () => {
         margin: 0,
         padding: 0,
         position: "relative",
+        height: '100%',
+        maxHeight: 'calc(100% - 265px)',
       }}
     >
       <Nav />

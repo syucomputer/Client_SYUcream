@@ -1,7 +1,7 @@
 import "./Areas.css"
 import Button from "../button/Button";
 import { useState } from "react";
-const Areas = ({ label, list, onItemClick, VisibleItemCount }) => {
+const Areas = ({ label, list, onItemClick, VisibleItemCount, labelStyle }) => {
   const [showAllItems, setShowAllItems] = useState(false);
 
   const handlerToggle = () => {
@@ -10,7 +10,7 @@ const Areas = ({ label, list, onItemClick, VisibleItemCount }) => {
 
   return (
     <div className="AreaContainer">
-      <div className="AreaLabel">
+      <div className={`AreaLabel ${labelStyle}`}>
         {label}
       </div>
       <div className="AreaBox">

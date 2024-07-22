@@ -1,7 +1,13 @@
 import React from "react";
 import CheckBox from "../checkbox/CheckBox";
+import Button from "../button/Button";
 
 const TrendCheckbox = ({ selectedDivision, setSelectedDivision , selectedPeriod , setSelectedPeriod }) => {
+
+  const handleGraph = () => {
+
+  }
+
   return (
     <div>
       <div className="TrendsCheckBox">
@@ -55,6 +61,9 @@ const TrendCheckbox = ({ selectedDivision, setSelectedDivision , selectedPeriod 
             checked={selectedPeriod === "12months"}
           />
         </div>
+      </div>
+      <div>
+        <Button label="그래프 보기" onClick={handleGraph} className="GraphButton" />
       </div>
     </div>
   );
