@@ -18,7 +18,7 @@ const AreaOfInterest = () => {
       techStack: selectedItems.filter(item => item.division === 'techstack').map(item => item.name)
     };
 
-    axios.post(`/member/${studentId}/keyword`, postData)
+    axios.post(`http://localhost:8080/member/${studentId}/keyword`, postData)
       .then(response => {
         console.log('POST 요청 성공:', postData, response.data);
         navigate('/signup/course');

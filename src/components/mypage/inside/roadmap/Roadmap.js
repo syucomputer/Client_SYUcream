@@ -22,7 +22,7 @@ const Roadmap = ({ selectedRoadmapId }) => {
   }, [selectedRoadmapId]);
 
   const fetchRoadmapDetail = (selectedRoadmapId) => {
-    axios.get(`/board/roadmaps/detail/${selectedRoadmapId}`)
+    axios.get(`http://localhost:8080/board/roadmaps/detail/${selectedRoadmapId}`)
       .then(response => {
         const roadmap = response.data;
 
@@ -59,7 +59,7 @@ const Roadmap = ({ selectedRoadmapId }) => {
       ...formData,
     };
 
-    axios.put(`/board/roadmaps/${selectedRoadmapId}`, updatedRoadmap)
+    axios.put(`http://localhost:8080/board/roadmaps/${selectedRoadmapId}`, updatedRoadmap)
       .then(response => {
         setRoadmapDetail(response.data);
         setIsEditing(false);
@@ -111,7 +111,6 @@ const Roadmap = ({ selectedRoadmapId }) => {
             </div>
           )}
             <div className="Section">
-              {console.log(roadmapDetail?.neededSkill)}
               <div className="AddContainer">
                 필요한 공부 및 기술
               </div>

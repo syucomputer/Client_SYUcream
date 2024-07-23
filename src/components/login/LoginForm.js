@@ -18,7 +18,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const request = await axios.post('/member/login', {
+      const request = await axios.post('http://localhost:8080/member/login', {
         memId: id,
         password: password,
       });

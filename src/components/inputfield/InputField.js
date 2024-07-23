@@ -30,7 +30,7 @@ const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuc
     setButtonLabel("재전송하기");
 
     try {
-      const response = await axios.post(`/auth/${inputValue}`, {
+      const response = await axios.post(`http://localhost:8080/auth/${inputValue}`, {
           userEmail: inputValue
       });
       console.log(response.data); // 응답 확인
@@ -52,7 +52,7 @@ const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuc
   // 인증 코드 확인 함수
   const checkVerificationCode = async () => {
     try {
-      const response = await axios.get(`/auth/${inputValue}/${verificationCode}`);
+      const response = await axios.get(`http://localhost:8080/auth/${inputValue}/${verificationCode}`);
 
       if (response.status === 200) {
         setIsEmail(false);
@@ -87,6 +87,7 @@ const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuc
                 src={inputType === 'text'
                   ? "profile/icon/Hide_On.jpg"
                   : "profile/icon/Hide_Off.jpg"}
+                alt="비밀번호 보이기"
               />
               Hide
             </label>

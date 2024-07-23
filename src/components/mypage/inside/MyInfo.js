@@ -14,7 +14,7 @@ const MyInfo = () => {
 
     // 사용자의 관심있는 키워드 불러오기
     useEffect(() => {
-      axios.get(`/member/${user.memId}/keyword`)
+      axios.get(`http://localhost:8080/member/${user.memId}/keyword`)
         .then(response => {
           // 받아온 데이터를 원하는 형식으로 가공합니다.
           const keywords = [];
@@ -39,7 +39,7 @@ const MyInfo = () => {
       techStack: selectedKeywords.filter(item => item.division === 'techstack').map(item => item.name)
     };
 
-    axios.put(`/member/${user.memId}/keyword`, postData)
+    axios.put(`http://localhost:8080/member/${user.memId}/keyword`, postData)
       .then(response => {
         console.log(response.data)
         setSelectedKeywords(selectedKeywords);

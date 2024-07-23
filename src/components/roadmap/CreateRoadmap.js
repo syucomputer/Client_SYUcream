@@ -17,7 +17,7 @@ const CreateRoadmap = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/member/keyword/all`, {
+    axios.get(`http://localhost:8080/member/keyword/all`, {
       headers: {
         'Accept': 'application/json'
       }

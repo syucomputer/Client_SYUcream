@@ -12,7 +12,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
 
   // roadmapData가 변경될 때마다 실행되는 useEffect
   useEffect(() => {
-    axios.get(`/board/roadmaps/detail/${selectedRoadmapId}`)
+    axios.get(`http://localhost:8080/board/roadmaps/detail/${selectedRoadmapId}`)
       .then(response => {
         setRoadmapData(response.data);
       })
@@ -29,7 +29,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
 
   const renderChat = () => {
     if(roadmapData && roadmapData.professorName){
-      axios.get(`/board/comment/roadmap/${selectedRoadmapId}`)
+      axios.get(`http://localhost:8080/board/comment/roadmap/${selectedRoadmapId}`)
         .then(response => {
           console.log(response.data)
           setChatData(response.data);
@@ -41,7 +41,7 @@ const ChatRoom = ({ selectedRoadmapId }) => {
   }
 
   const handleAddChat = () => {
-    axios.post(`/board/comment/${selectedRoadmapId}`, {
+    axios.post(`http://localhost:8080/board/comment/${selectedRoadmapId}`, {
       roadmapId: selectedRoadmapId,
       memberId: roadmapData.memberId,
       content: chat
