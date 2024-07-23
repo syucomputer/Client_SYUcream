@@ -13,7 +13,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
   const { user } = useAuth();
 
   useEffect(() => {
-    axios.get('/member/keyword/all',{
+    axios.get('http://localhost:8080/member/keyword/all',{
       headers: {
         'Accept': 'application/json'
       }
@@ -35,7 +35,7 @@ const AreaComponent = ({ onSelectedItemsChange }) => {
 
   useEffect(() => {
     if (user) {
-      axios.get(`/member/${user.memId}/keyword`, {
+      axios.get(`http://localhost:8080/member/${user.memId}/keyword`, {
         headers: {
           'Accept': 'application/json'
         }

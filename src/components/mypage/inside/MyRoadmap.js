@@ -4,7 +4,6 @@ import axios from "axios";
 import {useAuth} from "../../login/AuthContext";
 import {useNavigate, useParams} from "react-router-dom";
 import "./MyInside.css"
-import roadmap from "./roadmap/Roadmap";
 
 const MyRoadmap = () => {
   const [roadmaps, setRoadmaps] = useState(null);
@@ -14,7 +13,7 @@ const MyRoadmap = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/board/roadmaps/${user.memId}`, {
+    axios.get(`http://localhost:8080/board/roadmaps/${user.memId}`, {
       headers: {
         'Accept': 'application/json'
       }

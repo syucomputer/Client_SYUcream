@@ -17,7 +17,7 @@ const MySubject = () => {
     useEffect(() => {
         console.log(user.memId)
         axios
-            .get(`/subject/course/${user.memId}`)
+            .get(`http://localhost:8080/subject/course/${user.memId}`)
             .then((response) => {
                 console.log("수강과목", response.data)
                 const subjectsData = response.data.results.subjects;

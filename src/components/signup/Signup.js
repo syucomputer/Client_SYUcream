@@ -1,15 +1,13 @@
-import React, {useContext, useRef, useState} from "react";
+import React, { useRef, useState} from "react";
 import InputField from "../inputfield/InputField";
 import axios from "axios";
 import useToast from "../toast/useToast";
 import "./Signup.css"
 import Button from "../button/Button";
 import {useNavigate, useOutletContext} from "react-router-dom";
-import {StudentIdContext} from "./StudentIdContext";
 
 const Signup = () => {
   const { handleStudentIdChange } = useOutletContext();
-  const { studentId } = useContext(StudentIdContext);
   const navigate = useNavigate();
 
   const [state, setState] = useState({
@@ -66,7 +64,7 @@ const Signup = () => {
       passwordRef.current.focus();
     } else {
       try {
-        const request = await axios.post('/member/save', {
+        const request = await axios.post('http://localhost:8080/member/save', {
           memId: state.id,
           name: state.name,
           email: state.email,

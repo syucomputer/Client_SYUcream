@@ -12,7 +12,7 @@ const Trends = () => {
   const date = new Date();
 
   useEffect(() => {
-    axios.get(`/keywords/${selectedDivision}/${selectedPeriod}`)
+    axios.get(`http://localhost:8080/keywords/${selectedDivision}/${selectedPeriod}`)
       .then(response => {
         const rankingArray = Object.values(response.data?.ranking);
 

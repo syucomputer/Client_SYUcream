@@ -1,9 +1,6 @@
-import React, {useContext, useState} from "react";
-import Signup from "./Signup";
-import Course from "./Course";
-import AreaOfInterest from "./AreaOfInterest";
+import React, {useContext} from "react";
 import "./Signup.css";
-import {Outlet, useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import {StudentIdContext} from "./StudentIdContext";
 
 const SignupForm = () => {
