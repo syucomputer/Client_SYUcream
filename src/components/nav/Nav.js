@@ -21,22 +21,34 @@ const Nav = () => {
       <NavLink to="/trend" className="nav-link" style={user ? active : {}}>
         최신 동향
       </NavLink>
-      {user && user.division === '학생'? (
+      {user ? (
+        user.division === '학생'? (
+          <>
+            <NavLink to="/subject" className="nav-link" style={user ? active : {}}>
+              과목 추천
+            </NavLink>
+            <NavLink to="/roadmap" className="nav-link" style={user ? active : {}}>
+              로드맵 생성
+            </NavLink>
+          </>
+        ) : (
+            <>
+              <NavLink to="/roadmap" className="nav-link" style={user ? active : {}}>
+                로드맵 생성
+              </NavLink>
+              <NavLink to="/roadmap/pro-manage" className="nav-link" style={user ? active : {}}>
+                로드맵 관리
+              </NavLink>
+            </>
+          )
+
+      ) : (
         <>
           <NavLink to="/subject" className="nav-link" style={user ? active : {}}>
             과목 추천
           </NavLink>
           <NavLink to="/roadmap" className="nav-link" style={user ? active : {}}>
             로드맵 생성
-          </NavLink>
-        </>
-      ) : (
-        <>
-          <NavLink to="/roadmap" className="nav-link" style={user ? active : {}}>
-            로드맵 생성
-          </NavLink>
-          <NavLink to="/roadmap/pro-manage" className="nav-link" style={user ? active : {}}>
-            로드맵 관리
           </NavLink>
         </>
       )}

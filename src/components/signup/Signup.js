@@ -107,6 +107,7 @@ const Signup = () => {
         onChange={(value) => handleChangeState('email', value)}
         ref={emailRef}
         onVerificationSuccess={() => setIsSuc(true)}
+        post={true}
       />
       <InputField
         type="password"
@@ -121,8 +122,8 @@ const Signup = () => {
         value={state.passwordR}
         onChange={(value) => handleChangeState('passwordR', value)}
       />
-      <Button label="다음으로" className={stateFill ? "NextButton ButtonFill" : "NextButton"} onClick={handleSubmit} />
-      <div className="Label">
+      <Button label="다음으로" className={stateFill ? "next-button button-fill" : "next-button"} onClick={handleSubmit} />
+      <div className="label">
         계정을 만들고 사용 약관 및 개인 정보 보호 정책에 동의합니다.
       </div>
     </div>
