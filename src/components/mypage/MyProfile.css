@@ -27,13 +27,6 @@
     left: 0;
 }
 
-.editButton {
-    width: 80px;
-    height: 30px;
-    background-color: #ADB6FF;
-    float: right;
-}
-
 .profile-img {
     width: 150px;
     height: 150px;
@@ -45,8 +38,18 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 섀도우 효과 */
 }
 
-.homeButton,
-.roadmapButton {
+.edit-button {
+    min-width: 80px;
+    height: 30px;
+    font-size: 15px;
+    margin: 10px 0;
+    background-color: #ADB6FF;
+    float: right;
+    padding: 5px 15px;
+}
+
+.home-button,
+.roadmap-button {
     width: calc(100% - 30px);
     max-width: 340px;
     height: 40px;
@@ -54,11 +57,11 @@
     border-radius: 15px;
 }
 
-.homeButton {
+.home-button {
     background-color: #9CB5DA;
 }
 
-.roadmapButton {
+.roadmap-button {
     background-color: #02225F;
     color: white;
 }
