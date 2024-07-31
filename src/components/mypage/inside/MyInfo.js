@@ -1,7 +1,7 @@
 import Button from "../../button/Button";
 import ModalWindow from "../../modal/ModalWindow";
 import AreaComponent from "../../area/AreaComponent";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useAuth} from "../../login/AuthContext";
 import axios from "axios";
 import MySubject from "./subject/MySubject";
@@ -51,22 +51,20 @@ const MyInfo = () => {
   };
 
   return (
-    <div className="my-info-container">
+    <div className="info-container">
       <div>
         <h1>나의 정보 관리</h1>
-        <div className="keywordContainer">
+        <div className="keyword-container">
           <div className="keyword">
             <label>나의 관심 키워드</label>
-            <Button label="수정하기" className="keywordEdit" onClick={handlerEdit}/>
+            <Button label="수정하기" className="keyword-edit" onClick={handlerEdit}/>
           </div>
-          <div className="selectKeyword">
-            <div className="selectKeyword">
-              {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
-                <div key={index} className="MySelectedItem">
-                  {keyword.name}
-                </div>
-              ))}
-            </div>
+          <div className="select-keyword">
+            {Array.isArray(selectedKeywords) && selectedKeywords.map((keyword, index) => (
+              <div key={index} className="selected-item">
+                {keyword.name}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -74,15 +72,15 @@ const MyInfo = () => {
       <ModalWindow
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}
+        className="keyword-modal"
         contentLabel="Modal"
       >
         <div>
           <h2>관심있는 키워드를 선택해주세요!</h2>
-          <button type="button" className="btn-close" aria-label="Close"
-            onClick={() => setIsModalOpen(false)}></button>
+          <Button className="modal-button" onClick={() => setIsModalOpen(false)} label="x" />
         </div>
         <AreaComponent onSelectedItemsChange={setSelectedKeywords}/>
-        <Button label="선택완료" className="selectButton" onClick={handleCloseModal}/>
+        <Button label="선택완료" className="select-button" onClick={handleCloseModal}/>
       </ModalWindow>
     </div>
   )

@@ -4,10 +4,14 @@ import TrendsTable from "./TrendsTable";
 import TrendCheckbox from "./TrendCheckbox";
 import DescriptionBox from "./DescriptionBox";
 import "./Trends.css";
+import Button from "../button/Button";
+import ModalWindow from "../modal/ModalWindow";
+import TrendGraph from "./TrendGraph";
 
 const Trends = () => {
   const [selectedDivision, setSelectedDivision] = useState("job");
   const [selectedPeriod, setSelectedPeriod] = useState("1month")
+  const [isModal, setIsModal] = useState(false);
   const [trendsData, setTrendsData] = useState([]);
   const date = new Date();
 
@@ -29,6 +33,10 @@ const Trends = () => {
   // const handleJobTitleClick = (description) => {
   //   setDescription(description);
   // };
+
+  const handleGraph = () => {
+    setIsModal(true)
+  }
 
   const selectDate = () => {
     const year = date.getFullYear();
@@ -66,9 +74,9 @@ const Trends = () => {
 
 
   return (
-    <div className="TrendsContainer">
-      <div className="TrendsBox">
-        <div className="TrendTitle">
+    <div className="trends-container">
+      <div className="trends-box">
+        <div className="trend-title">
           <h1> 최신동향 </h1>
           <div>
             이 페이지에서는 사용자가 설정한 기간에 대해 <br/>
@@ -78,21 +86,33 @@ const Trends = () => {
             있습니다.
           </div>
         </div>
-        <div className="TrendsBody">
-          <div className="Center Date">{selectDate()}</div>
+        <div className="trends-body">
+          <div className="center date">{selectDate()}</div>
           <TrendsTable
             selectedDivision={selectedDivision}
             trendsData={trendsData}/>
         </div>
       </div>
-      <div className="TrendsBox">
+      <div className="trends-box">
         <TrendCheckbox
           selectedDivision={selectedDivision}
           setSelectedDivision={setSelectedDivision}
           selectedPeriod={selectedPeriod}
           setSelectedPeriod={setSelectedPeriod}
         />
+        <div>
+          <Button label="그래프 보기" onClick={handleGraph} className="graph-button"/>
+        </div>
         <DescriptionBox description={"직무명을 클릭하면 설명을 확인할 수 있어요."}/>
+        <ModalWindow
+          isOpen={isModal}
+          onRequestClose={() => setIsModal(false)}
+          className="trend-modal"
+          contentLabel="Modal"
+        >
+          <Button className="modal-button" onClick={() => setIsModal(false)} label="x" />
+          <TrendGraph data={trendsData} />
+        </ModalWindow>
       </div>
     </div>
   );

@@ -120,6 +120,10 @@
     border-radius: 10px;
 }
 
+.roadmap-modal {
+    width: 500px;
+}
+
 /* ProManageRoadmap.js */
 .pro-container {
     height: 100%;
