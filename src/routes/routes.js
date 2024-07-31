@@ -28,6 +28,10 @@ const routes = [
     element: <LoginPage />,
   },
   {
+    path: "/find-password",
+    element: <LoginPage />,
+  },
+  {
     path: "/signup",
     element: <SignupPage />,
     children: [

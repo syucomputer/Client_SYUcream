@@ -4,17 +4,17 @@ import "./InputField.css";
 import axios from "axios";
 import useToast from "../toast/useToast";
 
-const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuccess, showHideOption = true}, ref ) => {
+const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuccess, post, showHideOption = true}, ref ) => {
   const isEmailField = label === "이메일"; // 이메일 필드 여부를 판별
 
   const [inputType, setInputType] = useState(type);
+  const [inputValue, setInputValue] = useState(value);
+
   const [isEmail, setIsEmail] = useState(false);
   const [isRight, setIsRight] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [buttonLabel, setButtonLabel] = useState("인증하기");
   const [verificationCode, setVerificationCode] = useState("");
-
-  const [inputValue, setInputValue] = useState(value); // value prop을 로컬 상태로 관리
   const showToast = useToast();
 
   // 입력 값이 변경될 때마다 상태를 업데이트하고, 부모 컴포넌트에서 전달된 onChange 핸들러 호출
@@ -33,7 +33,7 @@ const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuc
       const response = await axios.post(`http://localhost:8080/auth/${inputValue}`, {
           userEmail: inputValue
       });
-      console.log(response.data); // 응답 확인
+      console.log(response.data);
     } catch (error) {
       console.error("이메일 전송 실패:", error);
     }
@@ -103,40 +103,50 @@ const InputField = forwardRef(({ type, label, value, onChange, onVerificationSuc
         {isEmailField && (
           <>
             <label>@syuin.ac.kr</label>
-            {isSuccess ? (
-              <input
-                type="checkbox"
-                checked
-                readOnly
-                className="CheckBoxStyle"
-              />
+            {post ? (
+              isSuccess ? (
+                <input
+                  type="checkbox"
+                  checked
+                  readOnly
+                  className="CheckBoxStyle"
+                />
+              ) : (
+                <Button
+                  label={buttonLabel}
+                  className='ButtonStyle'
+                  onClick={postEmail}
+                />
+              )
             ) : (
-              <Button
-                label={buttonLabel}
-                className='ButtonStyle'
-                onClick={postEmail}
-              />
-            )}
+              <>
+              </>
+            )
+
+            }
           </>
         )}
       </div>
-      {isEmailField && isEmail && (
-        <div style={{ marginTop: "10px", textAlign: "center" }}>
-          <label>인증코드</label>
-          <input
-            type="text"
-            value={verificationCode}
-            onChange={handleCodeChange}
-            className="EmailCode"
-            maxLength="8"
-          />
-          <Button
-            label="인증하기"
-            className={isRight ? "CodeButtonStyleRight" : "CodeButtonStyle"}
-            onClick={checkVerificationCode}
-          />
-        </div>
-      )}
+      {window.location.pathname.startsWith('/signup') &&
+        isEmailField &&
+        isEmail && (
+          <div style={{ marginTop: "10px", textAlign: "center" }}>
+            <label>인증코드</label>
+            <input
+              type="text"
+              value={verificationCode}
+              onChange={handleCodeChange}
+              className="EmailCode"
+              maxLength="8"
+            />
+            <Button
+              label="인증하기"
+              className={isRight ? "CodeButtonStyleRight" : "CodeButtonStyle"}
+              onClick={checkVerificationCode}
+            />
+          </div>
+        )
+      }
     </div>
   );
 });

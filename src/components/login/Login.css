@@ -1,35 +1,44 @@
-.LoginForm {
-  width: 450px;
-  height: 400px;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 32px;
-  position: relative;
+.login-form {
+    width: 450px;
+    height: 400px;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 32px;
+    position: relative;
 }
 
-.ForgotPassword {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin: 20px;
-  font-size: 12px;
-  text-decoration: underline;
+.forgot-password {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
-.LoginButton {
-  width: 100%;
-  height: 40px;
-  margin-top: 20px;
+.forgot-password:hover {
+    color: #007BFF;
+    text-decoration: underline;
 }
 
-.SignButton {
-  width: 510px;
-  height: 40px;
-  margin-top: 30px;
-  color: black;
-  background-color: #ffffff;
+.post-button {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
 }
 
-.Center {
-  text-align: center;
+.button-fill {
+    background-color: #4084FFcc;
+}
+
+.go-button {
+    width: 100%;
+    height: 40px;
+    margin-top: 30px;
+    color: black;
+    background-color: #ffffff;
+}
+
+.center {
+    text-align: center;
 }

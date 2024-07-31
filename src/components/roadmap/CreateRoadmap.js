@@ -12,6 +12,7 @@ const CreateRoadmap = () => {
   const [fields, setFields] = useState([])
   const [tech, setTech] = useState([])
   const [keywordList, setKeywordList] = useState([]);
+  const [jobList, setJobList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -37,39 +38,40 @@ const CreateRoadmap = () => {
   }, []);
 
   const handleItemClick = (item) => {
-    const isItemAlreadySelected = keywordList.some(selectedItem => selectedItem.name === item.name && selectedItem.division === item.division);
+    const isItemAlreadySelected = keywordList.includes(item.name);
+    let updatedKeywords;
 
-    const updatedItems = isItemAlreadySelected
-      ? keywordList.filter(selectedItem => !(selectedItem.name === item.name && selectedItem.division === item.division))
-      : [...keywordList, item];
-    setKeywordList(updatedItems);
+    if (isItemAlreadySelected) {
+      // 이미 선택된 항목이면 제거
+      updatedKeywords = keywordList.filter(keyword => keyword !== item.name);
+    } else {
+      // 새로운 항목이면 추가
+      updatedKeywords = [...keywordList, item.name];
+    }
+    setKeywordList(updatedKeywords);
   };
 
-  const handleRemoveItem = (item) => {
-    const updatedItems = keywordList.filter(selectedItem => !(selectedItem.name === item.name && selectedItem.division === item.division));
-    setKeywordList(updatedItems);
+  const handleRemoveItem = (keyword) => {
+    const updatedKeywords = keywordList.filter(item => item !== keyword);
+    setKeywordList(updatedKeywords);
   };
 
   const handleKeywordComplete = () =>{
     setIsModalOpen(true)
 
-    // axios.post(`/roadmaps/recommend-jobs`)
-    //   .then(response => {
-    //     console.log(response.data)
-    //     setIsModalOpen(true)
-    //   })
-    //   .catch(error => {
-    //     console.log("키워드 선택 완료 에러", error)
-    //   })
-  }
+    axios.post(`http://localhost:8080/roadmaps/recommend-jobs`, {
+      keywords: keywordList
+    })
+      .then(response => {
+        setJobList(response.data)
+        setIsModalOpen(false)
 
-  useEffect(() => {
-    if (isModalOpen) {
-      setTimeout(() => {
-        navigate('jobs');
-      }, 3000); // 3 seconds
-    }
-  }, [isModalOpen]);
+        navigate('jobs',{ state: { jobList: response.data } })
+      })
+      .catch(error => {
+        console.log("키워드 선택 완료 에러", error)
+      })
+  }
 
   const handlerCloseModal = () => {
     setIsModalOpen(false);
@@ -89,21 +91,22 @@ const CreateRoadmap = () => {
           <Areas VisibleItemCount="10" label="기술스택" list={tech} onItemClick={handleItemClick} />
         </div>
         <div className="keyword-container-box">
-          {keywordList.map((selectedItem, index) => (
+          {keywordList.map((keyword, index) => (
             <div key={index} className="selected-item">
-              {selectedItem.name}
-              <button className="remove" onClick={() => handleRemoveItem(selectedItem)}>x</button>
+              {keyword}
+              <button className="remove" onClick={() => handleRemoveItem(keyword)}>x</button>
             </div>
           ))}
         </div>
       </div>
-      <Button className="complete-button" onClick={handleKeywordComplete} label="선택 완료" />
+      <Button className="complete-button" onClick={handleKeywordComplete} label="선택 완료"/>
       <ModalWindow
         isOpen={isModalOpen}
         onRequestClose={handlerCloseModal}
+        className="roadmap-modal"
         contentLabel="Modal"
       >
-        <Button className="" onClick={() => setIsModalOpen(false)} label="x" />
+        <Button className="modal-button" onClick={() => setIsModalOpen(false)} label="x" />
         <p>
           <strong>맞춤형 분야</strong> 찾는 중
         </p>

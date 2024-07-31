@@ -46,7 +46,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <div className="LoginForm">
+      <div className="login-form">
         <h2 style={{ textAlign: "center" }}>로그인</h2>
         <InputField
             type="text"
@@ -63,18 +63,18 @@ const LoginForm = () => {
         />
         <Button
           label="로그인"
-          className={id && password ? "LoginButton ButtonFill" : "LoginButton"}
+          className={id && password ? "post-button button-fill" : "post-button"}
           onClick={handleLogin}
         />
-        <div className="Center Label">
+        <div className="center label">
           계속하려면 사용 및 개인정보 보호 정책에 동의합니다.
         </div>
-        <div className="ForgotPassword">비밀번호를 잊으셨나요?</div>
+        <label className="forgot-password" onClick={() => navigate('/find-password')}>비밀번호를 잊으셨나요?</label>
       </div>
-      <div className="Center">
+      <div className="center">
         <Button
           label="회원가입"
-          className="SignButton"
+          className="go-button"
           onClick={handleSign}
         />
       </div>

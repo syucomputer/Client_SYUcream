@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import Button from "../button/Button";
 import "./CreateRoadmap.css"
 import ModalWindow from "../modal/ModalWindow";
+import {useLocation} from "react-router-dom";
 
 const SelectJob = () => {
-  const[isModal, setIsModal] = useState(false);
-  const[createTime, setCreateTime] = useState(true);
-
+  const [isModal, setIsModal] = useState(false);
+  const [createTime, setCreateTime] = useState(true);
+  const location = useLocation();
+  const { jobList } = location.state || {};  // location.state가 존재하면 jobs를 가져옴
 
   const handleCreate = () => {
 
@@ -14,6 +16,7 @@ const SelectJob = () => {
 
   return (
     <div className="SelectJobContainer">
+      {console.log(jobList)}
       <h1>나의 로드맵 만들기</h1>
       <p>
         관심 키워드를 바탕으로 추천드리는 직무입니다.

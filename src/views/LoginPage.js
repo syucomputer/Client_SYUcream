@@ -1,19 +1,28 @@
 import LoginForm from "../components/login/LoginForm";
 import React from "react";
+import FindPassword from "../components/login/FindPassword";
 
 const LoginPage = () => {
+  const handleLogin = () => {
+    if (window.location.pathname.startsWith('/login')) {
+      return <LoginForm />
+    } else {
+      return <FindPassword />
+    }
+  }
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh", // 뷰포트 높이만큼 컨테이너를 늘림
+        height: "100vh",
         background: `url(${process.env.PUBLIC_URL}/LoginBackGround.png)`,
         position: "relative",
       }}
     >
-      <LoginForm />
+      {handleLogin()}
     </div>
   );
 };
