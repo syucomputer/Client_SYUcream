@@ -63,6 +63,7 @@ const CreateRoadmap = () => {
       keywords: keywordList
     })
       .then(response => {
+        console.log(response.data)
         setJobList(response.data)
         setIsModalOpen(false)
 

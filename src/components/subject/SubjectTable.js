@@ -106,7 +106,7 @@ const SubjectTable = () => {
 
     if (sortOption === "추천순") {
       sortedSubjects.sort((a, b) => {
-        const order = { "강력 추천": 1, 추천: 2 };
+        const order = { "강력 추천": 1, "추천" : 2 };
         return (order[a.subjectStatus] || 3) - (order[b.subjectStatus] || 3);
       });
     } else if (sortOption === "학년순") {
@@ -118,9 +118,9 @@ const SubjectTable = () => {
     setSubjects(sortedSubjects); // 정렬된 데이터로 상태 업데이트
   }, [sortOption, allSubjects]); // sortOption과 allSubjects가 바뀔 때마다 실행
 
-  const uniqueSemesters = Array.from(
-      new Set(allSubjects.map((subject) => `${subject.completeYear}년 ${subject.completeTerm}`))
-  );
+  // const uniqueSemesters = Array.from(
+  //     new Set(allSubjects.map((subject) => `${subject.completeYear}년 ${subject.completeTerm}`))
+  // );
 
   const pageNumbers = [];
 
@@ -168,8 +168,7 @@ const SubjectTable = () => {
           {/*))}*/}
         </select>
       </div>
-
-      <table className="SubjectTable">
+      <table className="subject-table">
         <thead>
           <tr>
             <th>학년</th>

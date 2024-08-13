@@ -40,7 +40,7 @@ const MyRoadmap = () => {
   };
 
   return (
-    <div className="MyRoadmapContainer">
+    <div className="my-roadmap-container">
       {!roadmaps ? (
         <div className="no-roadmap">
           <p>등록된 로드맵이 없습니다.</p>
@@ -50,16 +50,16 @@ const MyRoadmap = () => {
         </div>
       ) : (
         <>
-          <div className="SelectBox">
-            <select className="Select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
+          <div className="select-box">
+            <select className="select" value={selectedRoadmapId} onChange={handleRoadmapChange}>
               {roadmaps.map(roadmap => (
                 <option key={roadmap.id} value={roadmap.id}>
                   {`${roadmap.title} - ${roadmap.reviewStatus} - ${roadmap.professorName}`}
                 </option>
               ))}
             </select>
-            <button className="SelectButton" onClick={() => navigate('/mypage/roadmap/manage')}>
-              <img src="/profile/icon/Content.jpg" className="ContentImg" alt="목차" />
+            <button className="select-button" onClick={() => navigate('/mypage/roadmap/manage')}>
+              <img src="/profile/icon/Content.jpg" className="content-img" alt="목차" />
               전체 로드맵
             </button>
           </div>

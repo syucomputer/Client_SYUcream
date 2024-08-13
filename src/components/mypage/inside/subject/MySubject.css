@@ -6,7 +6,35 @@
     border: 1px solid black;
 }
 
-.SubjectTable {
+.label-title {
+    margin-left: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.search-form {
+    margin-left: 700px;
+    align-items: center;
+    background-color: #f2f8ff;
+    border-radius: 5px;
+    margin-top: 15px;
+    height: 38px;
+    border: none;
+    outline: none;
+}
+
+.short-form {
+    margin-left: 10px;
+    align-items: center;
+    background-color: #f2f8ff;
+    border-radius: 5px;
+    margin-top: 15px;
+    height: 38px;
+    border: none;
+    outline: none;
+}
+
+.subject-table {
     border-collapse: collapse;
     border-radius: 10px;
     overflow: hidden;
@@ -14,14 +42,14 @@
     table-layout: fixed;
 }
 
-.SubjectTable th {
+.subject-table th {
     color: gray;
     font-weight: normal;
     padding: 10px 0;
     border-bottom: 1px solid lightgray;
 }
 
-.SubjectTable td {
+.subject-table td {
     padding: 20px 0;
     border-bottom: 1px solid lightgray;
 }
@@ -48,37 +76,10 @@
     color: white;
 }
 
-.label-title {
-    margin-left: 10px;
-    font-size: 22px;
-    font-weight: bold;
-}
-
 .semester-form {
     margin-left: 10px;
 }
 
-.search-form {
-    margin-left: 700px;
-    align-items: center;
-    background-color: #f2f8ff;
-    border-radius: 5px;
-    margin-top: 15px;
-    height: 38px;
-    border: none;
-    outline: none;
-}
-
-.short-form {
-    margin-left: 10px;
-    align-items: center;
-    background-color: #f2f8ff;
-    border-radius: 5px;
-    margin-top: 15px;
-    height: 38px;
-    border: none;
-    outline: none;
-}
 .modal {
     position: fixed;
     top: 0;

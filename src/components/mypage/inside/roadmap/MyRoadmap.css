@@ -65,7 +65,7 @@
 }
 
 /* roadmap.js */
-.AllContainer {
+.all-container {
     width: calc(100% - 40px);
     border: 1px solid black;
     display: flex;
@@ -73,14 +73,14 @@
     margin: 20px auto;
 }
 
-.Section {
+.section {
     border: 1px solid black;
     margin: 40px;
     padding: 10px 20px 20px;
     position: relative;
 }
 
-.AddContainer {
+.add-container {
     position: absolute;
     top: -20px;
     left: 20px;
@@ -89,7 +89,7 @@
     font-weight: bold;
 }
 
-.ContentBox {
+.content-box {
     list-style-type: none;
     padding-left: 0;
     margin-top: 40px;

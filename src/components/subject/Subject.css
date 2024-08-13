@@ -6,7 +6,7 @@
   border-radius: 10px;
 }
 
-.SubjectTable {
+.subject-table {
   border-collapse: collapse;
   border-radius: 10px;
   overflow: hidden;
@@ -16,14 +16,14 @@
   table-layout: fixed;
 }
 
-.SubjectTable th {
+.subject-table th {
   color: gray;
   font-weight: normal;
   padding: 10px 0;
   border-bottom: 1px solid lightgray;
 }
 
-.SubjectTable td {
+.subject-table td {
   padding: 20px 0;
   border-bottom: 1px solid lightgray;
 }
