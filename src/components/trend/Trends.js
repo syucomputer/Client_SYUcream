@@ -10,33 +10,29 @@ import TrendGraph from "./TrendGraph";
 
 const Trends = () => {
   const [selectedDivision, setSelectedDivision] = useState("job");
-  const [selectedPeriod, setSelectedPeriod] = useState("1month")
+  const [selectedPeriod, setSelectedPeriod] = useState("1month");
   const [isModal, setIsModal] = useState(false);
   const [trendsData, setTrendsData] = useState([]);
+  const [description, setDescription] = useState("직무명을 클릭하면 설명을 확인할 수 있어요.");
+  const [selectedKeyword, setSelectedKeyword] = useState(""); // 키워드 명 상태 추가
   const date = new Date();
 
   useEffect(() => {
     axios.get(`http://localhost:8080/keywords/${selectedDivision}/${selectedPeriod}`)
       .then(response => {
         const rankingArray = Object.values(response.data?.ranking);
+        console.log(rankingArray)
 
-        setTrendsData(rankingArray)
+        setTrendsData(rankingArray);
       })
       .catch(error => {
-        console.log("직무별 순위 조회", error)
-      })
+        console.log("직무별 순위 조회", error);
+      });
   }, [selectedDivision, selectedPeriod]);
 
-  // const [description, setDescription] = useState(
-  //   "직무명을 클릭하면 설명을 확인할 수 있어요."
-  // );
-  // const handleJobTitleClick = (description) => {
-  //   setDescription(description);
-  // };
-
   const handleGraph = () => {
-    setIsModal(true)
-  }
+    setIsModal(true);
+  };
 
   const selectDate = () => {
     const year = date.getFullYear();
@@ -72,6 +68,19 @@ const Trends = () => {
     return `${formatDate(startDate)} ~ ${formatDate(endDate)}`;
   };
 
+  const handleJobTitleClick = async (name) => {
+    try {
+      const encodedName = encodeURIComponent(name);
+      console.log(`Fetching description for keyword: ${name}`);
+      const response = await axios.get(`http://localhost:8080/member/keyword/description?keyword=${encodedName}`);
+      console.log(`Description received: ${response.data.description}`);
+      setSelectedKeyword(name);
+      setDescription(response.data.description);
+    } catch (error) {
+      console.error("Error fetching keyword description", error);
+      setDescription("설명을 찾을 수 없습니다.");
+    }
+  };
 
   return (
     <div className="trends-container">
@@ -90,7 +99,9 @@ const Trends = () => {
           <div className="center date">{selectDate()}</div>
           <TrendsTable
             selectedDivision={selectedDivision}
-            trendsData={trendsData}/>
+            trendsData={trendsData}
+            handleJobTitleClick={handleJobTitleClick}
+          />
         </div>
       </div>
       <div className="trends-box">
@@ -103,7 +114,7 @@ const Trends = () => {
         <div>
           <Button label="그래프 보기" onClick={handleGraph} className="graph-button"/>
         </div>
-        <DescriptionBox description={"직무명을 클릭하면 설명을 확인할 수 있어요."}/>
+        <DescriptionBox title={selectedKeyword} description={description}/>
         <ModalWindow
           isOpen={isModal}
           onRequestClose={() => setIsModal(false)}

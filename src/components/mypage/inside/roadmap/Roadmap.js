@@ -83,10 +83,10 @@ const Roadmap = ({ selectedRoadmapId }) => {
 
     return (
       <div>
-        <div className="AllContainer">
+        <div className="all-container">
           {roadmapDetail && (
             <div>
-              <h1 style={{ textAlign: 'center' }}>
+              <h1 className="center">
                 {isEditing ? (
                   <textarea
                       name="relatedJob"
@@ -110,11 +110,11 @@ const Roadmap = ({ selectedRoadmapId }) => {
               </div>
             </div>
           )}
-            <div className="Section">
-              <div className="AddContainer">
+            <div className="section">
+              <div className="add-container">
                 필요한 공부 및 기술
               </div>
-              <ul className="ContentBox">
+              <ul className="content-box">
                 {isEditing ? (
                   <textarea
                     name="neededSkill"
@@ -128,11 +128,11 @@ const Roadmap = ({ selectedRoadmapId }) => {
                 )}
               </ul>
             </div>
-            <div className="Section">
-              <div className="AddContainer">
+            <div className="section">
+              <div className="add-container">
                 3개월 학습계획
               </div>
-              <div className="ContentBox">
+              <div className="content-box">
                 {isEditing ? (
                   <textarea
                     name="plan"
@@ -148,11 +148,11 @@ const Roadmap = ({ selectedRoadmapId }) => {
                 )}
               </div>
             </div>
-            <div className="Section">
-              <div className="AddContainer">
+            <div className="section">
+              <div className="add-container">
                 추가적으로 도움이 되는 프로젝트
               </div>
-              <div className="ContentBox">
+              <div className="content-box">
                 {isEditing ? (
                   <textarea
                     name="project"

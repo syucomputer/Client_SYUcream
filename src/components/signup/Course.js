@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./Signup.css"
@@ -12,12 +12,6 @@ const Course = () => {
   const [subjectData, setSubjectData] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (studentId) {
-      upLoadSubjects(studentId);
-    }
-  }, [studentId]);
-
   const upLoadSubjects = (studentId) => {
       // 수강 과목을 불러오는 요청을 보냅니다.
     axios.get(`http://localhost:8080/subject/user/${studentId}`)
@@ -25,10 +19,21 @@ const Course = () => {
         console.log(response.data);
         // 응답 데이터의 구조를 확인하여 존재하는지 확인
         if (response.status === 200) {
-          const subjectData = response.data.results.subject;
+          const subjectData = response.data.results.subjects;
 
-          // 상태 업데이트
-          setSubjectData(subjectData);
+          // 년도와 학기별 중복 제거
+          const uniqueSubjects = subjectData.reduce((acc, current) => {
+            const x = acc.find(
+              (item) =>
+                item.completeYear === current.completeYear &&
+                item.completeTerm === current.completeTerm
+            );
+            if (!x) {
+              acc.push(current);
+            }
+            return acc;
+          }, []);
+          setSubjectData(uniqueSubjects);
           setLoading(false)
           setComplete(true)
         } else {
@@ -47,7 +52,7 @@ const Course = () => {
   }
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="center">
       <h2>수강 과목 불러오기</h2>
       <div>
         사이트 이용을 위한 수강과목을 불러와주세요! <br/>
@@ -55,7 +60,7 @@ const Course = () => {
       </div>
       {loading ? (
         <div>
-          <div className="box boxSpinner">
+          <div className="box">
             <div className="spinner"></div>
             <div>
               사이트 이용을 위한 수강과목을 불러오는 중입니다...
@@ -63,7 +68,7 @@ const Course = () => {
           </div>
         </div>
         ) : (complete ? (
-          <div className="successMessage">
+          <div>
             <div className="box">
               <div>
                 {subjectData && subjectData.map((subject) => (
@@ -73,12 +78,12 @@ const Course = () => {
                 ))}
               </div>
             </div>
-            <button className="next" onClick={handlerNext}> 서비스 시작하기 </button>
+            <button className="button-sign" onClick={handlerNext}> 서비스 시작하기 </button>
           </div>
         ) : (
           <div>
             <div className="box"></div>
-            <button className="ButtonPull" onClick={() => upLoadSubjects(studentId)}>
+            <button className="button-sign" onClick={() => upLoadSubjects(studentId)}>
               초기 설정 완료하고 서비스 시작하기
             </button>
           </div>
